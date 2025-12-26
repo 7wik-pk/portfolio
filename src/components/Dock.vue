@@ -5,7 +5,7 @@
         v-for="(app, index) in dockApps" 
         :key="index"
         class="dock-item"
-        :class="{ 'dock-item-separator': app.separator }"
+        :class="{ 'dock-item-separator': app.separator, 'hide-on-mobile': app.hideOnMobile }"
         @click="app.action && app.action()"
       >
         <div v-if="!app.separator" class="dock-icon-wrapper">
@@ -61,6 +61,9 @@ const dockApps = apps.filter(app => app.showInDock).map(app => ({
   .dock-container {
     --icon-size: 38px;
     --icon-margin: 3px;
+  }
+  .hide-on-mobile {
+    display: none !important;
   }
 }
 

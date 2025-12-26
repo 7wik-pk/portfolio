@@ -176,6 +176,27 @@ const openDrawer = () => {
   letter-spacing: -0.01em;
 }
 
+@media (max-width: 768px) {
+  .drawer {
+    width: 95%;
+  }
+  .drawer-content {
+    padding: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 12px;
+  }
+  .drawer-app {
+    padding: 8px 4px;
+    gap: 4px;
+  }
+  .drawer-app-icon {
+    font-size: 36px;
+  }
+  .drawer-app-name {
+    font-size: 11px;
+  }
+}
+
 .drawer-content::-webkit-scrollbar {
   width: 8px;
 }

@@ -4,12 +4,12 @@ import githubIcon from '../assets/icons/github2.png'
 import linkedinIcon from '../assets/icons/linkedin-app-icon.webp'
 import eduIcon from '../assets/icons/edu.png'
 import photosIcon from '../assets/icons/photos-2021-05-28.png'
-import hobbiesIcon from '../assets/icons/garageband-2020-12-10.webp'
+import hobbiesIcon from '../assets/icons/GarageBand_2025.webp'
 import vsCodeIcon from '../assets/icons/vscode.png'
 import steamIcon from '../assets/icons/steam.webp'
 import youtubeIcon from '../assets/icons/youtube.jpg'
 import discordIcon from '../assets/icons/discord_macos_bigsur_icon_190238.png'
-import resumeIcon from '../assets/icons/resume.png'
+import resumeIcon from '../assets/icons/resume2.png'
 
 export const apps = [
     {
@@ -20,7 +20,8 @@ export const apps = [
         showInDock: true,
         showInDrawer: true,
         actionType: 'command',
-        actionPayload: 'open-finder'
+        actionPayload: 'open-finder',
+        hideOnMobile: true
     },
     {
         id: 'launchpad',
@@ -30,7 +31,8 @@ export const apps = [
         showInDock: true,
         showInDrawer: false,
         actionType: 'command',
-        actionPayload: 'toggle-drawer'
+        actionPayload: 'toggle-drawer',
+        hideOnMobile: false
     },
     {
         id: 'techstack',
@@ -40,40 +42,41 @@ export const apps = [
         showInDock: true,
         showInDrawer: true,
         actionType: 'command',
-        actionPayload: 'open-techstack'
+        actionPayload: 'open-techstack',
+        hideOnMobile: false
     },
     {
         id: 'github',
         name: 'GitHub',
         image: githubIcon,
         emoji: '🐙',
-        url: 'https://github.com/7wik-pk',
         showInDock: true,
         showInDrawer: true,
         actionType: 'link',
-        actionPayload: 'https://github.com/7wik-pk'
+        actionPayload: 'https://github.com/7wik-pk',
+        hideOnMobile: false
     },
     {
         id: 'resume',
         name: 'Resume',
         image: resumeIcon,
         emoji: '📄',
-        url: '#',
         showInDock: true,
         showInDrawer: true,
         actionType: 'command',
-        actionPayload: 'open-resume'
+        actionPayload: 'open-resume',
+        hideOnMobile: false
     },
     {
         id: 'linkedin',
         name: 'LinkedIn',
         image: linkedinIcon,
         emoji: '🔗',
-        url: 'https://www.linkedin.com/in/sathwik-k-77b58b140/',
         showInDock: true,
         showInDrawer: true,
         actionType: 'link',
-        actionPayload: 'https://www.linkedin.com/in/sathwik-k-77b58b140/'
+        actionPayload: 'https://www.linkedin.com/in/sathwik-k-77b58b140/',
+        hideOnMobile: false
     },
     {
         id: 'education',
@@ -83,7 +86,8 @@ export const apps = [
         showInDock: true,
         showInDrawer: true,
         actionType: 'command',
-        actionPayload: 'open-education'
+        actionPayload: 'open-education',
+        hideOnMobile: true
     },
     {
         id: 'hobbies',
@@ -93,7 +97,8 @@ export const apps = [
         showInDock: true,
         showInDrawer: true,
         actionType: 'command',
-        actionPayload: 'open-hobbies'
+        actionPayload: 'open-hobbies',
+        hideOnMobile: true
     },
     // {
     //     id: 'discord',
@@ -109,21 +114,21 @@ export const apps = [
         name: 'Steam',
         image: steamIcon,
         emoji: '🎮',
-        url: 'https://steamcommunity.com/id/7wik_pk',
         showInDock: true,
         showInDrawer: true,
         actionType: 'link',
-        actionPayload: 'https://steamcommunity.com/id/7wik_pk'
+        actionPayload: 'https://steamcommunity.com/id/7wik_pk',
+        hideOnMobile: true
     },
     {
         id: 'youtube',
         name: 'YouTube',
         image: youtubeIcon,
         emoji: '📺',
-        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         showInDock: false,
         showInDrawer: true,
         actionType: 'link',
-        actionPayload: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        actionPayload: 'https://www.youtube.com/watch?v=klfT41uZniI',
+        hideOnMobile: false
     }
 ]
