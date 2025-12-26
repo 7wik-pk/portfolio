@@ -20,6 +20,7 @@
       <div 
         class="sticky-text"
         contenteditable="true"
+        spellcheck="false"
         @mousedown.stop
         v-html="content"
       ></div>
