@@ -125,11 +125,11 @@ const goToFolder = (id) => {
         </div>
 
         <div class="finder-search">
-          <span class="search-icon" @click="emit('show-toast', 'Search is coming soon!')">🔍</span>
+          <span class="search-icon" @click="emit('show-toast', undefined)">🔍</span>
           <input 
             type="text" 
             placeholder="Search" 
-            @click="emit('show-toast', 'Search is coming soon!')"
+            @click="emit('show-toast', undefined)"
             readonly
           />
         </div>

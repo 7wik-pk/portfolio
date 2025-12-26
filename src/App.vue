@@ -54,7 +54,7 @@ const toast = ref({
   timeoutId: null
 })
 
-const showToast = (message) => {
+const showToast = (message = "That isn't ready just yet, apologies...") => {
   // Clear any existing timeout to avoid conflicting disappearance
   if (toast.value.timeoutId) {
     clearTimeout(toast.value.timeoutId)
@@ -175,7 +175,7 @@ const handleAppLaunch = (app) => {
         })
         break;
       default:
-        showToast("That isn't ready just yet, apologies...")
+        showToast()
         break;
     }
     
@@ -187,6 +187,10 @@ const handleAppLaunch = (app) => {
 }
 
 const handleFileLaunch = (file) => {
+  if (!file.srcPath) {
+    showToast()
+    return
+  }
   launchWindow({
     id: 'preview',
     title: file.name,
@@ -214,7 +218,7 @@ const handleMenuAction = (action) => {
     <MenuBar 
       :active-app-name="activeAppName"
       :is-file-disabled="isFileDisabled"
-      @menu-click="showToast('That isn\'t ready just yet, apologies...')"
+      @menu-click="showToast()"
       @action="handleMenuAction"
     />
     
