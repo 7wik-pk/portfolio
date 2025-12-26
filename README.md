@@ -2,6 +2,8 @@
 
 A high-fidelity personal portfolio website that recreates the macOS Sequoia/Sonoma desktop interface using Vue 3. This project focuses on authentic interaction design, system architecture simulation, and responsiveness.
 
+Currently hosted at https://7wik-pk.github.io/portfolio/
+
 ## 🏗️ Architecture & Technical Implementation
 
 ### Dynamic Window Management 🪟
@@ -59,6 +61,12 @@ The application is data-driven, separating configuration from logic:
 - **Build Tool**: Vite
 - **Styling**: Vanilla CSS (Scoped) with extensive usage of `backdrop-filter` for glassmorphism.
 - **Fonts**: SF Pro Display (Project-hosted assets).
+
+## Acknowledgements
+
+I found most of the MacOS icons on https://www.macosicongallery.com/ and https://macosicons.com/ - I'm naturally grateful to the creators responsible for making them available on these sites.
+
+This project was almost entirely vibe-coded, thanks to Google Antigravity & several models (I jump from one to another when I exceed free usage quotas because I'm stingier than an Indian housewife in the Sunday market).
 
 ## Setup
 ```bash
