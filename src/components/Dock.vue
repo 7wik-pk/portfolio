@@ -60,8 +60,6 @@ const dockApps = [
   // hobbies - list out and figure out a clever way to display my hobbies. also decide on a suitable icon.
   { name: 'Hobbies', image: hobbiesIcon, emoji: '🎵', action: null },
 
-
-
   // // about - show a little bit about me
   // { emoji: '📚', action: null },
 
