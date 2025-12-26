@@ -31,6 +31,7 @@ import photosIcon from '../assets/icons/photos-2021-05-28.png'
 import hobbiesIcon from '../assets/icons/garageband-2020-12-10.webp'
 import vsCodeIcon from '../assets/icons/vscode.png'
 import steamIcon from '../assets/icons/steam.webp'
+import youtubeIcon from '../assets/icons/youtube.jpg'
 
 const emit = defineEmits(['open-drawer'])
 
@@ -66,6 +67,9 @@ const dockApps = [
   // steam - show a little bit about me
   { name: 'Steam', image: steamIcon, emoji: '🎮', action: () => window.open('https://steamcommunity.com/id/7wik_pk', '_blank') },
 
+  // youtube
+  { name: 'YouTube', image: youtubeIcon, emoji: '📺', action: () => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank') },
+
   // { separator: true },
   // { emoji: '🗑️', action: null },
 ]
@@ -74,6 +78,11 @@ const dockApps = [
 
 <style scoped>
 .dock-container {
+  --icon-size: 56px;
+  --icon-margin: 6px;
+  --dock-padding: 4px;
+  --label-scale: 1;
+
   position: fixed;
   bottom: 0;
   left: 0;
@@ -85,11 +94,24 @@ const dockApps = [
   pointer-events: none;
 }
 
+@media (max-width: 1400px) {
+  .dock-container {
+    --icon-size: 48px;
+    --icon-margin: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dock-container {
+    --icon-size: 38px;
+    --icon-margin: 3px;
+  }
+}
+
 .dock {
   display: flex;
   align-items: flex-end;
-  /* height: 64px; */
-  padding: 0 4px;
+  padding: 0 var(--dock-padding);
   background: rgba(30, 30, 30, 0.4);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -99,7 +121,6 @@ const dockApps = [
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   pointer-events: auto;
-  /* gap: 4px; */
 }
 
 .dock-item {
@@ -107,7 +128,6 @@ const dockApps = [
   align-items: center;
   justify-content: center;
   position: relative;
-  /* padding: 4px; */
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -132,6 +152,12 @@ const dockApps = [
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
+@media (max-width: 768px) {
+  .dock-label {
+    display: none;
+  }
+}
+
 .dock-item:hover .dock-label {
   opacity: 1;
   transform: translateY(0);
@@ -153,12 +179,10 @@ const dockApps = [
 }
 
 .dock-icon {
-  width: 56px;
-  height: 56px;
+  width: var(--icon-size);
+  height: var(--icon-size);
   border-radius: 12px;
-  /* padding-bottom: 4px; */
-  /* padding: 4px; */
-  margin: 6px;
+  margin: var(--icon-margin);
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -190,8 +214,20 @@ const dockApps = [
   transition: opacity 0.2s ease;
 }
 
+@media (max-width: 768px) {
+  .dock-indicator {
+    display: none;
+  }
+}
+
 .dock-item:hover .dock-icon {
   transform: scale(1.3) translateY(-8px);
+}
+
+@media (max-width: 1024px) {
+  .dock-item:hover .dock-icon {
+    transform: scale(1.15) translateY(-4px);
+  }
 }
 
 .dock-item:hover .dock-indicator {

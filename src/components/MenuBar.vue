@@ -138,5 +138,18 @@ onUnmounted(() => {
   opacity: 0.9;
   white-space: pre;
 }
+@media (max-width: 768px) {
+  .menu-item {
+    display: none;
+  }
+  
+  .menu-bar-right {
+    gap: 10px;
+  }
+  
+  .time {
+    font-size: 12px;
+  }
+}
 </style>
 

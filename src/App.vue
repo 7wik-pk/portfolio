@@ -2,7 +2,7 @@
   <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
     <MenuBar />
     <div class="desktop">
-      <AppDrawer v-if="drawerOpen" />
+      <AppDrawer v-if="drawerOpen" @open-drawer="openDrawer" />
     </div>
     <Dock @open-drawer="openDrawer" />
   </div>

@@ -1,9 +1,9 @@
 <template>
-  <div class="drawer-overlay" @click.self="closeDrawer">
+  <div class="drawer-overlay" @click.self="openDrawer">
     <div class="drawer">
       <div class="drawer-header">
         <div class="drawer-title">Applications</div>
-        <button class="drawer-close" @click="closeDrawer">✕</button>
+        <button class="drawer-close" @click="openDrawer">✕</button>
       </div>
       <div class="drawer-content">
         <div 
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['close'])
+const emit = defineEmits(['open-drawer'])
 
 const drawerApps = [
   { emoji: '📁', name: 'Finder' },
@@ -45,8 +45,8 @@ const drawerApps = [
   { emoji: '🧮', name: 'Calculator' }
 ]
 
-const closeDrawer = () => {
-  emit('close')
+const openDrawer = () => {
+  emit('open-drawer')
 }
 </script>
 
