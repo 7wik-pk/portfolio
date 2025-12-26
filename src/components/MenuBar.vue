@@ -2,19 +2,16 @@
   <div class="menu-bar">
     <div class="menu-bar-left">
       <div class="apple-logo"><img src="../assets/icons/apple-16.ico" alt="Apple Logo" /></div>
-      <div class="menu-item finder">Finder</div>
+      <div class="menu-item active-app">{{ activeAppName }}</div>
       <div class="menu-item">File</div>
-      <div class="menu-item">Edit</div>
-      <div class="menu-item">View</div>
-      <div class="menu-item">Go</div>
-      <div class="menu-item">Window</div>
-      <div class="menu-item">Help</div>
     </div>
     <div class="menu-bar-right">
       <!-- ideas: linkedin, github, email icons with links -->
       <!-- <div class="menu-icon">🔋</div> -->
       <!-- <div class="menu-icon">📶</div> -->
-      <div class="menu-icon">🔍</div>
+      <div class="menu-icon search">
+        <img :src="searchIcon" alt="Search" width="16" height="16" />
+      </div>
       <!-- <div class="menu-icon">🔔</div> -->
       <div class="control-center"><img src="../assets/icons/control-center.png" alt="Control Center" width="16" height="16" /></div>
       <div class="time">{{ currentTime }}</div>
@@ -24,6 +21,14 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
+
+const props = defineProps({
+  activeAppName: {
+    type: String,
+    default: 'Finder'
+  }
+})
 
 const currentTime = ref('')
 
@@ -72,7 +77,7 @@ onUnmounted(() => {
   z-index: 1000;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
@@ -113,10 +118,17 @@ onUnmounted(() => {
   font-size: 14px;
   opacity: 0.85;
   cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.finder {
-  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+.menu-icon.search img {
+  opacity: 0.9;
+  filter: brightness(0) invert(1);
+}
+
+.active-app {
   font-weight: bold;
 }
 

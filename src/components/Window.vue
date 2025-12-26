@@ -165,7 +165,7 @@ onUnmounted(() => {
   font-size: 13px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
 
 .window-content {

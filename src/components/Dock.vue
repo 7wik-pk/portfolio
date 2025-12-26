@@ -146,7 +146,7 @@ const handleAppClick = (app) => {
   transform: translateY(10px);
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @media (max-width: 768px) {

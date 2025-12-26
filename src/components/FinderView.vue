@@ -181,7 +181,7 @@ const goToFolder = (id) => {
   height: 100%;
   background: rgba(30, 30, 30, 0.6);
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .finder-content-wrapper {

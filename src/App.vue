@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import MenuBar from './components/MenuBar.vue'
 import Dock from './components/Dock.vue'
 import AppDrawer from './components/AppDrawer.vue'
@@ -48,6 +48,21 @@ const windowComponents = {
   preview: Preview,
   resume: Preview // Resume uses Preview component
 }
+
+const defaultTitle = "Sathwik's Portfolio"
+
+const activeAppName = computed(() => {
+  if (windowStack.value.length === 0) return defaultTitle
+  const activeId = windowStack.value[windowStack.value.length - 1]
+  const win = openWindows.value.find(w => w.id === activeId)
+  if (!win) return defaultTitle
+  
+  // Return App Names
+  if (win.component === 'finder') return "Finder"
+  if (win.component === 'resume' || win.component === 'preview') return "Preview"
+  
+  return win.title
+})
 
 // Load all wallpapers eagerly
 const wallpapers = import.meta.glob('./assets/img/walls/*.{png,jpg,jpeg,webp,JPG,PNG}', { eager: true })
@@ -109,7 +124,7 @@ const handleFileLaunch = (file) => {
 
 <template>
   <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
-    <MenuBar />
+    <MenuBar :active-app-name="activeAppName" />
     
     <div class="desktop">
       <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />

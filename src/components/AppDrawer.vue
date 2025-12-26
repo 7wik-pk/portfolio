@@ -102,7 +102,7 @@ const openDrawer = () => {
   font-size: 15px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   letter-spacing: -0.01em;
 }
 
@@ -170,7 +170,7 @@ const openDrawer = () => {
 .drawer-app-name {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.85);
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   text-align: center;
   font-weight: 400;
   letter-spacing: -0.01em;
