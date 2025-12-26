@@ -47,7 +47,7 @@ const props = defineProps({
   },
   initialContent: {
     type: String,
-    default: `<strong>Welcome to my portfolio! 👋</strong><br><br>I'm Sathwik, and I've built this interactive macOS-style portfolio to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`
+    default: `<strong>Welcome to my portfolio! 👋</strong><br><br>I'm Sathwik, and I've built this interactive macOS-style portfolio (in Vue3 JS) to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`
   },
   showPortrait: {
     type: Boolean,

@@ -10,6 +10,7 @@ import steamIcon from '../assets/icons/steam.webp'
 import youtubeIcon from '../assets/icons/youtube.png'
 import discordIcon from '../assets/icons/discord_macos_bigsur_icon_190238.png'
 import resumeIcon from '../assets/icons/resume2.png'
+import spotifyIcon from '../assets/icons/spotify.png'
 
 export const apps = [
     {
@@ -118,6 +119,17 @@ export const apps = [
         showInDrawer: true,
         actionType: 'link',
         actionPayload: 'https://steamcommunity.com/id/7wik_pk',
+        hideOnMobile: true
+    },
+    {
+        id: 'spotify',
+        name: 'Spotify',
+        image: spotifyIcon,
+        emoji: '🎵',
+        showInDock: true,
+        showInDrawer: true,
+        actionType: 'link',
+        actionPayload: 'https://open.spotify.com/user/31jz5awzbapr5hajsfdfiixvjq6y',
         hideOnMobile: true
     },
     {
