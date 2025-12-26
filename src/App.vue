@@ -17,7 +17,7 @@ import AppDrawer from './components/AppDrawer.vue'
 const drawerOpen = ref(false)
 
 const openDrawer = () => {
-  drawerOpen.value = true
+  drawerOpen.value = !drawerOpen.value
 }
 
 const closeDrawer = () => {

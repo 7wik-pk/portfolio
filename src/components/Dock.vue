@@ -25,7 +25,7 @@
 import finderIcon from '../assets/icons/finder-2021-09-10.webp'
 import launchpadIcon from '../assets/icons/launchpad.webp'
 import githubIcon from '../assets/icons/github2.png'
-import linkedinIcon from '../assets/icons/linkedin.png'
+import linkedinIcon from '../assets/icons/linkedin-app-icon.webp'
 import eduIcon from '../assets/icons/edu.png'
 import photosIcon from '../assets/icons/photos-2021-05-28.png'
 import hobbiesIcon from '../assets/icons/garageband-2020-12-10.webp'
@@ -42,9 +42,12 @@ const dockApps = [
   // app drawer - should show icons to my github, linkedin, email, and my github projects. also have a YT icon linking to you-know-what.
   { name: 'Launchpad', image: launchpadIcon, emoji: '📱', action: () => emit('open-drawer') },
 
+  // tech stack - skills, languages, frameworks, etc. that I know
+  { name: 'Tech Stack Familiarity', image: vsCodeIcon, emoji: '📺', action: null },
+
   // github
   { name: 'GitHub', image: githubIcon, emoji: '🐙', action: () => window.open('https://github.com/7wik-pk', '_blank') },
-  
+
   // linkedin
   { name: 'LinkedIn', image: linkedinIcon, emoji: '🔗', action: () => window.open('https://www.linkedin.com/in/sathwik-k-77b58b140/', '_blank') },
   
@@ -52,13 +55,12 @@ const dockApps = [
   { name: 'Education', image: eduIcon, emoji: '🎓', action: null },
 
   // should show my images (?)
-  { name: 'Photos', image: photosIcon, emoji: '📷', action: null },
+  // { name: 'Photos', image: photosIcon, emoji: '📷', action: null },
 
   // hobbies - list out and figure out a clever way to display my hobbies. also decide on a suitable icon.
   { name: 'Hobbies', image: hobbiesIcon, emoji: '🎵', action: null },
 
-  // tech stack - skills, languages, frameworks, etc. that I know
-  { name: 'Tech Stack Familiarity', image: vsCodeIcon, emoji: '📺', action: null },
+
 
   // // about - show a little bit about me
   // { emoji: '📚', action: null },
@@ -88,7 +90,7 @@ const dockApps = [
 .dock {
   display: flex;
   align-items: flex-end;
-  height: 64px;
+  /* height: 64px; */
   padding: 0 4px;
   background: rgba(30, 30, 30, 0.4);
   backdrop-filter: blur(30px) saturate(180%);
@@ -99,7 +101,7 @@ const dockApps = [
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   pointer-events: auto;
-  gap: 4px;
+  /* gap: 4px; */
 }
 
 .dock-item {
@@ -107,6 +109,7 @@ const dockApps = [
   align-items: center;
   justify-content: center;
   position: relative;
+  /* padding: 4px; */
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -155,7 +158,11 @@ const dockApps = [
   width: 56px;
   height: 56px;
   border-radius: 12px;
-  padding-bottom: 4px;
+  /* padding-bottom: 4px; */
+  /* padding: 4px; */
+  margin: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
