@@ -1,11 +1,13 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { finderFiles } from '../config/finder'
+import { finderFiles, applicationsFolder } from '../config/finder'
+import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
+import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
 
 const currentPath = ref([]) // Stack of folder objects
 const selectedFile = ref(null)
 
-const emit = defineEmits(['launch-file'])
+const emit = defineEmits(['launch-file', 'launch-app'])
 
 const currentFiles = computed(() => {
   if (currentPath.value.length === 0) {
@@ -28,6 +30,8 @@ const openFile = (file) => {
     selectedFile.value = null
   } else if (file.kind === 'Link') {
     window.open(file.url, '_blank')
+  } else if (file.kind === 'App') {
+    emit('launch-app', file.action)
   } else {
     emit('launch-file', file)
   }
@@ -47,6 +51,22 @@ const goToRoot = () => {
   currentPath.value = []
   selectedFile.value = null
 }
+
+const goToFolder = (id) => {
+  let folder = null
+  if (id === 'apps') folder = applicationsFolder
+  // if (id === 'downloads') folder = downloadsFolder
+  
+  // Find in finderFiles if not one of the majors
+  if (!folder) {
+    folder = finderFiles.find(f => f.id === id)
+  }
+
+  if (folder) {
+    currentPath.value = [folder]
+    selectedFile.value = null
+  }
+}
 </script>
 
 <template>
@@ -55,17 +75,25 @@ const goToRoot = () => {
     <div class="finder-sidebar">
       <div class="sidebar-section">
         <div class="sidebar-title">Favorites</div>
-        <div class="sidebar-item" :class="{ active: currentPath.length === 0 }" @click="goToRoot">
-          <span class="sidebar-icon">🏠</span>
+        <div 
+          class="sidebar-item" 
+          :class="{ active: currentPath.length === 0 }" 
+          @click="goToRoot"
+        >
+          <span class="sidebar-icon">
+            <img :src="sidebarHomeIcon" alt="Home" class="sidebar-img-icon" />
+          </span>
           <span class="sidebar-label">Home</span>
         </div>
-        <div class="sidebar-item">
-          <span class="sidebar-icon">📂</span>
-          <span class="sidebar-label">Projects</span>
-        </div>
-        <div class="sidebar-item">
-          <span class="sidebar-icon">⬇️</span>
-          <span class="sidebar-label">Downloads</span>
+        <div 
+          class="sidebar-item" 
+          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'apps' }" 
+          @click="goToFolder('apps')"
+        >
+          <span class="sidebar-icon">
+            <img :src="sidebarAppsIcon" alt="Applications" class="sidebar-img-icon" />
+          </span>
+          <span class="sidebar-label">Applications</span>
         </div>
       </div>
     </div>
@@ -262,6 +290,17 @@ const goToRoot = () => {
   color: #fff;
 }
 
+.sidebar-img-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.sidebar-item.active .sidebar-img-icon {
+  opacity: 1;
+}
+
 /* Main Content */
 .finder-main {
   flex: 1;
@@ -328,6 +367,7 @@ const goToRoot = () => {
 .details-preview {
   height: 160px;
   display: flex;
+  margin-top: 10px;
   align-items: center;
   justify-content: center;
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);

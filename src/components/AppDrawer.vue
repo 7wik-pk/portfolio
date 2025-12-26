@@ -47,7 +47,7 @@ const openDrawer = () => {
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 998;
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;

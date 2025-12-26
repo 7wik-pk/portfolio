@@ -5,8 +5,12 @@
         v-for="(app, index) in dockApps" 
         :key="index"
         class="dock-item"
-        :class="{ 'dock-item-separator': app.separator, 'hide-on-mobile': app.hideOnMobile }"
-        @click="app.action && app.action()"
+        :class="{ 
+          'dock-item-separator': app.separator, 
+          'hide-on-mobile': app.hideOnMobile,
+          'bouncing': bouncingApps.has(app.id)
+        }"
+        @click="handleAppClick(app)"
       >
         <div v-if="!app.separator" class="dock-icon-wrapper">
           <div class="dock-label">{{ app.name }}</div>
@@ -14,7 +18,10 @@
             <img v-if="app.image" :src="app.image" :alt="app.name" class="dock-image-icon" />
             <span v-else>{{ app.emoji }}</span>
           </div>
-          <div class="dock-indicator"></div>
+          <div 
+            class="dock-indicator"
+            :class="{ 'active': activeAppIds.includes(app.id) }"
+          ></div>
         </div>
       </div>
     </div>
@@ -22,14 +29,45 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { apps } from '../config/apps'
+
+const props = defineProps({
+  activeAppIds: {
+    type: Array,
+    default: () => []
+  }
+})
 
 const emit = defineEmits(['launch-app'])
 
-const dockApps = apps.filter(app => app.showInDock).map(app => ({
-  ...app,
-  action: () => emit('launch-app', app)
-}))
+const bouncingApps = ref(new Set())
+
+const dockApps = apps.filter(app => app.showInDock)
+
+const handleAppClick = (app) => {
+  if (app.separator) return
+
+  const isAlreadyOpen = props.activeAppIds.includes(app.id)
+  const isLaunchpad = app.actionPayload === 'toggle-drawer'
+
+  // Only bounce if NOT open and NOT launchpad
+  if (!isAlreadyOpen && !isLaunchpad) {
+    bouncingApps.value.add(app.id)
+    setTimeout(() => {
+      bouncingApps.value.delete(app.id)
+    }, 600)
+  }
+
+  // Only delay if NOT open and NOT launchpad
+  if (!isAlreadyOpen && !isLaunchpad) {
+    setTimeout(() => {
+      emit('launch-app', app)
+    }, 300)
+  } else {
+    emit('launch-app', app)
+  }
+}
 </script>
 
 <style scoped>
@@ -173,6 +211,10 @@ const dockApps = apps.filter(app => app.showInDock).map(app => ({
   transition: opacity 0.2s ease;
 }
 
+.dock-indicator.active {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .dock-indicator {
     display: none;
@@ -195,6 +237,18 @@ const dockApps = apps.filter(app => app.showInDock).map(app => ({
 
 .dock-item:active .dock-icon {
   transform: scale(1.2) translateY(-6px);
+}
+
+/* Bounce Animation */
+.dock-item.bouncing .dock-icon {
+  animation: dock-bounce 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+@keyframes dock-bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-24px); }
+  50% { transform: translateY(0); }
+  70% { transform: translateY(-8px); }
 }
 </style>
 

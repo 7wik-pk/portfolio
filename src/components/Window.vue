@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isOpen" class="window-overlay" @click.self="close">
+  <div v-if="isOpen" class="window-overlay">
     <div 
       class="window" 
       :style="{ 
@@ -94,8 +94,8 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1100;
-  pointer-events: auto;
+  z-index: inherit;
+  pointer-events: none;
 }
 
 .window {
@@ -109,6 +109,7 @@ onUnmounted(() => {
   flex-direction: column;
   overflow: hidden;
   animation: window-appear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
 }
 
 @keyframes window-appear {

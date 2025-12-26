@@ -9,15 +9,45 @@ import FinderView from './components/FinderView.vue'
 import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
-const resumeOpen = ref(false)
-const finderOpen = ref(false)
 const currentWallpaper = ref('')
 
-const activePreview = ref({
-  src: '',
-  title: '',
-  isOpen: false
-})
+// Dynamic Window Registry
+const openWindows = ref([])
+// Use a simple array for stacking order
+const windowStack = ref([])
+
+const bringToFront = (id) => {
+  windowStack.value = windowStack.value.filter(item => item !== id)
+  windowStack.value.push(id)
+}
+
+const getZIndex = (id) => {
+  return 2000 + windowStack.value.indexOf(id)
+}
+
+const launchWindow = (config) => {
+  const existing = openWindows.value.find(w => w.id === config.id)
+  if (!existing) {
+    openWindows.value.push(config)
+  } else {
+    // Update props if already open (important for Preview)
+    existing.props = config.props
+    existing.title = config.title
+  }
+  bringToFront(config.id)
+}
+
+const closeWindow = (id) => {
+  openWindows.value = openWindows.value.filter(w => w.id !== id)
+  windowStack.value = windowStack.value.filter(item => item !== id)
+}
+
+// Map IDs to components for dynamic rendering
+const windowComponents = {
+  finder: FinderView,
+  preview: Preview,
+  resume: Preview // Resume uses Preview component
+}
 
 // Load all wallpapers eagerly
 const wallpapers = import.meta.glob('./assets/img/walls/*.{png,jpg,jpeg,webp,JPG,PNG}', { eager: true })
@@ -36,15 +66,30 @@ const handleAppLaunch = (app) => {
   if (app.actionType === 'link') {
     window.open(app.actionPayload, '_blank')
   } else if (app.actionType === 'command') {
+    // Auto-close drawer on app launch (except for the toggle itself if it's already handling it)
+    drawerOpen.value = false
+    
     switch (app.actionPayload) {
       case 'toggle-drawer':
         openDrawer()
         break;
       case 'open-resume':
-        resumeOpen.value = true
+        launchWindow({
+          id: 'resume',
+          title: 'sathwik_general_resume.pdf',
+          component: 'resume',
+          props: { src: resumePdf, title: 'Resume' }
+        })
         break;
       case 'open-finder':
-        finderOpen.value = true
+        launchWindow({
+          id: 'finder',
+          title: 'Finder',
+          component: 'finder',
+          width: '900px',
+          height: '600px',
+          props: {}
+        })
         break;
       default:
         break;
@@ -53,11 +98,12 @@ const handleAppLaunch = (app) => {
 }
 
 const handleFileLaunch = (file) => {
-  activePreview.value = {
-    src: file.srcPath,
+  launchWindow({
+    id: 'preview',
     title: file.name,
-    isOpen: true
-  }
+    component: 'preview',
+    props: { src: file.srcPath, title: file.name }
+  })
 }
 </script>
 
@@ -68,36 +114,31 @@ const handleFileLaunch = (file) => {
     <div class="desktop">
       <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />
       
-      <!-- Windows -->
+      <!-- Dynamic Windows -->
       <Window 
-        :is-open="resumeOpen" 
-        title="sathwik_general_resume.pdf" 
-        @close="resumeOpen = false"
+        v-for="win in openWindows"
+        :key="win.id"
+        :is-open="true"
+        :title="win.title"
+        :width="win.width"
+        :height="win.height"
+        :style="{ zIndex: getZIndex(win.id) }"
+        @close="closeWindow(win.id)"
+        @mousedown="bringToFront(win.id)"
       >
-        <Preview :src="resumePdf" title="Resume" />
-      </Window>
-
-      <Window 
-        :is-open="finderOpen" 
-        title="Finder" 
-        width="900px"
-        height="600px"
-        @close="finderOpen = false"
-      >
-        <FinderView @launch-file="handleFileLaunch" />
-      </Window>
-
-      <!-- Generic Preview Window -->
-      <Window 
-        :is-open="activePreview.isOpen" 
-        :title="activePreview.title"
-        @close="activePreview.isOpen = false"
-      >
-        <Preview :src="activePreview.src" :title="activePreview.title" />
+        <component 
+          :is="windowComponents[win.component]" 
+          v-bind="win.props"
+          @launch-file="handleFileLaunch"
+          @launch-app="handleAppLaunch"
+        />
       </Window>
     </div>
 
-    <Dock @launch-app="handleAppLaunch" />
+    <Dock 
+      :active-app-ids="openWindows.map(w => w.id)"
+      @launch-app="handleAppLaunch" 
+    />
   </div>
 </template>
 
