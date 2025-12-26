@@ -7,6 +7,7 @@ import Window from './components/Window.vue'
 import Preview from './components/Preview.vue'
 import FinderView from './components/FinderView.vue'
 import Toast from './components/Toast.vue'
+import StickyNote from './components/StickyNote.vue'
 import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
@@ -17,6 +18,10 @@ const openWindows = ref([])
 // Use a simple array for stacking order
 const windowStack = ref([])
 
+// Sticky Note State
+const stickyNoteVisible = ref(true)
+const stickyNoteZIndex = ref(1500) // Fixed z-index below windows (which start at 2000)
+
 const bringToFront = (id) => {
   windowStack.value = windowStack.value.filter(item => item !== id)
   windowStack.value.push(id)
@@ -24,6 +29,10 @@ const bringToFront = (id) => {
 
 const getZIndex = (id) => {
   return 2000 + windowStack.value.indexOf(id)
+}
+
+const closeStickyNote = () => {
+  stickyNoteVisible.value = false
 }
 
 // Toast System
@@ -119,9 +128,6 @@ const handleAppLaunch = (app) => {
   if (app.actionType === 'link') {
     window.open(app.actionPayload, '_blank')
   } else if (app.actionType === 'command') {
-    // Auto-close drawer on app launch (except for the toggle itself if it's already handling it)
-    drawerOpen.value = false
-    
     switch (app.actionPayload) {
       case 'toggle-drawer':
         openDrawer()
@@ -147,6 +153,11 @@ const handleAppLaunch = (app) => {
       default:
         showToast("That isn't ready just yet, apologies...")
         break;
+    }
+    
+    // Auto-close drawer for all actions except toggle-drawer
+    if (app.actionPayload !== 'toggle-drawer') {
+      drawerOpen.value = false
     }
   }
 }
@@ -193,6 +204,15 @@ const handleFileLaunch = (file) => {
         />
       </Window>
     </div>
+
+    <!-- Sticky Note -->
+    <StickyNote 
+      v-if="stickyNoteVisible"
+      :initial-x="40"
+      :initial-y="60"
+      :z-index="stickyNoteZIndex"
+      @close="closeStickyNote"
+    />
 
     <Dock 
       :active-app-ids="openWindows.map(w => w.id)"

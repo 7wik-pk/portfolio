@@ -86,6 +86,11 @@ const handleAppClick = (app) => {
   padding-bottom: 4px;
   z-index: 999;
   pointer-events: none;
+  transition: z-index 0s;
+}
+
+.dock-container:hover {
+  z-index: 10000;
 }
 
 @media (max-width: 1400px) {
