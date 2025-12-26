@@ -241,12 +241,12 @@ const handleAppClick = (app) => {
 
 /* Bounce Animation */
 .dock-item.bouncing .dock-icon {
-  animation: dock-bounce 0.5s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: dock-bounce 0.6s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 
 @keyframes dock-bounce {
   0%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-24px); }
+  30% { transform: translateY(-34px); }
   50% { transform: translateY(0); }
   70% { transform: translateY(-8px); }
 }

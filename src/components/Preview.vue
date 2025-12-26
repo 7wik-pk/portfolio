@@ -1,6 +1,6 @@
 <template>
   <div class="preview-container">
-    <iframe v-if="isPdf" :src="src" class="preview-content pdf"></iframe>
+    <iframe v-if="isPdf" :src="pdfUrl" class="preview-content pdf"></iframe>
     <div v-else class="preview-content image">
       <img :src="src" :alt="title" />
     </div>
@@ -17,6 +17,12 @@ const props = defineProps({
 
 const isPdf = computed(() => {
   return props.src && props.src.toLowerCase().endsWith('.pdf')
+})
+
+const pdfUrl = computed(() => {
+  if (!isPdf.value) return props.src
+  // Append #view=FitH to fit to width by default
+  return `${props.src}#view=FitH`
 })
 </script>
 
