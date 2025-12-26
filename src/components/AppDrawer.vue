@@ -10,8 +10,12 @@
           v-for="(app, index) in drawerApps" 
           :key="index"
           class="drawer-app"
+          @click="handleAppClick(app)"
         >
-          <div class="drawer-app-icon">{{ app.emoji }}</div>
+          <div class="drawer-app-icon">
+            <img v-if="app.image" :src="app.image" :alt="app.name" class="drawer-image-icon" />
+            <span v-else>{{ app.emoji }}</span>
+          </div>
           <div class="drawer-app-name">{{ app.name }}</div>
         </div>
       </div>
@@ -20,30 +24,13 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['open-drawer'])
+import { apps } from '../config/apps'
+const drawerApps = apps.filter(app => app.showInDrawer)
+const emit = defineEmits(['launch-app', 'open-drawer'])
 
-const drawerApps = [
-  { emoji: '📁', name: 'Finder' },
-  { emoji: '📱', name: 'Projects' },
-  { emoji: '📷', name: 'Photos' },
-  { emoji: '🎵', name: 'Music' },
-  { emoji: '📺', name: 'TV' },
-  { emoji: '📚', name: 'Books' },
-  { emoji: '📝', name: 'Notes' },
-  { emoji: '📅', name: 'Calendar' },
-  { emoji: '📞', name: 'FaceTime' },
-  { emoji: '💼', name: 'Keynote' },
-  { emoji: '📊', name: 'Numbers' },
-  { emoji: '📄', name: 'Pages' },
-  { emoji: '🎨', name: 'Preview' },
-  { emoji: '⚙️', name: 'Settings' },
-  { emoji: '🗂️', name: 'Files' },
-  { emoji: '🎮', name: 'Game Center' },
-  { emoji: '📻', name: 'Podcasts' },
-  { emoji: '🗺️', name: 'Maps' },
-  { emoji: '⏰', name: 'Clock' },
-  { emoji: '🧮', name: 'Calculator' }
-]
+const handleAppClick = (app) => {
+  emit('launch-app', app)
+}
 
 const openDrawer = () => {
   emit('open-drawer')
@@ -172,6 +159,12 @@ const openDrawer = () => {
 
 .drawer-app:hover .drawer-app-icon {
   transform: scale(1.1);
+}
+
+.drawer-image-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .drawer-app-name {

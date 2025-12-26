@@ -2,9 +2,9 @@
   <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
     <MenuBar />
     <div class="desktop">
-      <AppDrawer v-if="drawerOpen" @open-drawer="openDrawer" />
+      <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />
     </div>
-    <Dock @open-drawer="openDrawer" />
+    <Dock @launch-app="handleAppLaunch" />
   </div>
 </template>
 
@@ -30,5 +30,24 @@ const openDrawer = () => {
   drawerOpen.value = !drawerOpen.value
 }
 
+const handleAppLaunch = (app) => {
+  if (app.actionType === 'link') {
+    window.open(app.actionPayload, '_blank')
+  } else if (app.actionType === 'command') {
+
+    switch (app.actionPayload) {
+      // Add all command handlers here as needed
+      case 'toggle-drawer':
+        openDrawer()
+        break;
+      case 'open-resume':
+        // window.open('https://drive.google.com/file/d/1Z7wik-pk/view?usp=sharing', '_blank')
+        break;
+      default:
+        break;
+    }
+    
+  }
+}
 </script>
 

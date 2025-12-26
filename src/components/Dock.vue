@@ -22,58 +22,14 @@
 </template>
 
 <script setup>
-import finderIcon from '../assets/icons/finder-2021-09-10.webp'
-import launchpadIcon from '../assets/icons/launchpad.webp'
-import githubIcon from '../assets/icons/github2.png'
-import linkedinIcon from '../assets/icons/linkedin-app-icon.webp'
-import eduIcon from '../assets/icons/edu.png'
-import photosIcon from '../assets/icons/photos-2021-05-28.png'
-import hobbiesIcon from '../assets/icons/garageband-2020-12-10.webp'
-import vsCodeIcon from '../assets/icons/vscode.png'
-import steamIcon from '../assets/icons/steam.webp'
-import youtubeIcon from '../assets/icons/youtube.jpg'
+import { apps } from '../config/apps'
 
-const emit = defineEmits(['open-drawer'])
+const emit = defineEmits(['launch-app'])
 
-const dockApps = [
-  
-// finder - should take them to a macOS finder view to show my resume and projects as links 
-  { name: 'Finder', image: finderIcon, emoji: '📁', action: null },
-
-  // app drawer - should show icons to my github, linkedin, email, and my github projects. also have a YT icon linking to you-know-what.
-  { name: 'Launchpad', image: launchpadIcon, emoji: '📱', action: () => emit('open-drawer') },
-
-  // tech stack - skills, languages, frameworks, etc. that I know
-  { name: 'Tech Stack Familiarity', image: vsCodeIcon, emoji: '📺', action: null },
-
-  // github
-  { name: 'GitHub', image: githubIcon, emoji: '🐙', action: () => window.open('https://github.com/7wik-pk', '_blank') },
-
-  // linkedin
-  { name: 'LinkedIn', image: linkedinIcon, emoji: '🔗', action: () => window.open('https://www.linkedin.com/in/sathwik-k-77b58b140/', '_blank') },
-  
-  // educational background
-  { name: 'Education', image: eduIcon, emoji: '🎓', action: null },
-
-  // should show my images (?)
-  // { name: 'Photos', image: photosIcon, emoji: '📷', action: null },
-
-  // hobbies - list out and figure out a clever way to display my hobbies. also decide on a suitable icon.
-  { name: 'Hobbies', image: hobbiesIcon, emoji: '🎵', action: null },
-
-  // // about - show a little bit about me
-  // { emoji: '📚', action: null },
-
-  // steam - show a little bit about me
-  { name: 'Steam', image: steamIcon, emoji: '🎮', action: () => window.open('https://steamcommunity.com/id/7wik_pk', '_blank') },
-
-  // youtube
-  { name: 'YouTube', image: youtubeIcon, emoji: '📺', action: () => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank') },
-
-  // { separator: true },
-  // { emoji: '🗑️', action: null },
-]
-
+const dockApps = apps.filter(app => app.showInDock).map(app => ({
+  ...app,
+  action: () => emit('launch-app', app)
+}))
 </script>
 
 <style scoped>

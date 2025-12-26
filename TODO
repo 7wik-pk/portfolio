@@ -1,1 +1,4 @@
+- add a stickies-like note that welcomes users to my portfolio.
+- recreate either preview or something else for viewing resume, education background, projects (start with dummy projects) and tech stack.
+- figure out a way to dynamically generate the data for "projects" component - pull info/data from my GitHub repos to automate this maybe. BONUS; figure out a way to dynamically fetch/generate appropriate mac-style icons for each project.
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
