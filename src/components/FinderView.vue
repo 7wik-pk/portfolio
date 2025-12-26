@@ -17,6 +17,11 @@ const currentFiles = computed(() => {
 })
 
 const selectFile = (file) => {
+  // Mobile behavior: Tap selected item to open
+  if (selectedFile.value?.id === file.id && window.innerWidth <= 768) {
+    openFile(file)
+    return
+  }
   selectedFile.value = file
 }
 

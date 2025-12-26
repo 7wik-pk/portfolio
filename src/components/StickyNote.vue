@@ -13,7 +13,7 @@
     </div>
     
     <div class="sticky-content">
-      <div class="portrait-container">
+      <div v-if="showPortrait" class="portrait-container">
         <img :src="portraitImage" alt="Portrait" class="portrait-image" />
       </div>
       
@@ -44,6 +44,14 @@ const props = defineProps({
   zIndex: {
     type: Number,
     default: 1500
+  },
+  initialContent: {
+    type: String,
+    default: `<strong>Welcome to my portfolio! 👋</strong><br><br>I'm Sathwik, and I've built this interactive macOS-style portfolio to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`
+  },
+  showPortrait: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -54,7 +62,7 @@ const position = ref({ x: props.initialX, y: props.initialY })
 const isDragging = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
 
-const content = ref(`<strong>Welcome to my portfolio! 👋</strong><br><br>I'm Sathwik, and I've built this interactive macOS-style portfolio to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`)
+const content = ref(props.initialContent)
 
 const close = () => {
   isVisible.value = false

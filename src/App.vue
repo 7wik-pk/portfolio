@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import MenuBar from './components/MenuBar.vue'
 import Dock from './components/Dock.vue'
 import AppDrawer from './components/AppDrawer.vue'
@@ -12,6 +12,18 @@ import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
 const currentWallpaper = ref('')
+
+// Mobile Detection
+const isMobile = ref(false)
+const disclaimerVisible = ref(true)
+
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768
+}
+
+const closeDisclaimer = () => {
+  disclaimerVisible.value = false
+}
 
 // Dynamic Window Registry
 const openWindows = ref([])
@@ -118,6 +130,13 @@ const wallPaths = Object.values(wallpapers).map(m => m.default)
 onMounted(() => {
   const randomIndex = Math.floor(Math.random() * wallPaths.length)
   currentWallpaper.value = wallPaths[randomIndex]
+  
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
 })
 
 const openDrawer = () => {
@@ -212,6 +231,17 @@ const handleFileLaunch = (file) => {
       :initial-y="60"
       :z-index="stickyNoteZIndex"
       @close="closeStickyNote"
+    />
+
+    <!-- Mobile Disclaimer Note -->
+    <StickyNote 
+      v-if="isMobile && disclaimerVisible"
+      :initial-x="40"
+      :initial-y="450"
+      :z-index="1500"
+      :show-portrait="false"
+      initial-content="<strong>Note:</strong><br><br>Although this portfolio is responsive to some degree, it should be viewed on a tablet or PC screen for the best experience."
+      @close="closeDisclaimer"
     />
 
     <Dock 
