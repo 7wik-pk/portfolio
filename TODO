@@ -1,8 +1,11 @@
 - add a stickies-like note that welcomes users to my portfolio.
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
+- add a context menu for the apple logo on the top left - with "About me", "This portfolio's source code"
 
 keep search-bar functionality in mind when implementing everything below:
 
 - recreate either preview or something else for viewing resume, education background, projects (start with dummy projects) and tech stack -- interlink tech stack and projects.
 - figure out a way to dynamically generate the data for "projects" component - pull info/data from my GitHub repos to automate this maybe. BONUS; figure out a way to dynamically fetch/generate appropriate mac-style icons for each project.
 
+advanced:
+- use github apis or smth to update last modified datetime of each project regularly

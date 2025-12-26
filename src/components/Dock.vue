@@ -162,7 +162,7 @@ const dockApps = apps.filter(app => app.showInDock).map(app => ({
 
 .dock-indicator {
   position: absolute;
-  bottom: -4px;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
   width: 4px;

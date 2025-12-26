@@ -7,7 +7,7 @@ import photosIcon from '../assets/icons/photos-2021-05-28.png'
 import hobbiesIcon from '../assets/icons/GarageBand_2025.webp'
 import vsCodeIcon from '../assets/icons/vscode.png'
 import steamIcon from '../assets/icons/steam.webp'
-import youtubeIcon from '../assets/icons/youtube.jpg'
+import youtubeIcon from '../assets/icons/youtube.png'
 import discordIcon from '../assets/icons/discord_macos_bigsur_icon_190238.png'
 import resumeIcon from '../assets/icons/resume2.png'
 
