@@ -1,9 +1,29 @@
 <template>
   <div class="menu-bar">
     <div class="menu-bar-left">
-      <div class="apple-logo" @click="emit('menu-click')"><img src="../assets/icons/apple-16.ico" alt="Apple Logo" /></div>
+      <div 
+        class="apple-logo" 
+        :class="{ active: activeMenu === 'apple' }"
+        @click.stop="toggleMenu('apple')"
+      >
+        <img src="../assets/icons/apple-16.ico" alt="Apple Logo" />
+        <div v-show="activeMenu === 'apple'" class="dropdown-menu">
+          <div class="dropdown-item" @click.stop="handleAction('about')">About Me</div>
+          <div class="dropdown-separator"></div>
+          <div class="dropdown-item" @click.stop="handleAction('source')">Source Code</div>
+        </div>
+      </div>
       <div class="menu-item active-app">{{ activeAppName }}</div>
-      <div class="menu-item" @click="emit('menu-click')">File</div>
+      <div 
+        class="menu-item" 
+        :class="{ active: activeMenu === 'file', disabled: isFileDisabled }"
+        @click.stop="toggleMenu('file')"
+      >
+        File
+        <div v-show="activeMenu === 'file'" class="dropdown-menu">
+          <div class="dropdown-item" @click.stop="handleAction('close-window')">Close Window</div>
+        </div>
+      </div>
     </div>
     <div class="menu-bar-right">
       <!-- ideas: linkedin, github, email icons with links -->
@@ -23,12 +43,40 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
-const emit = defineEmits(['menu-click'])
+
+const emit = defineEmits(['menu-click', 'action'])
+const activeMenu = ref(null)
+
+const toggleMenu = (menu) => {
+  if (menu === 'file' && props.isFileDisabled) return
+  activeMenu.value = activeMenu.value === menu ? null : menu
+}
+
+const closeMenu = () => {
+  activeMenu.value = null
+}
+
+const handleAction = (action) => {
+  emit('action', action)
+  closeMenu()
+}
+
+onMounted(() => {
+  window.addEventListener('click', closeMenu)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('click', closeMenu)
+})
 
 const props = defineProps({
   activeAppName: {
     type: String,
     default: 'Finder'
+  },
+  isFileDisabled: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -76,7 +124,7 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
-  z-index: 1000;
+  z-index: 9999;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
@@ -90,23 +138,73 @@ onUnmounted(() => {
   gap: 2px;
 }
 
-.apple-logo {
-  padding-left: 0.4rem;
-  font-size: 16px;
-  opacity: 0.9;
-  cursor: pointer;
-}
-
 .menu-item {
   padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.15s ease;
   user-select: none;
+  position: relative;
 }
 
-.menu-item:hover {
+.apple-logo {
+  position: relative;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.apple-logo:hover, .apple-logo.active {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item:hover, .menu-item.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 220px;
+  background: rgba(40, 40, 40, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 6px;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 2000;
+}
+
+.dropdown-item {
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item:hover {
+  background: #007aff;
+  color: white;
+}
+
+.dropdown-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 4px 6px;
 }
 
 .menu-bar-right {

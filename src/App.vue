@@ -123,6 +123,11 @@ const activeAppName = computed(() => {
   return win.title
 })
 
+// File Menu Logic
+const isFileDisabled = computed(() => {
+  return windowStack.value.length === 0
+})
+
 // Load all wallpapers eagerly
 const wallpapers = import.meta.glob('./assets/img/walls/*.{png,jpg,jpeg,webp,JPG,PNG}', { eager: true })
 const wallPaths = Object.values(wallpapers).map(m => m.default)
@@ -189,13 +194,28 @@ const handleFileLaunch = (file) => {
     props: { src: file.srcPath, title: file.name }
   })
 }
+
+const handleMenuAction = (action) => {
+  if (action === 'about') {
+    showToast('About Me coming soon!')
+  } else if (action === 'source') {
+    window.open('https://github.com/7wik-pk/portfolio', '_blank')
+  } else if (action === 'close-window') {
+    const activeId = windowStack.value[windowStack.value.length - 1]
+    if (activeId) {
+      closeWindow(activeId)
+    }
+  }
+}
 </script>
 
 <template>
   <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
     <MenuBar 
-      :active-app-name="activeAppName" 
+      :active-app-name="activeAppName"
+      :is-file-disabled="isFileDisabled"
       @menu-click="showToast('That isn\'t ready just yet, apologies...')"
+      @action="handleMenuAction"
     />
     
     <div class="desktop">
