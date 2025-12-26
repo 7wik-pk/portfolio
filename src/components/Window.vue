@@ -19,6 +19,8 @@
       <div class="window-content">
         <slot></slot>
       </div>
+      <!-- Focus Guard: Captures clicks on inactive windows with iframes -->
+      <div v-if="!isFocused" class="focus-guard"></div>
     </div>
   </div>
 </template>
@@ -28,6 +30,10 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   isOpen: Boolean,
+  isFocused: {
+    type: Boolean,
+    default: true
+  },
   title: String,
   width: {
     type: String,
@@ -172,6 +178,17 @@ onUnmounted(() => {
   flex: 1;
   overflow: auto;
   background: rgba(255, 255, 255, 0.02);
+}
+
+.focus-guard {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  cursor: default;
+  background: transparent;
 }
 
 @media (max-width: 768px) {

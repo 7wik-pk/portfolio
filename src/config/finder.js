@@ -5,6 +5,7 @@ import pdfDocument from '../assets/icons/Pdf_Document.png'
 import resumeIcon from '../assets/icons/resume2.png'
 import finderIcon from '../assets/icons/finder-2021-09-10.webp'
 import folderIcon from '../assets/icons/Folder_Tahoe.png'
+import selfPortrait from '../assets/img/portrait.jpg'
 import { apps } from './apps'
 
 const applicationsIcon = folderIcon
@@ -74,7 +75,8 @@ export const finderFiles = [
         type: 'PNG Image',
         size: '800 KB',
         kind: 'Image',
-        srcPath: githubIcon,
+        image: selfPortrait,
+        srcPath: selfPortrait,
         lastModified: 'Nov 15, 2025 at 2:15 PM',
         emoji: '🖼️'
     },

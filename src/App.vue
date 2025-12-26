@@ -179,6 +179,7 @@ const handleFileLaunch = (file) => {
         :title="win.title"
         :width="win.width"
         :height="win.height"
+        :is-focused="windowStack[windowStack.length - 1] === win.id"
         :style="{ zIndex: getZIndex(win.id) }"
         @close="closeWindow(win.id)"
         @mousedown="bringToFront(win.id)"
