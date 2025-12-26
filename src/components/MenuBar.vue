@@ -1,19 +1,19 @@
 <template>
   <div class="menu-bar">
     <div class="menu-bar-left">
-      <div class="apple-logo"><img src="../assets/icons/apple-16.ico" alt="Apple Logo" /></div>
+      <div class="apple-logo" @click="emit('menu-click')"><img src="../assets/icons/apple-16.ico" alt="Apple Logo" /></div>
       <div class="menu-item active-app">{{ activeAppName }}</div>
-      <div class="menu-item">File</div>
+      <div class="menu-item" @click="emit('menu-click')">File</div>
     </div>
     <div class="menu-bar-right">
       <!-- ideas: linkedin, github, email icons with links -->
       <!-- <div class="menu-icon">🔋</div> -->
       <!-- <div class="menu-icon">📶</div> -->
-      <div class="menu-icon search">
+      <div class="menu-icon search" @click="emit('menu-click')">
         <img :src="searchIcon" alt="Search" width="16" height="16" />
       </div>
       <!-- <div class="menu-icon">🔔</div> -->
-      <div class="control-center"><img src="../assets/icons/control-center.png" alt="Control Center" width="16" height="16" /></div>
+      <div class="control-center" @click="emit('menu-click')"><img src="../assets/icons/control-center.png" alt="Control Center" width="16" height="16" /></div>
       <div class="time">{{ currentTime }}</div>
     </div>
   </div>
@@ -22,6 +22,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
+
+const emit = defineEmits(['menu-click'])
 
 const props = defineProps({
   activeAppName: {
@@ -92,13 +94,13 @@ onUnmounted(() => {
   padding-left: 0.4rem;
   font-size: 16px;
   opacity: 0.9;
-  cursor: default;
+  cursor: pointer;
 }
 
 .menu-item {
   padding: 4px 8px;
   border-radius: 4px;
-  cursor: default;
+  cursor: pointer;
   transition: background-color 0.15s ease;
   user-select: none;
 }
@@ -117,7 +119,7 @@ onUnmounted(() => {
 .menu-icon {
   font-size: 14px;
   opacity: 0.85;
-  cursor: default;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,7 +141,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  cursor: default;
+  cursor: pointer;
   opacity: 0.85;
 }
 

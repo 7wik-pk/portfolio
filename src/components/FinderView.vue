@@ -7,7 +7,7 @@ import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
 const currentPath = ref([]) // Stack of folder objects
 const selectedFile = ref(null)
 
-const emit = defineEmits(['launch-file', 'launch-app'])
+const emit = defineEmits(['launch-file', 'launch-app', 'show-toast'])
 
 const currentFiles = computed(() => {
   if (currentPath.value.length === 0) {
@@ -117,6 +117,16 @@ const goToFolder = (id) => {
             <div class="breadcrumb-separator">›</div>
             <div class="breadcrumb-item" @click="goToBreadcrumb(index)">{{ folder.name }}</div>
           </template>
+        </div>
+
+        <div class="finder-search">
+          <span class="search-icon" @click="emit('show-toast', 'Search is coming soon!')">🔍</span>
+          <input 
+            type="text" 
+            placeholder="Search" 
+            @click="emit('show-toast', 'Search is coming soon!')"
+            readonly
+          />
         </div>
       </div>
 
@@ -248,6 +258,38 @@ const goToFolder = (id) => {
 
 .breadcrumb-separator {
   color: rgba(255, 255, 255, 0.3);
+}
+
+/* Search Bar */
+.finder-search {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 4px 8px;
+  gap: 6px;
+  width: 180px;
+}
+
+.search-icon {
+  font-size: 12px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.finder-search input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+}
+
+.finder-search input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* Sidebar */

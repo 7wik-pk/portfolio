@@ -6,6 +6,7 @@ import AppDrawer from './components/AppDrawer.vue'
 import Window from './components/Window.vue'
 import Preview from './components/Preview.vue'
 import FinderView from './components/FinderView.vue'
+import Toast from './components/Toast.vue'
 import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
@@ -23,6 +24,43 @@ const bringToFront = (id) => {
 
 const getZIndex = (id) => {
   return 2000 + windowStack.value.indexOf(id)
+}
+
+// Toast System
+const toast = ref({
+  show: false,
+  message: '',
+  timeoutId: null
+})
+
+const showToast = (message) => {
+  // Clear any existing timeout to avoid conflicting disappearance
+  if (toast.value.timeoutId) {
+    clearTimeout(toast.value.timeoutId)
+    toast.value.timeoutId = null
+  }
+
+  // Reset if already showing to re-trigger animation
+  if (toast.value.show) {
+    toast.value.show = false
+    // Delay slightly to allow Vue to notice the state change
+    setTimeout(() => {
+      toast.value.message = message
+      toast.value.show = true
+      startToastTimer()
+    }, 10)
+  } else {
+    toast.value.message = message
+    toast.value.show = true
+    startToastTimer()
+  }
+}
+
+const startToastTimer = () => {
+  toast.value.timeoutId = setTimeout(() => {
+    toast.value.show = false
+    toast.value.timeoutId = null
+  }, 3000)
 }
 
 const launchWindow = (config) => {
@@ -107,6 +145,7 @@ const handleAppLaunch = (app) => {
         })
         break;
       default:
+        showToast("That isn't ready just yet, apologies...")
         break;
     }
   }
@@ -124,7 +163,10 @@ const handleFileLaunch = (file) => {
 
 <template>
   <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
-    <MenuBar :active-app-name="activeAppName" />
+    <MenuBar 
+      :active-app-name="activeAppName" 
+      @menu-click="showToast('That isn\'t ready just yet, apologies...')"
+    />
     
     <div class="desktop">
       <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />
@@ -146,6 +188,7 @@ const handleFileLaunch = (file) => {
           v-bind="win.props"
           @launch-file="handleFileLaunch"
           @launch-app="handleAppLaunch"
+          @show-toast="showToast"
         />
       </Window>
     </div>
@@ -154,6 +197,8 @@ const handleFileLaunch = (file) => {
       :active-app-ids="openWindows.map(w => w.id)"
       @launch-app="handleAppLaunch" 
     />
+
+    <Toast :show="toast.show" :message="toast.message" @close="toast.show = false" />
   </div>
 </template>
 
