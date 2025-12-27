@@ -165,7 +165,7 @@ const stopDrag = () => {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgba(80, 80, 80, 0.9);
+  background: rgba(80, 80, 80, 0.5);
   backdrop-filter: blur(10px);
   border: 0.5px solid rgba(255, 255, 255, 0.3);
   color: #fff;
@@ -181,7 +181,7 @@ const stopDrag = () => {
 }
 
 .toast-close:hover {
-  background: rgba(255, 255, 255, 0.014);
+  background: rgba(80, 80, 80, 0.9);
 }
 
 .toast-close svg {
