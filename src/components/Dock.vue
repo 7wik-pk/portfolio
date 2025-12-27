@@ -56,7 +56,7 @@ const handleAppClick = (app) => {
     bouncingApps.value.add(app.id)
     setTimeout(() => {
       bouncingApps.value.delete(app.id)
-    }, 600)
+    }, 1200)
   }
 
   // Only delay if NOT open and NOT launchpad
@@ -246,7 +246,7 @@ const handleAppClick = (app) => {
 
 /* Bounce Animation */
 .dock-item.bouncing .dock-icon {
-  animation: dock-bounce 0.6s cubic-bezier(0.28, 0.84, 0.42, 1);
+  animation: dock-bounce 1.2s cubic-bezier(0.28, 0.84, 0.42, 1);
 }
 
 @keyframes dock-bounce {

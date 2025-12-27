@@ -7,6 +7,8 @@
 - add "About me" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
+- in control center allow changing wallpapers
+- add acknowledgements and thank the creators of icons, mention where i found them, etc.
 
 keep search-bar functionality in mind when implementing everything below:
 

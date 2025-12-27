@@ -1,6 +1,12 @@
 <template>
   <Transition name="toast">
-    <div v-if="show" class="toast-container">
+    <div 
+      v-if="show" 
+      class="toast-container"
+      :style="{ transform: isDragging || dragOffset > 0 ? `translateX(${dragOffset}px)` : undefined }"
+      @mousedown="startDrag"
+      @touchstart="startDrag"
+    >
       <div class="toast-content">
         <div class="toast-icon">
           <img :src="toolsIcon" alt="Tools" class="toast-img-icon" />
@@ -21,6 +27,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import toolsIcon from '../assets/icons/finder_sidebar/Tools.ico'
 
 defineProps({
@@ -28,7 +35,57 @@ defineProps({
   message: String
 })
 
-defineEmits(['close'])
+const emit = defineEmits(['close'])
+
+const dragOffset = ref(0)
+const isDragging = ref(false)
+const startX = ref(0)
+
+const startDrag = (event) => {
+  isDragging.value = true
+  startX.value = event.clientX || event.touches[0].clientX
+  
+  // Add global listeners
+  window.addEventListener('mousemove', onDrag)
+  window.addEventListener('mouseup', stopDrag)
+  window.addEventListener('touchmove', onDrag)
+  window.addEventListener('touchend', stopDrag)
+}
+
+const onDrag = (event) => {
+  if (!isDragging.value) return
+  
+  const currentX = event.clientX || event.touches[0].clientX
+  const delta = currentX - startX.value
+  
+  // Only allow dragging to the right (positive delta)
+  if (delta > 0) {
+    dragOffset.value = delta
+  } else {
+    dragOffset.value = 0
+  }
+}
+
+const stopDrag = () => {
+  if (!isDragging.value) return
+  isDragging.value = false
+  
+  // Remove global listeners
+  window.removeEventListener('mousemove', onDrag)
+  window.removeEventListener('mouseup', stopDrag)
+  window.removeEventListener('touchmove', onDrag)
+  window.removeEventListener('touchend', stopDrag)
+  
+  // Threshold to dismiss (100px)
+  if (dragOffset.value > 100) {
+    emit('close')
+    // Reset after a brief delay so it's ready for next time
+    setTimeout(() => { dragOffset.value = 0 }, 300)
+  } else {
+    // Snap back
+    dragOffset.value = 0
+  }
+}
 </script>
 
 <style scoped>
@@ -45,7 +102,14 @@ defineEmits(['close'])
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   padding: 12px;
+  padding: 12px;
   pointer-events: auto;
+  cursor: grab;
+  transition: transform 0.1s linear; /* Quick response when dragging */
+}
+
+.toast-container:active {
+  cursor: grabbing;
 }
 
 .toast-container:hover .toast-close {
@@ -117,7 +181,7 @@ defineEmits(['close'])
 }
 
 .toast-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.014);
 }
 
 .toast-close svg {
@@ -131,7 +195,7 @@ defineEmits(['close'])
 }
 
 .toast-enter-from {
-  transform: translateX(100%) scale(0.9);
+  transform: translateX(100%) scale(0.9); 
   opacity: 0;
 }
 
