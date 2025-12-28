@@ -5,6 +5,7 @@ import resumeIcon from '../assets/icons/resume2.png'
 import applicationsIcon from '../assets/icons/apps.png'
 import desktopIcon from '../assets/icons/Folder_Desktop.png'
 import googleContactIcon from '../assets/icons/google_contact.png'
+import selfPortrait from '../assets/img/portrait.jpg'
 import { apps } from './apps'
 
 // Sidebar Icons
@@ -22,11 +23,25 @@ export const aboutMe = {
     name: 'About Me',
     type: 'Information',
     image: googleContactIcon,
-    size: '12 KB',
-    kind: 'Information',
-    srcPath: null, // Triggers WIP toast in App.vue
-    lastModified: 'Dec 24, 2025 at 11:30 AM',
-    emoji: '📄'
+    size: '4 KB',
+    kind: 'Info',
+    lastModified: 'Dec 28, 2025 at 6:45 PM',
+    emoji: '👤',
+    infoProps: {
+        image: selfPortrait,
+        title: 'Sathwik',
+        subtitle: 'Software Engineer / Developer / Designer',
+        details: [
+            { label: 'Role(s)', value: 'Full Stack Developer, Systems Developer, Cloud Engineer' },
+            { label: 'Based in', value: 'Australia (Melbourne, VIC) / India (Bengaluru, Karnataka)' },
+            { label: 'Expertise', value: 'Golang, Backend Web Development, PostGreSQL, Geospatial Data Processing (PostGIS), VueJS, Android Studio (Kotlin), Python & Reinforcement Learning' },
+        ],
+        buttons: [
+            { text: 'My Resume', action: 'resume', type: 'secondary' },
+            { text: 'Email Me', action: 'email', type: 'secondary' }
+        ],
+        email: 'satpk17@gmail.com'
+    }
 }
 
 export const resume = {
@@ -64,6 +79,8 @@ export const applicationsFolder = {
             emoji: app.emoji
         }))
 }
+// Load all project icons eagerly so Vite bundles them correctly
+const projectIcons = import.meta.glob('../assets/icons/projects/*.png', { eager: true })
 
 export const projectsFolder = {
     id: 'projects',
@@ -76,10 +93,10 @@ export const projectsFolder = {
     emoji: '📁',
     children: projectsData.map(p => ({
         ...p,
-        image: new URL(p.image, import.meta.url).href
+        // Match the static path from JSON against the globbed imports
+        image: projectIcons[p.image]?.default || p.image
     }))
 }
-
 
 export const desktopFolder = {
     id: 'desktop',

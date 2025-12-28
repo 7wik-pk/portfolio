@@ -9,7 +9,8 @@ import FinderView from './views/FinderView.vue'
 import Toast from './components/Toast.vue'
 import StickyNote from './components/StickyNote.vue'
 import DesktopIcon from './components/DesktopIcon.vue'
-import { desktopFolder, aboutMe, sourceCodeLink, contentMap, sidebarFavorites } from './config/finder'
+import InfoView from './views/InfoView.vue'
+import { contentMap, sidebarFavorites } from './config/finder'
 
 const drawerOpen = ref(false)
 const currentWallpaper = ref('')
@@ -90,10 +91,17 @@ const launchWindow = (config) => {
   const existing = openWindows.value.find(w => w.id === config.id)
   if (!existing) {
     openWindows.value.push(config)
-  } else if (config.props && Object.keys(config.props).length > 0) {
-    // Only update props if new ones are explicitly passed (e.g. for Preview or specific folder launches)
-    existing.props = { ...existing.props, ...config.props }
+  } else {
+    // Update core window properties if provided
+    if (config.width) existing.width = config.width
+    if (config.height) existing.height = config.height
     if (config.title) existing.title = config.title
+    if (config.resizable !== undefined) existing.resizable = config.resizable
+    
+    // Update props if new ones are explicitly passed
+    if (config.props && Object.keys(config.props).length > 0) {
+      existing.props = { ...existing.props, ...config.props }
+    }
   }
   bringToFront(config.id)
 }
@@ -106,7 +114,8 @@ const closeWindow = (id) => {
 // Map IDs to components for dynamic rendering
 const windowComponents = {
   finder: FinderView,
-  preview: Preview
+  preview: Preview,
+  info: InfoView
 }
 
 const defaultTitle = "Sathwik's Portfolio"
@@ -120,6 +129,7 @@ const activeAppName = computed(() => {
   // Return App Names
   if (win.component === 'finder') return "Finder"
   if (win.component === 'preview') return "Preview"
+  if (win.component === 'info') return "About Me"
   
   return win.title
 })
@@ -215,6 +225,16 @@ const handleLaunch = (item) => {
       height: '600px',
       props: { initialPath }
     })
+  } else if (item.kind === 'Info') {
+    launchWindow({
+      id: item.id,
+      title: item.name,
+      component: 'info',
+      width: '640px',
+      height: '420px',
+      resizable: false,
+      props: item.infoProps
+    })
   } else {
     // Media/Document Preview
     if (!item.srcPath) {
@@ -230,12 +250,19 @@ const handleLaunch = (item) => {
     })
   }
 }
+const handleInfoAction = (action, config) => {
+  if (action === 'email') {
+    window.open(`mailto:${config.email}`, '_blank')
+  } else if (action === 'resume') {
+    handleLaunch(contentMap['resume'])
+  }
+}
 
 const handleMenuAction = (action) => {
   if (action === 'about') {
-    handleLaunch(aboutMe)
+    handleLaunch(contentMap['about-me'])
   } else if (action === 'source') {
-    handleLaunch(sourceCodeLink)
+    handleLaunch(contentMap['source-code'])
   } else if (action === 'close-window') {
     const activeId = windowStack.value[windowStack.value.length - 1]
     if (activeId) {
@@ -271,7 +298,7 @@ const handleMenuAction = (action) => {
       <!-- Desktop Icons -->
       <div class="desktop-icons">
         <DesktopIcon
-          v-for="item in desktopFolder.children"
+          v-for="item in contentMap.desktop.children"
           :key="item.id"
           :item="item"
           :is-selected="selectedDesktopIcon === item.id"
@@ -288,6 +315,7 @@ const handleMenuAction = (action) => {
         :title="win.title"
         :width="win.width"
         :height="win.height"
+        :resizable="win.resizable"
         :is-focused="windowStack[windowStack.length - 1] === win.id"
         :style="{ zIndex: getZIndex(win.id) }"
         @close="closeWindow(win.id)"
@@ -298,6 +326,7 @@ const handleMenuAction = (action) => {
           v-bind="win.props"
           @launch-file="handleLaunch"
           @launch-app="handleLaunch"
+          @button-click="action => handleInfoAction(action, win.props)"
           @show-toast="showToast"
         />
       </Window>

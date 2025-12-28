@@ -2,6 +2,7 @@
   <div v-if="isOpen" class="window-overlay">
     <div 
       class="window" 
+      :class="{ 'is-resizable': resizable }"
       :style="{ 
         width: width, 
         height: height,
@@ -42,6 +43,10 @@ const props = defineProps({
   height: {
     type: String,
     default: '80%'
+  },
+  resizable: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -105,7 +110,7 @@ onUnmounted(() => {
 }
 
 .window {
-  background: rgba(30, 30, 30, 0.85);
+  background: rgba(30, 30, 30, 0.5);
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 12px;
@@ -133,7 +138,7 @@ onUnmounted(() => {
 
 .window-titlebar {
   height: 38px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(30,30,30, 0.35); /* Added extra weight here to restore top bar density */
   display: flex;
   align-items: center;
   padding: 0 12px;
@@ -179,7 +184,7 @@ onUnmounted(() => {
 .window-content {
   flex: 1;
   overflow: auto;
-  background: rgba(255, 255, 255, 0.02);
+  background: transparent;
 }
 
 .focus-guard {
@@ -194,7 +199,7 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1366px) {
-  .window {
+  .window.is-resizable {
     width: 85% !important;
     height: 75% !important;
   }
