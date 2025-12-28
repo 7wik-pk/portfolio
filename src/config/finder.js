@@ -5,10 +5,15 @@ import pdfDocument from '../assets/icons/Pdf_Document.png'
 import resumeIcon from '../assets/icons/resume2.png'
 import finderIcon from '../assets/icons/finder-2021-09-10.webp'
 import folderIcon from '../assets/icons/Folder_Tahoe.png'
+import applicationsIcon from '../assets/icons/apps.png'
 import selfPortrait from '../assets/img/portrait.jpg'
 import { apps } from './apps'
 
-const applicationsIcon = folderIcon
+// project icons
+import racingLineMapperIcon from '../assets/icons/projects/racing-liner.png'
+import safeTrekIcon from '../assets/icons/projects/safetrek.png'
+import rbTreeIcon from '../assets/icons/projects/rbtree.png'
+import portfolioIcon from '../assets/icons/projects/portfolio.png'
 
 export const applicationsFolder = {
     id: 'apps',
@@ -20,7 +25,7 @@ export const applicationsFolder = {
     lastModified: 'Dec 26, 2025 at 12:00 PM',
     emoji: '🚀',
     children: apps
-        .filter(app => app.id !== 'launchpad' && app.id !== 'finder')
+        .filter(app => app.id !== 'launchpad' && app.id !== 'finder' && app.id !== 'resume')
         .map(app => ({
             id: `app-${app.id}`,
             name: app.name,
@@ -32,6 +37,74 @@ export const applicationsFolder = {
             lastModified: 'Dec 26, 2025 at 12:00 PM',
             emoji: app.emoji
         }))
+}
+
+export const projectsFolder = {
+    id: 'projects',
+    name: 'Projects',
+    type: 'Folder',
+    size: '--',
+    image: projectsIcon,
+    kind: 'Folder',
+    lastModified: 'Oct 10, 2025 at 9:00 AM',
+    emoji: '📁',
+    children: [
+        {
+            id: 'p1',
+            name: 'Racing Line Mapper',
+            type: 'GitHub Repository',
+            image: racingLineMapperIcon,
+            size: '--',
+            kind: 'Link',
+            url: 'https://github.com/7wik-pk/racing-line-mapper',
+            lastModified: 'Dec 20, 2025 at 10:00 AM',
+            emoji: '🔗'
+        },
+        {
+            id: 'p2',
+            name: 'Portfolio Site',
+            type: 'GitHub Repository',
+            image: portfolioIcon,
+            size: '--',
+            kind: 'Link',
+            url: 'https://github.com/7wik-pk/portfolio',
+            lastModified: 'Dec 26, 2025 at 7:30 PM',
+            emoji: '🔗'
+        },
+        {
+            id: 'p3',
+            name: 'SafeTrek',
+            type: 'GitHub Repository',
+            image: safeTrekIcon,
+            size: '--',
+            kind: 'Link',
+            url: 'https://github.com/7wik-pk/safetrek',
+            lastModified: 'Dec 26, 2025 at 5:23 PM',
+            emoji: '🔗'
+        },
+        {
+            id: 'p4',
+            name: 'Generic Red-Black Trees',
+            type: 'GitHub Repository',
+            image: rbTreeIcon,
+            size: '--',
+            kind: 'Link',
+            url: 'https://github.com/swarupgt/red-black-tree-generic',
+            lastModified: 'Dec 26, 2025 at 5:23 PM',
+            emoji: '🔗'
+        }
+        // {
+        //     id: '99',
+        //     name: 'Source Code',
+        //     type: 'Folder',
+        //     size: '--',
+        //     image: folderIcon,
+        //     kind: 'Folder',
+        //     lastModified: 'Oct 10, 2025 at 9:00 AM',
+        //     emoji: '📁',
+        //     children: []
+        // }
+    ]
 }
 
 // export const downloadsFolder = {
@@ -58,17 +131,7 @@ export const finderFiles = [
         lastModified: 'Dec 24, 2025 at 11:30 AM',
         emoji: '📄'
     },
-    {
-        id: '2',
-        name: 'Resume.pdf',
-        type: 'PDF Document',
-        image: resumeIcon,
-        size: '1.2 MB',
-        kind: 'PDF',
-        srcPath: resumePdf,
-        lastModified: 'Dec 26, 2025 at 5:23 PM',
-        emoji: '📄'
-    },
+    applicationsFolder,
     {
         id: '4',
         name: 'Portrait.png',
@@ -80,60 +143,17 @@ export const finderFiles = [
         lastModified: 'Nov 15, 2025 at 2:15 PM',
         emoji: '🖼️'
     },
+    
     {
-        id: '5',
-        name: 'Projects',
-        type: 'Folder',
-        size: '--',
-        image: projectsIcon,
-        kind: 'Folder',
-        lastModified: 'Oct 10, 2025 at 9:00 AM',
-        emoji: '📁',
-        children: [
-            {
-                id: 'p1',
-                name: 'Racing Line Mapper',
-                type: 'GitHub Repository',
-                image: githubIcon,
-                size: '--',
-                kind: 'Link',
-                url: 'https://github.com/7wik-pk/racing-line-mapper',
-                lastModified: 'Dec 20, 2025 at 10:00 AM',
-                emoji: '🔗'
-            },
-            {
-                id: 'p2',
-                name: 'Portfolio Site',
-                type: 'GitHub Repository',
-                image: githubIcon,
-                size: '--',
-                kind: 'Link',
-                url: 'https://github.com/7wik-pk/portfolio',
-                lastModified: 'Dec 26, 2025 at 7:30 PM',
-                emoji: '🔗'
-            },
-            {
-                id: 'p3',
-                name: 'SafeTrek',
-                type: 'GitHub Repository',
-                image: githubIcon,
-                size: '--',
-                kind: 'Link',
-                url: 'https://github.com/7wik-pk/safetrek',
-                lastModified: 'Dec 26, 2025 at 5:23 PM',
-                emoji: '🔗'
-            },
-            // {
-            //     id: '99',
-            //     name: 'Source Code',
-            //     type: 'Folder',
-            //     size: '--',
-            //     image: folderIcon,
-            //     kind: 'Folder',
-            //     lastModified: 'Oct 10, 2025 at 9:00 AM',
-            //     emoji: '📁',
-            //     children: []
-            // }
-        ]
-    }
+        id: '2',
+        name: 'Resume.pdf',
+        type: 'PDF Document',
+        image: resumeIcon,
+        size: '1.2 MB',
+        kind: 'PDF',
+        srcPath: resumePdf,
+        lastModified: 'Dec 26, 2025 at 5:23 PM',
+        emoji: '📄'
+    },
+    projectsFolder
 ]

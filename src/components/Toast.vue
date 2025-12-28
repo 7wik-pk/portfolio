@@ -76,8 +76,8 @@ const stopDrag = () => {
   window.removeEventListener('touchmove', onDrag)
   window.removeEventListener('touchend', stopDrag)
   
-  // Threshold to dismiss (100px)
-  if (dragOffset.value > 100) {
+  // Threshold to dismiss (50px)
+  if (dragOffset.value > 50) {
     emit('close')
     // Reset after a brief delay so it's ready for next time
     setTimeout(() => { dragOffset.value = 0 }, 300)
@@ -100,7 +100,7 @@ const stopDrag = () => {
   border-radius: 12px;
   border: 0.5px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  z-index: 9999;
+  z-index: 9998;
   padding: 12px;
   padding: 12px;
   pointer-events: auto;

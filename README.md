@@ -1,8 +1,19 @@
-# macOS-style Portfolio 🖥️
+# macOS-style Portfolio
 
 A high-fidelity personal portfolio website that recreates the macOS Sequoia/Sonoma desktop interface using Vue 3. This project focuses on authentic interaction design, system architecture simulation, and responsiveness.
 
 Currently hosted at https://7wik-pk.github.io/portfolio/
+
+## Example screenshots:
+
+### Desktop
+![Desktop](src/assets/img/screenshots/Screenshot_20251227_180011.png)
+
+### Launchpad (App Drawer)
+![Launchpad](src/assets/img/screenshots/Screenshot_20251227_180030.png)
+
+### Finder
+![Finder](src/assets/img/screenshots/Screenshot_20251227_180039.png)
 
 ## 🏗️ Architecture & Technical Implementation
 

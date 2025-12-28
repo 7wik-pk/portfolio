@@ -26,14 +26,51 @@
       </div>
     </div>
     <div class="menu-bar-right">
-      <!-- ideas: linkedin, github, email icons with links -->
-      <!-- <div class="menu-icon">🔋</div> -->
-      <!-- <div class="menu-icon">📶</div> -->
+
       <div class="menu-icon search" @click="emit('menu-click')">
         <img :src="searchIcon" alt="Search" width="16" height="16" />
       </div>
-      <!-- <div class="menu-icon">🔔</div> -->
-      <div class="control-center" @click="emit('menu-click')"><img src="../assets/icons/control-center.png" alt="Control Center" width="16" height="16" /></div>
+
+      <div 
+        class="control-center"
+        :class="{ active: activeMenu === 'control-center' }"
+        @click.stop="toggleMenu('control-center')"
+      >
+        <img src="../assets/icons/control-center.png" alt="Control Center" width="16" height="16" />
+
+        <div
+          v-show="activeMenu === 'control-center'"
+          class="dropdown-menu control-center-menu expandable"
+        >
+          <!-- Change Wallpaper trigger -->
+          <div
+            class="dropdown-item"
+            @click.stop="showWallpaperMenu = !showWallpaperMenu"
+          >
+            Change Wallpaper
+          </div>
+
+          <!-- EXPANDING section -->
+          <div
+            class="wallpaper-expand"
+            :class="{ open: showWallpaperMenu }"
+          >
+            <div
+              v-for="wp in wallpapers"
+              :key="wp.path"
+              class="dropdown-item wallpaper-option"
+              @click.stop="handleWallpaperSelect(wp.path)"
+            >
+              <div
+                class="wallpaper-thumb"
+                :style="{ backgroundImage: `url(${wp.path})` }"
+              ></div>
+              <span class="wallpaper-label">{{ wp.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="time">{{ currentTime }}</div>
     </div>
   </div>
@@ -43,9 +80,9 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
-
-const emit = defineEmits(['menu-click', 'action'])
+const emit = defineEmits(['menu-click', 'action', 'change-wallpaper'])
 const activeMenu = ref(null)
+const showWallpaperMenu = ref(false)
 
 const toggleMenu = (menu) => {
   if (menu === 'file' && props.isFileDisabled) return
@@ -54,10 +91,18 @@ const toggleMenu = (menu) => {
 
 const closeMenu = () => {
   activeMenu.value = null
+  showWallpaperMenu.value = false
 }
 
 const handleAction = (action) => {
   emit('action', action)
+  closeMenu()
+}
+
+const handleWallpaperSelect = (path) => {
+  emit('change-wallpaper', path)
+  // Don't close menu immediately, let user see it changed? Or close? 
+  // Native behavior usually keeps it open or closes. Let's close for now.
   closeMenu()
 }
 
@@ -77,6 +122,10 @@ const props = defineProps({
   isFileDisabled: {
     type: Boolean,
     default: false
+  },
+  wallpapers: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -167,6 +216,10 @@ onUnmounted(() => {
   pointer-events: none;
 }
 
+.control-center.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
@@ -184,6 +237,60 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 2px;
   z-index: 2000;
+}
+
+.control-center-menu {
+  right: 0;
+  left: auto; /* Align to right for control center */
+  width: 260px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.menu-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 8px 10px 4px;
+  text-transform: uppercase;
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+}
+
+.wallpaper-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.wallpaper-preview {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.wallpaper-item:hover .wallpaper-preview {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.wallpaper-name {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .dropdown-item {
@@ -241,6 +348,62 @@ onUnmounted(() => {
   border-radius: 4px;
   cursor: pointer;
   opacity: 0.85;
+}
+
+/* Allow menu to grow */
+.control-center-menu.expandable {
+  padding-bottom: 4px;
+  z-index: 9999;
+}
+
+/* Expanding wallpaper section */
+.wallpaper-expand {
+  overflow-y: auto;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+
+/* When open, expand responsively */
+.wallpaper-expand.open {
+  max-height: min(40vh, 320px);
+}
+
+/* Wallpaper rows */
+.wallpaper-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Thumbnail */
+.wallpaper-thumb {
+  width: 72px;
+  height: 48px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.wallpaper-label {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 480px) {
+  .wallpaper-expand.open {
+    max-height: 22vh; /* ~2–3 items */
+  }
+}
+
+@media (min-width: 768px) {
+  .wallpaper-expand.open {
+    max-height: 45vh; /* many items */
+  }
 }
 
 .time {

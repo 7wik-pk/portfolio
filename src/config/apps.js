@@ -126,7 +126,7 @@ export const apps = [
         name: 'Spotify',
         image: spotifyIcon,
         emoji: '🎵',
-        showInDock: true,
+        showInDock: false,
         showInDrawer: true,
         actionType: 'link',
         actionPayload: 'https://open.spotify.com/user/31jz5awzbapr5hajsfdfiixvjq6y',

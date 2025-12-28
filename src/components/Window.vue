@@ -116,6 +116,7 @@ onUnmounted(() => {
   overflow: hidden;
   animation: window-appear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
+  max-height: 80%;
 }
 
 @keyframes window-appear {
@@ -194,7 +195,7 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .window {
     width: 95% !important;
-    height: 90% !important;
+    height: 80% !important;
   }
 }
 </style>

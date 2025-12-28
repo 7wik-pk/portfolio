@@ -1,8 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { finderFiles, applicationsFolder } from '../config/finder'
+import { finderFiles, applicationsFolder, projectsFolder } from '../config/finder'
 import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
 import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
+import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
+import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
 const currentPath = ref([]) // Stack of folder objects
 const selectedFile = ref(null)
@@ -60,6 +62,7 @@ const goToRoot = () => {
 const goToFolder = (id) => {
   let folder = null
   if (id === 'apps') folder = applicationsFolder
+  if (id === 'projects') folder = projectsFolder
   // if (id === 'downloads') folder = downloadsFolder
   
   // Find in finderFiles if not one of the majors
@@ -100,6 +103,16 @@ const goToFolder = (id) => {
           </span>
           <span class="sidebar-label">Applications</span>
         </div>
+        <div 
+          class="sidebar-item" 
+          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'projects' }" 
+          @click="goToFolder('projects')"
+        >
+          <span class="sidebar-icon">
+            <img :src="sidebarProjectsIcon" alt="Projects" class="sidebar-img-icon" />
+          </span>
+          <span class="sidebar-label">Projects</span>
+        </div>
       </div>
     </div>
 
@@ -125,7 +138,8 @@ const goToFolder = (id) => {
         </div>
 
         <div class="finder-search">
-          <span class="search-icon" @click="emit('show-toast', undefined)">🔍</span>
+          <span class="search-icon" @click="emit('show-toast', undefined)">
+            <img :src="searchIcon" alt="Search" width="12" height="12" /></span>
           <input 
             type="text" 
             placeholder="Search" 
@@ -270,6 +284,7 @@ const goToFolder = (id) => {
   margin-left: auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   padding: 4px 8px;
@@ -278,7 +293,9 @@ const goToFolder = (id) => {
 }
 
 .search-icon {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.5;
   cursor: pointer;
 }
@@ -388,7 +405,7 @@ const goToFolder = (id) => {
 .file-name {
   font-size: 12px;
   text-align: center;
-  word-break: break-all;
+  word-break: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;

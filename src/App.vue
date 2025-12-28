@@ -12,6 +12,8 @@ import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
 const currentWallpaper = ref('')
+const previousWallpaper = ref('')
+const isFading = ref(false)
 
 // Mobile Detection
 const isMobile = ref(false)
@@ -130,11 +132,37 @@ const isFileDisabled = computed(() => {
 
 // Load all wallpapers eagerly
 const wallpapers = import.meta.glob('./assets/img/walls/*.{png,jpg,jpeg,webp,JPG,PNG}', { eager: true })
-const wallPaths = Object.values(wallpapers).map(m => m.default)
+const rawWallpapers = Object.values(wallpapers).map(m => m.default)
+
+const wallpaperList = computed(() => {
+  return rawWallpapers.map(path => {
+    // Extract filename from path
+    const filename = path.split('/').pop().split('.')[0]
+    // Clean up name (remove underscores, hyphens, capitalize)
+    const name = filename
+      .replace(/[-_]/g, ' ')
+      .replace(/\b\w/g, l => l.toUpperCase())
+    return { name, path }
+  })
+})
+
+const handleWallpaperChange = (path) => {
+  if (path === currentWallpaper.value) return
+
+  previousWallpaper.value = currentWallpaper.value
+  currentWallpaper.value = path
+  isFading.value = true
+
+  // End fade after transition duration
+  setTimeout(() => {
+    previousWallpaper.value = ''
+    isFading.value = false
+  }, 400) // must match CSS duration
+}
 
 onMounted(() => {
-  const randomIndex = Math.floor(Math.random() * wallPaths.length)
-  currentWallpaper.value = wallPaths[randomIndex]
+  const randomIndex = Math.floor(Math.random() * rawWallpapers.length)
+  currentWallpaper.value = rawWallpapers[randomIndex]
   
   checkMobile()
   window.addEventListener('resize', checkMobile)
@@ -214,12 +242,28 @@ const handleMenuAction = (action) => {
 </script>
 
 <template>
-  <div class="macos-container" :style="{ backgroundImage: `url(${currentWallpaper})` }">
+  <div class="macos-container">
+    <!-- Old wallpaper -->
+    <div
+      v-if="previousWallpaper"
+      class="wallpaper-layer"
+      :style="{ backgroundImage: `url(${previousWallpaper})` }"
+    ></div>
+
+    <!-- New wallpaper -->
+    <div
+      class="wallpaper-layer"
+      :class="{ fadeIn: isFading }"
+      :style="{ backgroundImage: `url(${currentWallpaper})` }"
+    ></div>
+
     <MenuBar 
       :active-app-name="activeAppName"
       :is-file-disabled="isFileDisabled"
+      :wallpapers="wallpaperList"
       @menu-click="showToast()"
       @action="handleMenuAction"
+      @change-wallpaper="handleWallpaperChange"
     />
     
     <div class="desktop">
