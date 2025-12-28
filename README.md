@@ -38,7 +38,10 @@ The application is strictly data-driven, leveraging dry configuration patterns:
 - **Functional Icons**: High-fidelity desktop icons for "My Projects" and "My Resume".
   - *Interaction*: Supports single-click selection (blue label highlight) and double-click/double-tap launching.
   - *Accessibility*: High-contrast multi-layer text shadows ensure legibility on any wallpaper.
-- **About Me (InfoView) 👤**: Recreated the "About This Mac" experience using a generic `InfoView` component. It supports circular headshots, structured metadata details, and multiple system-integrated action buttons (e.g., "Email Me" or "My Resume").
+- **About Me (InfoView) 👤**: Recreated the "About This Mac" experience using a generic `InfoView` component. 
+  - *Welcoming*: Automatically launches 800ms after initial load to greet visitors.
+  - *Mobile Polish*: Intelligently reformats for small screens by scaling down portraits and collapsing dense sections (like Expertise) to maintain a clean, readable layout.
+  - *Integration*: Supports multiple system-integrated actions (e.g., "Email Me" or "My Resume").
 - **Interactive Stickies 📝**: Draggable, editable sticky note components.
   - *Smart Actions*: Supports internal hyperlinking (via `v-html`) to trigger system views like "About Me".
   - *Mobile Stacking*: Automatically switches from absolute positioning to a flexible stack (vertical in portrait, horizontal in landscape) on smaller screens to ensure visibility and clean organization.
@@ -64,7 +67,8 @@ The application is strictly data-driven, leveraging dry configuration patterns:
 - **Smart Tap Logic**: Robust double-tap detection for tablets (within 300ms) alongside native mouse support.
 - **Granular Resizing**: Added a per-window `resizable` property. This allows productivity apps (like Finder) to scale to **85% width** and **75% height** on smaller screens while keeping utility cards (like About Me) at their precise native dimensions.
 - **Touch Awareness**: Hover effects are conditionally disabled on touch devices using `@media (hover: hover)` to prevent "sticky" highlights.
-- **Adaptive UI**: The `InfoView` components automatically reformat into vertical stacks, and the system-wide breakpoint (1024px width / 600px height) ensures a seamless transition between desktop and touch-optimized modes.
+- **Native Touch Interactions**: Implemented comprehensive touch event handling (`touchstart`, `touchmove`, `touchend`) for complex desktop interactions like dragging windows and repositioning sticky notes on tablets and smartphones.
+- **Adaptive UI**: The `InfoView` components automatically reformat into vertical stacks with **custom macOS-styled scrollbars** for clear scroll awareness. The system-wide breakpoint (1024px width / 600px height) ensures a seamless transition between desktop and touch-optimized modes.
 
 ## 🛠️ Tech Stack
 - **Framework**: Vue 3 (Composition API)

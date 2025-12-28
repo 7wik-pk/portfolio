@@ -167,6 +167,11 @@ onMounted(() => {
   
   checkMobile()
   window.addEventListener('resize', checkMobile)
+
+  // Auto-launch 'About Me' for a welcoming first impression
+  setTimeout(() => {
+    handleLaunch(contentMap['about-me'])
+  }, 800)
 })
 
 onUnmounted(() => {
@@ -227,12 +232,13 @@ const handleLaunch = (item) => {
       props: { initialPath }
     })
   } else if (item.kind === 'Info') {
+    const isSmall = window.innerWidth <= 1024 || window.innerHeight <= 600
     launchWindow({
       id: item.id,
       title: item.name,
       component: 'info',
-      width: '640px',
-      height: '420px',
+      width: isSmall ? '90vw' : '640px',
+      height: isSmall ? '540px' : '420px',
       resizable: false,
       props: item.infoProps
     })
@@ -368,7 +374,7 @@ const handleMenuAction = (action) => {
     </div>
 
     <Dock 
-      :active-app-ids="openWindows.map(w => w.id)"
+      :active-app-ids="openWindows.map(w => w.id.startsWith('preview-') ? w.id.replace('preview-', '') : w.id)"
       @launch-app="handleLaunch" 
     />
 

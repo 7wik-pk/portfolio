@@ -9,7 +9,7 @@
       zIndex: zIndex
     }"
   >
-    <div class="sticky-header" @mousedown="startDragging">
+    <div class="sticky-header" @mousedown="startDragging" @touchstart="startDragging">
       <button class="sticky-close" @click="close" aria-label="Close note">×</button>
     </div>
     
@@ -79,24 +79,41 @@ const close = () => {
 }
 
 const startDragging = (e) => {
-  if (e.button !== 0 || props.isStacked) return
+  if (props.isStacked) return
+  
+  const isTouch = e.type === 'touchstart'
+  const clientX = isTouch ? e.touches[0].clientX : e.clientX
+  const clientY = isTouch ? e.touches[0].clientY : e.clientY
+
+  if (!isTouch && e.button !== 0) return
   
   isDragging.value = true
   dragStart.value = {
-    x: e.clientX - position.value.x,
-    y: e.clientY - position.value.y
+    x: clientX - position.value.x,
+    y: clientY - position.value.y
   }
   
-  window.addEventListener('mousemove', onDrag)
-  window.addEventListener('mouseup', stopDragging)
+  if (isTouch) {
+    window.addEventListener('touchmove', onDrag, { passive: false })
+    window.addEventListener('touchend', stopDragging)
+  } else {
+    window.addEventListener('mousemove', onDrag)
+    window.addEventListener('mouseup', stopDragging)
+  }
 }
 
 const onDrag = (e) => {
   if (!isDragging.value) return
   
+  const isTouch = e.type === 'touchmove'
+  const clientX = isTouch ? e.touches[0].clientX : e.clientX
+  const clientY = isTouch ? e.touches[0].clientY : e.clientY
+  
+  if (isTouch) e.preventDefault()
+
   position.value = {
-    x: e.clientX - dragStart.value.x,
-    y: e.clientY - dragStart.value.y
+    x: clientX - dragStart.value.x,
+    y: clientY - dragStart.value.y
   }
 }
 
@@ -104,11 +121,15 @@ const stopDragging = () => {
   isDragging.value = false
   window.removeEventListener('mousemove', onDrag)
   window.removeEventListener('mouseup', stopDragging)
+  window.removeEventListener('touchmove', onDrag)
+  window.removeEventListener('touchend', stopDragging)
 }
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', onDrag)
   window.removeEventListener('mouseup', stopDragging)
+  window.removeEventListener('touchmove', onDrag)
+  window.removeEventListener('touchend', stopDragging)
 })
 </script>
 

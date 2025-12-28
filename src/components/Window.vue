@@ -9,7 +9,7 @@
         transform: `translate(${position.x}px, ${position.y}px)`
       }"
     >
-      <div class="window-titlebar" @mousedown="startDragging">
+      <div class="window-titlebar" @mousedown="startDragging" @touchstart="startDragging">
         <div class="traffic-lights">
           <button class="light close" @click="close"></button>
           <button class="light minimize" @click="close"></button>
@@ -61,25 +61,41 @@ const close = () => {
 }
 
 const startDragging = (e) => {
-  // Only drag if left mouse button is clicked and not on traffic lights
-  if (e.button !== 0 || e.target.classList.contains('light')) return
+  const isTouch = e.type === 'touchstart'
+  const clientX = isTouch ? e.touches[0].clientX : e.clientX
+  const clientY = isTouch ? e.touches[0].clientY : e.clientY
+
+  // Only drag if left mouse button is clicked (for mouse) and not on traffic lights
+  if (!isTouch && e.button !== 0) return
+  if (e.target.classList.contains('light')) return
   
   isDragging.value = true
   dragStart.value = {
-    x: e.clientX - position.value.x,
-    y: e.clientY - position.value.y
+    x: clientX - position.value.x,
+    y: clientY - position.value.y
   }
   
-  window.addEventListener('mousemove', onDrag)
-  window.addEventListener('mouseup', stopDragging)
+  if (isTouch) {
+    window.addEventListener('touchmove', onDrag, { passive: false })
+    window.addEventListener('touchend', stopDragging)
+  } else {
+    window.addEventListener('mousemove', onDrag)
+    window.addEventListener('mouseup', stopDragging)
+  }
 }
 
 const onDrag = (e) => {
   if (!isDragging.value) return
   
+  const isTouch = e.type === 'touchmove'
+  const clientX = isTouch ? e.touches[0].clientX : e.clientX
+  const clientY = isTouch ? e.touches[0].clientY : e.clientY
+  
+  if (isTouch) e.preventDefault() // Prevent scroll while dragging
+
   position.value = {
-    x: e.clientX - dragStart.value.x,
-    y: e.clientY - dragStart.value.y
+    x: clientX - dragStart.value.x,
+    y: clientY - dragStart.value.y
   }
 }
 
@@ -87,11 +103,15 @@ const stopDragging = () => {
   isDragging.value = false
   window.removeEventListener('mousemove', onDrag)
   window.removeEventListener('mouseup', stopDragging)
+  window.removeEventListener('touchmove', onDrag)
+  window.removeEventListener('touchend', stopDragging)
 }
 
 onUnmounted(() => {
   window.removeEventListener('mousemove', onDrag)
   window.removeEventListener('mouseup', stopDragging)
+  window.removeEventListener('touchmove', onDrag)
+  window.removeEventListener('touchend', stopDragging)
 })
 </script>
 

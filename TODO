@@ -20,7 +20,11 @@
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
 - to the menu bar add a Give Feedback option which allows users to suggest new features, report bugs, etc. - figure out a way to automate going from here to making an issue on the repo's issues page (or an alternative way for me to receive feedback from this static gh-pages site)
-- make windows draggable on touchscreen devices
+
+DONE-
+- should "about me" open by default? like half a second after the page loads? - YES, added 800ms auto-launch
+- on phones, about me doesn't have a scroll bar visible at first sight - users might not know they can scroll. - FIXED with custom macOS scrollbar
+- make windows draggable on touchscreen devices - DONE (added touch event listeners)
 
 keep search-bar functionality in mind when implementing everything below:
 

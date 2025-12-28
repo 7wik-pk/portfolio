@@ -37,7 +37,12 @@ const emit = defineEmits(['button-click'])
         <p v-if="subtitle" class="subtitle">{{ subtitle }}</p>
         
         <div class="details-list">
-          <div v-for="(item, index) in details" :key="index" class="detail-row">
+          <div 
+            v-for="(item, index) in details" 
+            :key="index" 
+            class="detail-row"
+            :class="{ 'hide-on-phone': item.label === 'Expertise' }"
+          >
             <span class="detail-label">{{ item.label }}</span>
             <span class="detail-value">{{ item.value }}</span>
           </div>
@@ -71,6 +76,11 @@ const emit = defineEmits(['button-click'])
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   padding: 24px;
   overflow-y: auto;
+  scrollbar-width: none; /* Hide on Firefox/others by default */
+}
+
+.info-view::-webkit-scrollbar {
+  display: none; /* Hide on Chrome/Safari by default */
 }
 
 .info-container {
@@ -213,6 +223,15 @@ const emit = defineEmits(['button-click'])
   .info-btn {
     align-self: center;
   }
+
+  .main-image {
+    width: 130px;
+    height: 130px;
+  }
+
+  .hide-on-phone {
+    display: none;
+  }
   
   .detail-row {
     flex-direction: column;
@@ -228,6 +247,28 @@ const emit = defineEmits(['button-click'])
 
   .detail-value {
     text-align: center;
+  }
+
+  /* Show custom scrollbar hint only on phones */
+  .info-view {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+  }
+
+  .info-view::-webkit-scrollbar {
+    width: 6px;
+    display: block;
+  }
+
+  .info-view::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  .info-view::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
   }
 }
 </style>
