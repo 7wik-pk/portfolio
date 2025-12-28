@@ -2,7 +2,8 @@
   <div 
     v-if="isVisible"
     class="sticky-note"
-    :style="{ 
+    :class="{ 'is-stacked': isStacked }"
+    :style="isStacked ? { zIndex: zIndex } : { 
       top: `${position.y}px`,
       left: `${position.x}px`,
       zIndex: zIndex
@@ -48,6 +49,10 @@ const props = defineProps({
   showPortrait: {
     type: Boolean,
     default: true
+  },
+  isStacked: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -74,7 +79,7 @@ const close = () => {
 }
 
 const startDragging = (e) => {
-  if (e.button !== 0) return
+  if (e.button !== 0 || props.isStacked) return
   
   isDragging.value = true
   dragStart.value = {
@@ -123,6 +128,14 @@ onUnmounted(() => {
   user-select: none;
 }
 
+.sticky-note.is-stacked {
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 280px;
+  margin-bottom: 12px;
+}
+
 .sticky-header {
   height: 24px;
   display: flex;
@@ -166,7 +179,7 @@ onUnmounted(() => {
   outline: none;
   cursor: text;
   user-select: text;
-  min-height: 50px;
+  min-height: 20px;
 }
 
 :deep(.sticky-link) {

@@ -21,7 +21,8 @@ const disclaimerVisible = ref(true)
 const selectedDesktopIcon = ref(null)
 
 const checkMobile = () => {
-  isMobile.value = window.innerWidth <= 768
+  // Mobile if width is small (phones/tablets) OR if height is very small (landscape phones)
+  isMobile.value = window.innerWidth <= 1024 || window.innerHeight <= 600
 }
 
 const closeDisclaimer = () => {
@@ -255,6 +256,8 @@ const handleInfoAction = (action, config) => {
     handleLaunch({ actionType: 'link', actionPayload: `mailto:${config.email}` })
   } else if (action === 'resume') {
     handleLaunch(contentMap['resume'])
+  } else if (action === 'download-resume') {
+    window.open(contentMap['resume'].srcPath, '_blank')
   }
 }
 
@@ -338,26 +341,31 @@ const handleMenuAction = (action) => {
       </Window>
     </div>
 
-    <!-- Sticky Note -->
-    <StickyNote 
-      v-if="stickyNoteVisible"
-      :initial-x="40"
-      :initial-y="60"
-      :z-index="stickyNoteZIndex"
-      @close="closeStickyNote"
-      @link-click="handleStickyLink"
-    />
+    <!-- Sticky Notes Container -->
+    <div :class="{ 'sticky-stack': isMobile }">
+      <!-- Welcome Note -->
+      <StickyNote 
+        v-if="stickyNoteVisible"
+        :initial-x="40"
+        :initial-y="60"
+        :z-index="stickyNoteZIndex"
+        :is-stacked="isMobile"
+        @close="closeStickyNote"
+        @link-click="handleStickyLink"
+      />
 
-    <!-- Mobile Disclaimer Note -->
-    <StickyNote 
-      v-if="isMobile && disclaimerVisible"
-      :initial-x="40"
-      :initial-y="450"
-      :z-index="1500"
-      :show-portrait="false"
-      initial-content="<strong>Note:</strong><br><br>Although this portfolio is responsive to some degree, it should be viewed on a tablet or PC screen for the best experience."
-      @close="closeDisclaimer"
-    />
+      <!-- Mobile Disclaimer Note -->
+      <StickyNote 
+        v-if="isMobile && disclaimerVisible"
+        :initial-x="40"
+        :initial-y="450"
+        :z-index="1500"
+        :show-portrait="false"
+        :is-stacked="isMobile"
+        initial-content="<strong>Note:</strong><br><br>This portfolio <strong>should be viewed on a tablet or PC screen</strong> for the best experience.<br>[It is also responsive to some degree.]"
+        @close="closeDisclaimer"
+      />
+    </div>
 
     <Dock 
       :active-app-ids="openWindows.map(w => w.id)"

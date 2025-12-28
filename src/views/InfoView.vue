@@ -48,7 +48,7 @@ const emit = defineEmits(['button-click'])
             v-for="(btn, index) in buttons" 
             :key="index" 
             class="info-btn" 
-            :class="btn.type || 'secondary'"
+            :class="[btn.type || 'secondary', { 'mobile-only': btn.mobileOnly }]"
             @click="emit('button-click', btn.action)"
           >
             {{ btn.text }}
@@ -163,6 +163,16 @@ const emit = defineEmits(['button-click'])
 .info-btn.primary {
   background: #007aff;
   border-color: #007aff;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+  .mobile-only {
+    display: inline-block;
+  }
 }
 
 @media (hover: hover) {

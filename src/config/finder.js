@@ -34,7 +34,7 @@ export const aboutMe = {
         details: [
             { label: 'Role(s)', value: 'Full Stack Developer, Systems Developer, Cloud Engineer' },
             { label: 'Based in', value: 'Australia (Melbourne, VIC) / India (Bengaluru, Karnataka)' },
-            { label: 'Expertise', value: 'Golang, Backend Web Development, PostGreSQL, Geospatial Data Processing (PostGIS), VueJS, Android Studio (Kotlin), Python & Reinforcement Learning' },
+            { label: 'Expertise', value: 'Golang, Backend Web Development, PostGreSQL, Geospatial Data Processing (PostGIS), VueJS, Containerisation (Docker & Kubernetes), Python & Reinforcement Learning' },
         ],
         buttons: [
             { text: 'My Resume', action: 'resume', type: 'secondary' },

@@ -100,13 +100,41 @@ const handleAppClick = (app) => {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .dock-container {
-    --icon-size: 38px;
-    --icon-margin: 3px;
+    --icon-size: 64px;
+    --icon-margin: 7px; /* Proportional to 6/56 */
+    --dock-padding: 5px; /* Proportional to 4/56 */
+  }
+  .dock {
+    padding: 0 var(--dock-padding);
+    border-radius: 24px;
+    gap: 0; /* Use original margin-based spacing */
+  }
+  .dock-icon {
+    margin-top: 11px; /* Proportional to 10/56 */
+    margin-bottom: 11px;
   }
   .hide-on-mobile {
     display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dock-container {
+    --icon-size: min(18vw, 60px);
+    --icon-margin: 5px;
+    --dock-padding: 4px;
+  }
+  .dock {
+    padding: 0 var(--dock-padding);
+    border-radius: 20px;
+    width: auto;
+    max-width: 95vw;
+  }
+  .dock-icon {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 

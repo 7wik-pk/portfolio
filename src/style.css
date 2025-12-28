@@ -103,9 +103,35 @@ body {
   pointer-events: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px),
+(max-height: 600px) {
   .desktop-icons {
     right: 10px;
     top: 50px;
+  }
+
+  .sticky-stack {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+    z-index: 1500;
+  }
+
+  .sticky-stack>* {
+    pointer-events: auto;
+  }
+
+  /* Landscape specifically for small vertical heights (phones) */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .sticky-stack {
+      flex-direction: row;
+      align-items: flex-start;
+      /* Ensure notes don't stretch vertically in row layout */
+      top: 40px;
+    }
   }
 }

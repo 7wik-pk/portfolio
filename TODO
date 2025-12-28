@@ -8,7 +8,10 @@
 - add desktop icons - projects folder, resume - DONE
 - in smartphone mode the finder isn't working properly; double clicking won't open anything. fix this - DONE but still doesn't work on tablets and landscape mode - DONE
 - recreate the "About this mac" window for "About Me" - DONE (Generic InfoView implemented)
+- second sticky on phones is not directly below the first - fix it so that it's directly below the first sticky always - even if i change the height of the first one - DONE
+- move resume icon on desktop to a more obvious location on phones - it's hidden behind the sticky (make sticky thinner?) - DONE
 
+- add an easily visible "download" option for resume on small screens/touch screens
 - add "tech stack" section - consider using InfoView or a specialized grid view
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - use AI to generate summaries of my strongest performances using my transcripts
 - add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
@@ -17,6 +20,7 @@
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
 - to the menu bar add a Give Feedback option which allows users to suggest new features, report bugs, etc. - figure out a way to automate going from here to making an issue on the repo's issues page (or an alternative way for me to receive feedback from this static gh-pages site)
+- make windows draggable on touchscreen devices
 
 keep search-bar functionality in mind when implementing everything below:
 
