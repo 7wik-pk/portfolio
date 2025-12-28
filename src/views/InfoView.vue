@@ -110,7 +110,7 @@ const emit = defineEmits(['button-click'])
 
 .subtitle {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
   margin: 4px 0 24px 0;
 }
 
@@ -138,7 +138,7 @@ const emit = defineEmits(['button-click'])
 
 .detail-value {
   flex: 1;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.80);
   word-break: break-word;
 }
 

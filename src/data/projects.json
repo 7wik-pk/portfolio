@@ -13,7 +13,7 @@
     },
     {
         "id": "p2",
-        "name": "Portfolio Site",
+        "name": "This Portfolio",
         "type": "GitHub Repository",
         "image": "../assets/icons/projects/portfolio.png",
         "size": "--",
