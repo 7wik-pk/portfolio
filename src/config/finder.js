@@ -142,9 +142,9 @@ export const desktopFolder = {
     lastModified: 'Dec 28, 2025 at 4:00 PM',
     emoji: '🖥️',
     children: [
-        resumeFile,
+        // aboutMeFile,
         projectsFolder,
-        aboutMeFile
+        resumeFile
     ]
 }
 
@@ -164,17 +164,17 @@ export const finderFiles = [
     aboutMeFile,
     desktopFolder,
     applicationsFolder,
-    {
-        id: '4',
-        name: 'Portrait.png',
-        type: 'PNG Image',
-        size: '800 KB',
-        kind: 'Image',
-        image: selfPortrait,
-        srcPath: selfPortrait,
-        lastModified: 'Nov 15, 2025 at 2:15 PM',
-        emoji: '🖼️'
-    },
-    resumeFile,
-    projectsFolder
+    // {
+    //     id: '4',
+    //     name: 'Portrait.png',
+    //     type: 'PNG Image',
+    //     size: '800 KB',
+    //     kind: 'Image',
+    //     image: selfPortrait,
+    //     srcPath: selfPortrait,
+    //     lastModified: 'Nov 15, 2025 at 2:15 PM',
+    //     emoji: '🖼️'
+    // },
+    // resumeFile,
+    // projectsFolder
 ]

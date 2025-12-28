@@ -317,6 +317,7 @@ const goToFolder = (id) => {
   align-items: center;
   gap: 4px;
   font-size: 13px;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -399,6 +400,7 @@ const goToFolder = (id) => {
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -463,6 +465,7 @@ const goToFolder = (id) => {
 
 .file-name {
   font-size: 12px;
+  font-weight: 500;
   text-align: center;
   word-break: break-word;
   display: -webkit-box;

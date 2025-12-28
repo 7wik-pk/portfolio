@@ -168,11 +168,11 @@ const openDrawer = () => {
 }
 
 .drawer-app-name {
-  font-size: 12px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.85);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 

@@ -143,7 +143,7 @@ const handleAppClick = (app) => {
   padding: 4px 12px;
   border-radius: 6px;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;

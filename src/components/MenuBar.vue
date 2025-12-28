@@ -191,7 +191,7 @@ onUnmounted(() => {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.9);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -204,6 +204,7 @@ onUnmounted(() => {
 .menu-item {
   padding: 4px 8px;
   border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
   transition: background-color 0.15s ease;
   user-select: none;
@@ -307,6 +308,7 @@ onUnmounted(() => {
   border-radius: 4px;
   color: #fff;
   font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;

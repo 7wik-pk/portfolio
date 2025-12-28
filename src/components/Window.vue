@@ -117,6 +117,7 @@ onUnmounted(() => {
   animation: window-appear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
   max-height: 80%;
+  max-width: 85%;
 }
 
 @keyframes window-appear {
@@ -170,7 +171,7 @@ onUnmounted(() => {
   right: 0;
   text-align: center;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: bold;
   color: rgba(255, 255, 255, 0.7);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
@@ -194,7 +195,7 @@ onUnmounted(() => {
 
 @media (max-width: 1366px) {
   .window {
-    width: 95% !important;
+    width: 85% !important;
     height: 75% !important;
   }
 }

@@ -36,6 +36,17 @@ export const apps = [
         hideOnMobile: false
     },
     {
+        id: 'resume',
+        name: 'My Resume',
+        image: resumeIcon,
+        emoji: '📄',
+        showInDock: true,
+        showInDrawer: true,
+        actionType: 'command',
+        actionPayload: 'open-resume',
+        hideOnMobile: false
+    },
+    {
         id: 'techstack',
         name: 'Tech Stack Familiarity',
         image: vsCodeIcon,
@@ -55,17 +66,6 @@ export const apps = [
         showInDrawer: true,
         actionType: 'link',
         actionPayload: 'https://github.com/7wik-pk',
-        hideOnMobile: false
-    },
-    {
-        id: 'resume',
-        name: 'Resume',
-        image: resumeIcon,
-        emoji: '📄',
-        showInDock: true,
-        showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-resume',
         hideOnMobile: false
     },
     {

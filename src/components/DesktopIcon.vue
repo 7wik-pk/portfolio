@@ -70,9 +70,6 @@ const handleDblClick = () => {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.desktop-icon.selected {
-  background: rgba(0, 122, 255, 0.3);
-}
 
 .icon-wrapper {
   width: 64px;
@@ -80,7 +77,12 @@ const handleDblClick = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  transition: transform 0.2s ease;
+}
+
+.desktop-icon.selected .icon-wrapper {
+  filter: brightness(0.7) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
 }
 
 .icon-wrapper img {
@@ -95,11 +97,28 @@ const handleDblClick = () => {
 
 .icon-label {
   color: #fff;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: bold;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  /* Dual layer shadow: one crisp, one soft glow for contrast */
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 10px rgba(0, 0, 0, 0.5);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   word-break: break-word;
+  padding: 2px 5px;
+  border-radius: 4px;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: background 0.1s ease;
+}
+
+.desktop-icon.selected .icon-label {
+  background: #0063e1; /* macOS Selection Blue */
+  text-shadow: none;
 }
 </style>
