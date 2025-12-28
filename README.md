@@ -7,13 +7,13 @@ Currently hosted at https://7wik-pk.github.io/portfolio/
 ## Example screenshots:
 
 ### Desktop
-![Desktop](src/assets/img/screenshots/Screenshot_20251227_180011.png)
+![Desktop](src/assets/img/screenshots/desktop.png)
 
 ### Launchpad (App Drawer)
-![Launchpad](src/assets/img/screenshots/Screenshot_20251227_180030.png)
+![Launchpad](src/assets/img/screenshots/launchpad.png)
 
 ### Finder
-![Finder](src/assets/img/screenshots/Screenshot_20251227_180039.png)
+![Finder](src/assets/img/screenshots/finder.png)
 
 ## 🏗️ Architecture & Technical Implementation
 
