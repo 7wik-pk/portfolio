@@ -9,7 +9,7 @@ import FinderView from './views/FinderView.vue'
 import Toast from './components/Toast.vue'
 import StickyNote from './components/StickyNote.vue'
 import DesktopIcon from './components/DesktopIcon.vue'
-import { desktopFolder, aboutMeFile } from './config/finder'
+import { desktopFolder, aboutMeFile, sidebarFavorites } from './config/finder'
 import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
@@ -208,13 +208,17 @@ const handleAppLaunch = (app) => {
 
 const handleFileLaunch = (file) => {
   if (file.kind === 'Folder') {
+    // Check if this folder has a canonical favorites path (e.g. Desktop/Projects)
+    const favorite = sidebarFavorites.find(f => f.id === file.id)
+    const initialPath = favorite ? [...favorite.path] : [file]
+
     launchWindow({
       id: 'finder',
       title: 'Finder',
       component: 'finder',
       width: '900px',
       height: '600px',
-      props: { initialPath: [file] }
+      props: { initialPath }
     })
     return
   }
