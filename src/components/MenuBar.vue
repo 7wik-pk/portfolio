@@ -241,9 +241,9 @@ onUnmounted(() => {
   top: 28px;
   left: 0;
   width: 220px;
-  background: rgba(40, 40, 40, 0.95);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border-radius: 6px;
   border: 0.5px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -337,11 +337,14 @@ onUnmounted(() => {
 
 .menu-icon {
   font-size: 14px;
-  opacity: 0.85;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.menu-icon img {
+  opacity: 0.85;
 }
 
 .menu-icon.search img {
@@ -361,6 +364,9 @@ onUnmounted(() => {
   justify-content: center;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.control-center img {
   opacity: 0.85;
 }
 
