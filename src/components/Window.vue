@@ -192,10 +192,10 @@ onUnmounted(() => {
   background: transparent;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1366px) {
   .window {
     width: 95% !important;
-    height: 80% !important;
+    height: 75% !important;
   }
 }
 </style>

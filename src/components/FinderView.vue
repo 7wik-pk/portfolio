@@ -8,6 +8,7 @@ import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
 const currentPath = ref([]) // Stack of folder objects
 const selectedFile = ref(null)
+const lastTap = ref({ id: null, time: 0 })
 
 const emit = defineEmits(['launch-file', 'launch-app', 'show-toast'])
 
@@ -19,11 +20,27 @@ const currentFiles = computed(() => {
 })
 
 const selectFile = (file) => {
-  // Mobile behavior: Tap selected item to open
-  if (selectedFile.value?.id === file.id && window.innerWidth <= 768) {
+  const now = Date.now()
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches
+  const timeDiff = now - lastTap.value.time
+  
+  // Double tap detection (within 300ms)
+  if (lastTap.value.id === file.id && timeDiff < 300) {
+    openFile(file)
+    lastTap.value = { id: null, time: 0 } // Reset
+    return
+  }
+
+  // Update last tap
+  lastTap.value = { id: file.id, time: now }
+
+  // Selection logic for mobile/tablet (tap once to select, another tap to open if selected)
+  // This is a fallback/alternative to the time-based double tap
+  if (selectedFile.value?.id === file.id && (window.innerWidth <= 1366 || isTouchDevice)) {
     openFile(file)
     return
   }
+  
   selectedFile.value = file
 }
 
@@ -261,9 +278,11 @@ const goToFolder = (id) => {
   cursor: default;
 }
 
-.nav-btn:not(:disabled):hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+@media (hover: hover) {
+  .nav-btn:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
 }
 
 .nav-btn:not(:disabled):active {
@@ -285,8 +304,10 @@ const goToFolder = (id) => {
   border-radius: 4px;
 }
 
-.breadcrumb-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+@media (hover: hover) {
+  .breadcrumb-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .breadcrumb-separator {
@@ -359,8 +380,10 @@ const goToFolder = (id) => {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.sidebar-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+@media (hover: hover) {
+  .sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
 }
 
 .sidebar-item.active {

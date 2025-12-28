@@ -293,11 +293,6 @@ onUnmounted(() => {
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.wallpaper-item:hover .wallpaper-preview {
-  transform: scale(1.05);
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
 .wallpaper-name {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.7);
@@ -318,9 +313,11 @@ onUnmounted(() => {
   justify-content: space-between;
 }
 
-.dropdown-item:hover {
-  background: #007aff;
-  color: white;
+@media (hover: hover) {
+  .dropdown-item:hover {
+    background: #007aff;
+    color: white;
+  }
 }
 
 .dropdown-separator {
@@ -398,8 +395,10 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.wallpaper-option:hover {
-  background: #007aff;
+@media (hover: hover) {
+  .wallpaper-option:hover {
+    background: #007aff;
+  }
 }
 
 /* Thumbnail */
