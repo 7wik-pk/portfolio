@@ -7,6 +7,7 @@ import finderIcon from '../assets/icons/finder-2021-09-10.webp'
 import folderIcon from '../assets/icons/Folder_Tahoe.png'
 import applicationsIcon from '../assets/icons/apps.png'
 import selfPortrait from '../assets/img/portrait.jpg'
+import desktopIcon from '../assets/icons/Folder_Desktop.png'
 import { apps } from './apps'
 
 // project icons
@@ -137,12 +138,11 @@ export const desktopFolder = {
     name: 'Desktop',
     type: 'Folder',
     size: '--',
-    image: folderIcon,
+    image: desktopIcon,
     kind: 'Folder',
     lastModified: 'Dec 28, 2025 at 4:00 PM',
     emoji: '🖥️',
     children: [
-        // aboutMeFile,
         projectsFolder,
         resumeFile
     ]

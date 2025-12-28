@@ -5,11 +5,12 @@
 - on firefox & zen browser, wallpapers dont fade in and out on changing - the new wallpaper appears first and then there's an instantaneous return and fade-out transition of the old wallpaper, but on brave (chromium) it works as intended. fix this. - DONE
 - control center > change wallpaper needs refinements - make the whole inner submenu darker or indented - to indicate it's a submenu under "Change Wallpaper", add arrows to indicate drop down status, darken current wallpaper in the drop down and add a checkmark; when hovering over a wallpaper thumbnail, show the wallpaper name as a tooltip - DONE
 - double touch-clicking inside finder doesn't work on tablets + finder window is too tall on tablets - DONE
+- add desktop icons - projects folder, resume - DONE
 
-- add desktop icons - projects folder, resume, about me
 - add "tech stack" section - figure out a clever way to present this
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - use AI to generate summaries of my strongest performances using my transcripts
-- add "About me" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
+- add "About me" 
+- add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
