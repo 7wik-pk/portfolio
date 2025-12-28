@@ -121,11 +121,15 @@ const goToFolder = (id) => {
       <!-- Top Navigation Bar -->
       <div class="finder-nav">
         <div class="nav-buttons">
-          <button class="nav-btn" :disabled="currentPath.length === 0" @click="goBack">
-            <span class="icon">◀</span>
+          <button class="nav-btn" :disabled="currentPath.length === 0" @click="goBack" aria-label="Go back">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
           </button>
-          <button class="nav-btn" disabled>
-            <span class="icon">▶</span>
+          <button class="nav-btn" disabled aria-label="Go forward">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </button>
         </div>
         
@@ -232,29 +236,39 @@ const goToFolder = (id) => {
 
 .nav-buttons {
   display: flex;
-  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 0;
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.15s ease;
 }
 
 .nav-btn:disabled {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.15);
   cursor: default;
 }
 
 .nav-btn:not(:disabled):hover {
   background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.nav-btn:not(:disabled):active {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(0.95);
 }
 
 .breadcrumbs {
