@@ -6,6 +6,7 @@
 - control center > change wallpaper needs refinements - make the whole inner submenu darker or indented - to indicate it's a submenu under "Change Wallpaper", add arrows to indicate drop down status, darken current wallpaper in the drop down and add a checkmark; when hovering over a wallpaper thumbnail, show the wallpaper name as a tooltip - DONE
 - double touch-clicking inside finder doesn't work on tablets + finder window is too tall on tablets - DONE
 - add desktop icons - projects folder, resume - DONE
+- in smartphone mode the finder isn't working properly; double clicking won't open anything. fix this - DONE but still doesn't work on tablets and landscape mode - DONE
 
 - add "tech stack" section - figure out a clever way to present this
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - use AI to generate summaries of my strongest performances using my transcripts
@@ -23,5 +24,4 @@ keep search-bar functionality in mind when implementing everything below:
     - also fetch last modified dates using latest commits.
     - this could be a separate executable/script that i need to run locally to generate/update/delete static JSON files or similar - since gh-pages will be static. OR explore github actions for this.
     - BONUS; figure out a way to dynamically fetch/generate appropriate mac-style icons for each project.
-- in smartphone mode the finder isn't working properly; double clicking won't open anything. fix this - DONE but still doesn't work on tablets and landscape mode
-
+- add spotlight search with shortcut once search is implemented

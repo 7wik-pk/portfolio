@@ -1,0 +1,50 @@
+[
+    {
+        "id": "p1",
+        "name": "Racing Line Mapper",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/racing-liner.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/racing-line-mapper",
+        "lastModified": "Dec 20, 2025 at 10:00 AM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p2",
+        "name": "Portfolio Site",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/portfolio.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/portfolio",
+        "lastModified": "Dec 26, 2025 at 7:30 PM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p3",
+        "name": "SafeTrek",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/safetrek.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/safetrek",
+        "lastModified": "Dec 26, 2025 at 5:23 PM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p4",
+        "name": "Generic Red-Black Trees",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/rbtree.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/swarupgt/red-black-tree-generic",
+        "lastModified": "Dec 26, 2025 at 5:23 PM",
+        "emoji": "🔗"
+    }
+]

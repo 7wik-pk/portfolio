@@ -1,42 +1,36 @@
 import resumePdf from '../assets/docs/sathwik_general_resume.pdf'
-import githubIcon from '../assets/icons/github2.png'
 import projectsIcon from '../assets/icons/Folder_GitHub.png'
 import pdfDocument from '../assets/icons/Pdf_Document.png'
 import resumeIcon from '../assets/icons/resume2.png'
-import finderIcon from '../assets/icons/finder-2021-09-10.webp'
-import folderIcon from '../assets/icons/Folder_Tahoe.png'
 import applicationsIcon from '../assets/icons/apps.png'
-import selfPortrait from '../assets/img/portrait.jpg'
 import desktopIcon from '../assets/icons/Folder_Desktop.png'
+import googleContactIcon from '../assets/icons/google_contact.png'
 import { apps } from './apps'
 
 // Sidebar Icons
-import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
 import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
 import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
 import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
+import projectsData from '../data/projects.json'
 
 // project icons
-import racingLineMapperIcon from '../assets/icons/projects/racing-liner.png'
-import safeTrekIcon from '../assets/icons/projects/safetrek.png'
-import rbTreeIcon from '../assets/icons/projects/rbtree.png'
-import portfolioIcon from '../assets/icons/projects/portfolio.png'
+// (Individual project icons are now handled dynamically via projects.json paths)
 
-// Common file objects for reuse (DRY)
-export const aboutMeFile = {
-    id: 'about-me-pdf',
-    name: 'About Me.pdf',
-    type: 'PDF Document',
-    image: pdfDocument,
+// Common content objects for reuse (DRY)
+export const aboutMe = {
+    id: 'about-me',
+    name: 'About Me',
+    type: 'Information',
+    image: googleContactIcon,
     size: '12 KB',
-    kind: 'PDF',
+    kind: 'Information',
     srcPath: null, // Triggers WIP toast in App.vue
     lastModified: 'Dec 24, 2025 at 11:30 AM',
     emoji: '📄'
 }
 
-export const resumeFile = {
-    id: 'resume-pdf',
+export const resume = {
+    id: 'resume',
     name: 'My Resume.pdf',
     type: 'PDF Document',
     image: resumeIcon,
@@ -80,64 +74,12 @@ export const projectsFolder = {
     kind: 'Folder',
     lastModified: 'Oct 10, 2025 at 9:00 AM',
     emoji: '📁',
-    children: [
-        {
-            id: 'p1',
-            name: 'Racing Line Mapper',
-            type: 'GitHub Repository',
-            image: racingLineMapperIcon,
-            size: '--',
-            kind: 'Link',
-            url: 'https://github.com/7wik-pk/racing-line-mapper',
-            lastModified: 'Dec 20, 2025 at 10:00 AM',
-            emoji: '🔗'
-        },
-        {
-            id: 'p2',
-            name: 'Portfolio Site',
-            type: 'GitHub Repository',
-            image: portfolioIcon,
-            size: '--',
-            kind: 'Link',
-            url: 'https://github.com/7wik-pk/portfolio',
-            lastModified: 'Dec 26, 2025 at 7:30 PM',
-            emoji: '🔗'
-        },
-        {
-            id: 'p3',
-            name: 'SafeTrek',
-            type: 'GitHub Repository',
-            image: safeTrekIcon,
-            size: '--',
-            kind: 'Link',
-            url: 'https://github.com/7wik-pk/safetrek',
-            lastModified: 'Dec 26, 2025 at 5:23 PM',
-            emoji: '🔗'
-        },
-        {
-            id: 'p4',
-            name: 'Generic Red-Black Trees',
-            type: 'GitHub Repository',
-            image: rbTreeIcon,
-            size: '--',
-            kind: 'Link',
-            url: 'https://github.com/swarupgt/red-black-tree-generic',
-            lastModified: 'Dec 26, 2025 at 5:23 PM',
-            emoji: '🔗'
-        }
-        // {
-        //     id: '99',
-        //     name: 'Source Code',
-        //     type: 'Folder',
-        //     size: '--',
-        //     image: folderIcon,
-        //     kind: 'Folder',
-        //     lastModified: 'Oct 10, 2025 at 9:00 AM',
-        //     emoji: '📁',
-        //     children: []
-        // }
-    ]
+    children: projectsData.map(p => ({
+        ...p,
+        image: new URL(p.image, import.meta.url).href
+    }))
 }
+
 
 export const desktopFolder = {
     id: 'desktop',
@@ -150,58 +92,68 @@ export const desktopFolder = {
     emoji: '🖥️',
     children: [
         projectsFolder,
-        resumeFile
+        resume
     ]
 }
 
-// export const downloadsFolder = {
-//     id: 'downloads',
-//     name: 'Downloads',
-//     type: 'Folder',
-//     size: '--',
-//     image: folderIcon,
-//     kind: 'Folder',
-//     lastModified: 'Dec 26, 2025 at 12:00 PM',
-//     emoji: '⬇️',
-//     children: []
-// }
-
 export const finderFiles = [
-    aboutMeFile,
+    aboutMe,
     desktopFolder,
     applicationsFolder,
-    // {
-    //     id: '4',
-    //     name: 'Portrait.png',
-    //     type: 'PNG Image',
-    //     size: '800 KB',
-    //     kind: 'Image',
-    //     image: selfPortrait,
-    //     srcPath: selfPortrait,
-    //     lastModified: 'Nov 15, 2025 at 2:15 PM',
-    //     emoji: '🖼️'
-    // },
-    // resumeFile,
-    // projectsFolder
 ]
+
+// Helper to recursively find the path to a folder by ID
+const findPath = (targetId, tree, path = []) => {
+    for (const item of tree) {
+        if (item.id === targetId) return [...path, item]
+        if (item.children && Array.isArray(item.children)) {
+            const result = findPath(targetId, item.children, [...path, item])
+            if (result) return result
+        }
+    }
+    return null
+}
+
+export const sourceCodeLink = {
+    id: 'source-code',
+    name: 'Portfolio Source Code',
+    kind: 'Link',
+    actionType: 'link',
+    actionPayload: 'https://github.com/7wik-pk/portfolio',
+    emoji: '📂'
+}
 
 export const sidebarFavorites = [
     {
         id: 'apps',
         name: 'Applications',
-        icon: sidebarAppsIcon,
-        path: [applicationsFolder]
+        icon: sidebarAppsIcon
     },
     {
         id: 'desktop',
         name: 'Desktop',
-        icon: sidebarDesktopIcon,
-        path: [desktopFolder]
+        icon: sidebarDesktopIcon
     },
     {
         id: 'projects',
         name: 'My Projects',
-        icon: sidebarProjectsIcon,
-        path: [desktopFolder, projectsFolder]
+        icon: sidebarProjectsIcon
     }
-]
+].map(fav => ({
+    ...fav,
+    // Automatically infer the path from the finderFiles tree!
+    path: findPath(fav.id, [
+        { id: 'root', name: 'Home', children: finderFiles }
+    ])?.slice(1) || []
+    // .slice(1) removes the virtual 'root' from the breadcrumbs
+}))
+
+// Unified Content Map for stable window IDs and direct access
+export const contentMap = {
+    'about-me': aboutMe,
+    'resume': resume,
+    'projects': projectsFolder,
+    'apps': applicationsFolder,
+    'desktop': desktopFolder,
+    'source-code': sourceCodeLink
+}

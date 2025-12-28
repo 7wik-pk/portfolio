@@ -42,8 +42,8 @@ export const apps = [
         emoji: '📄',
         showInDock: true,
         showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-resume',
+        actionType: 'content',
+        actionPayload: 'resume',
         hideOnMobile: false
     },
     {

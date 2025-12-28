@@ -9,8 +9,7 @@ import FinderView from './views/FinderView.vue'
 import Toast from './components/Toast.vue'
 import StickyNote from './components/StickyNote.vue'
 import DesktopIcon from './components/DesktopIcon.vue'
-import { desktopFolder, aboutMeFile, sidebarFavorites } from './config/finder'
-import resumePdf from './assets/docs/sathwik_general_resume.pdf'
+import { desktopFolder, aboutMe, sourceCodeLink, contentMap, sidebarFavorites } from './config/finder'
 
 const drawerOpen = ref(false)
 const currentWallpaper = ref('')
@@ -91,10 +90,10 @@ const launchWindow = (config) => {
   const existing = openWindows.value.find(w => w.id === config.id)
   if (!existing) {
     openWindows.value.push(config)
-  } else {
-    // Update props if already open (important for Preview)
-    existing.props = config.props
-    existing.title = config.title
+  } else if (config.props && Object.keys(config.props).length > 0) {
+    // Only update props if new ones are explicitly passed (e.g. for Preview or specific folder launches)
+    existing.props = { ...existing.props, ...config.props }
+    if (config.title) existing.title = config.title
   }
   bringToFront(config.id)
 }
@@ -107,8 +106,7 @@ const closeWindow = (id) => {
 // Map IDs to components for dynamic rendering
 const windowComponents = {
   finder: FinderView,
-  preview: Preview,
-  resume: Preview // Resume uses Preview component
+  preview: Preview
 }
 
 const defaultTitle = "Sathwik's Portfolio"
@@ -121,7 +119,7 @@ const activeAppName = computed(() => {
   
   // Return App Names
   if (win.component === 'finder') return "Finder"
-  if (win.component === 'resume' || win.component === 'preview') return "Preview"
+  if (win.component === 'preview') return "Preview"
   
   return win.title
 })
@@ -168,49 +166,46 @@ const openDrawer = () => {
   drawerOpen.value = !drawerOpen.value
 }
 
-const handleAppLaunch = (app) => {
-  if (app.actionType === 'link') {
-    window.open(app.actionPayload, '_blank')
-  } else if (app.actionType === 'command') {
-    switch (app.actionPayload) {
-      case 'toggle-drawer':
-        openDrawer()
-        break;
-      case 'open-resume':
-        launchWindow({
-          id: 'resume',
-          title: 'sathwik_general_resume.pdf',
-          component: 'resume',
-          props: { src: resumePdf, title: 'Resume' }
-        })
-        break;
-      case 'open-finder':
-        launchWindow({
-          id: 'finder',
-          title: 'Finder',
-          component: 'finder',
-          width: '900px',
-          height: '600px',
-          props: {}
-        })
-        break;
-      default:
-        showToast()
-        break;
+const handleLaunch = (item) => {
+  // 1. Handle External Links
+  if (item.actionType === 'link') {
+    window.open(item.actionPayload, '_blank')
+    return
+  }
+
+  // 2. Handle System Commands
+  if (item.actionType === 'command') {
+    if (item.actionPayload === 'toggle-drawer') {
+      openDrawer()
+    } else if (item.actionPayload === 'open-finder') {
+      launchWindow({
+        id: 'finder',
+        title: 'Finder',
+        component: 'finder',
+        width: '900px',
+        height: '600px',
+        props: {}
+      })
+    } else {
+      showToast()
     }
     
-    // Auto-close drawer for all actions except toggle-drawer
-    if (app.actionPayload !== 'toggle-drawer') {
-      drawerOpen.value = false
-    }
+    if (item.actionPayload !== 'toggle-drawer') drawerOpen.value = false
+    return
   }
-}
 
-const handleFileLaunch = (file) => {
-  if (file.kind === 'Folder') {
-    // Check if this folder has a canonical favorites path (e.g. Desktop/Projects)
-    const favorite = sidebarFavorites.find(f => f.id === file.id)
-    const initialPath = favorite ? [...favorite.path] : [file]
+  // 3. Handle Content Shortcuts (Pinned items in Dock/Launchpad)
+  if (item.actionType === 'content') {
+    const content = contentMap[item.actionPayload]
+    if (content) handleLaunch(content)
+    drawerOpen.value = false
+    return
+  }
+
+  // 4. Handle Actual Files and Folders
+  if (item.kind === 'Folder') {
+    const favorite = sidebarFavorites.find(f => f.id === item.id)
+    const initialPath = favorite ? [...favorite.path] : [item]
 
     launchWindow({
       id: 'finder',
@@ -220,26 +215,27 @@ const handleFileLaunch = (file) => {
       height: '600px',
       props: { initialPath }
     })
-    return
+  } else {
+    // Media/Document Preview
+    if (!item.srcPath) {
+      showToast()
+      return
+    }
+    
+    launchWindow({
+      id: `preview-${item.id}`, // Stable window ID per file!
+      title: item.name,
+      component: 'preview',
+      props: { src: item.srcPath, title: item.name }
+    })
   }
-
-  if (!file.srcPath) {
-    showToast()
-    return
-  }
-  launchWindow({
-    id: 'preview',
-    title: file.name,
-    component: 'preview',
-    props: { src: file.srcPath, title: file.name }
-  })
 }
 
 const handleMenuAction = (action) => {
   if (action === 'about') {
-    handleFileLaunch(aboutMeFile)
+    handleLaunch(aboutMe)
   } else if (action === 'source') {
-    window.open('https://github.com/7wik-pk/portfolio', '_blank')
+    handleLaunch(sourceCodeLink)
   } else if (action === 'close-window') {
     const activeId = windowStack.value[windowStack.value.length - 1]
     if (activeId) {
@@ -270,7 +266,7 @@ const handleMenuAction = (action) => {
     />
     
     <div class="desktop" @click="selectedDesktopIcon = null">
-      <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />
+      <AppDrawer v-if="drawerOpen" @launch-app="handleLaunch" @open-drawer="openDrawer" />
       
       <!-- Desktop Icons -->
       <div class="desktop-icons">
@@ -280,7 +276,7 @@ const handleMenuAction = (action) => {
           :item="item"
           :is-selected="selectedDesktopIcon === item.id"
           @select="id => selectedDesktopIcon = id"
-          @launch="handleFileLaunch"
+          @launch="handleLaunch"
         />
       </div>
       
@@ -300,8 +296,8 @@ const handleMenuAction = (action) => {
         <component 
           :is="windowComponents[win.component]" 
           v-bind="win.props"
-          @launch-file="handleFileLaunch"
-          @launch-app="handleAppLaunch"
+          @launch-file="handleLaunch"
+          @launch-app="handleLaunch"
           @show-toast="showToast"
         />
       </Window>
@@ -329,7 +325,7 @@ const handleMenuAction = (action) => {
 
     <Dock 
       :active-app-ids="openWindows.map(w => w.id)"
-      @launch-app="handleAppLaunch" 
+      @launch-app="handleLaunch" 
     />
 
     <Toast :show="toast.show" :message="toast.message" @close="toast.show = false" />
