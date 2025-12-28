@@ -10,8 +10,8 @@
 - recreate the "About this mac" window for "About Me" - DONE (Generic InfoView implemented)
 - second sticky on phones is not directly below the first - fix it so that it's directly below the first sticky always - even if i change the height of the first one - DONE
 - move resume icon on desktop to a more obvious location on phones - it's hidden behind the sticky (make sticky thinner?) - DONE
+- add an easily visible "download" option for resume on small screens/touch screens - DONE for all screens all PDFs
 
-- add an easily visible "download" option for resume on small screens/touch screens
 - add "tech stack" section - consider using InfoView or a specialized grid view
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - use AI to generate summaries of my strongest performances using my transcripts
 - add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/

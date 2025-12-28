@@ -39,17 +39,21 @@ The application is strictly data-driven, leveraging dry configuration patterns:
   - *Interaction*: Supports single-click selection (blue label highlight) and double-click/double-tap launching.
   - *Accessibility*: High-contrast multi-layer text shadows ensure legibility on any wallpaper.
 - **About Me (InfoView) 👤**: Recreated the "About This Mac" experience using a generic `InfoView` component. It supports circular headshots, structured metadata details, and multiple system-integrated action buttons (e.g., "Email Me" or "My Resume").
-- **Interactive Stickies 📝**: Draggable, editable sticky note components. Now supports internal hyperlinking (via `v-html` and delegated event handling) that can trigger system actions like launching the About Me view.
+- **Interactive Stickies 📝**: Draggable, editable sticky note components.
+  - *Smart Actions*: Supports internal hyperlinking (via `v-html`) to trigger system views like "About Me".
+  - *Mobile Stacking*: Automatically switches from absolute positioning to a flexible stack (vertical in portrait, horizontal in landscape) on smaller screens to ensure visibility and clean organization.
 - **Dynamic Wallpapers 🌅**: Includes a smooth **cross-fade transition system** when changing wallpapers via the Control Center.
 
 ### 2. The Dock & Menu Bar 🚀
 - **Launch Simulation**: Implements a "bounce" physics animation and a realistic delay before windows appear.
+- **Proportional Scaling**: The Dock dynamically scales for tablets and phones, maintaining precise desktop icon-to-padding ratios while maximizing touch targets.
 - **Typography Polish**: Uses SF Pro Display with standardized Medium (500) weights across the Menu Bar and dropdowns for a more premium system feel.
 - **Context-Aware Menus**: The Apple and File menus update states dynamically based on window focus.
 
 ### 3. Finder (File System) 📂
 - **Smart Navigation**: Full breadcrumb support and a sidebar that automatically highlights the most specific active favorite.
 - **Automated Favorites**: Sidebar items are rendered from a registry that maps IDs to canonical folder paths.
+- **Universal PDF Actions**: A floating "Open in a new tab" action in the Previewer allows mobile users to view PDFs in their native browser environment for better readability and sharing.
 - **Responsive Details**: A details side panel that displays metadata (size, kind, modified date) for selected files.
 
 ### 4. Control Center & Aesthetics ⚡
@@ -60,7 +64,7 @@ The application is strictly data-driven, leveraging dry configuration patterns:
 - **Smart Tap Logic**: Robust double-tap detection for tablets (within 300ms) alongside native mouse support.
 - **Granular Resizing**: Added a per-window `resizable` property. This allows productivity apps (like Finder) to scale to **85% width** and **75% height** on smaller screens while keeping utility cards (like About Me) at their precise native dimensions.
 - **Touch Awareness**: Hover effects are conditionally disabled on touch devices using `@media (hover: hover)` to prevent "sticky" highlights.
-- **Mobile Optimized**: The Dock shrinks, specific apps hide, and the `InfoView` components automatically reformat into vertical stacks with scrollability to prevent header clipping.
+- **Adaptive UI**: The `InfoView` components automatically reformat into vertical stacks, and the system-wide breakpoint (1024px width / 600px height) ensures a seamless transition between desktop and touch-optimized modes.
 
 ## 🛠️ Tech Stack
 - **Framework**: Vue 3 (Composition API)
