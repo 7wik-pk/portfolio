@@ -1,10 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
-import { finderFiles, applicationsFolder, projectsFolder, desktopFolder } from '../config/finder'
+import { finderFiles, sidebarFavorites } from '../config/finder'
 import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
-import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
-import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
-import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
 import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
 const props = defineProps({
@@ -89,21 +86,43 @@ const goToRoot = () => {
 }
 
 const goToFolder = (id) => {
-  let folder = null
-  if (id === 'apps') folder = applicationsFolder
-  if (id === 'projects') folder = projectsFolder
-  if (id === 'desktop') folder = desktopFolder
-  // if (id === 'downloads') folder = downloadsFolder
-  
-  // Find in finderFiles if not one of the majors
-  if (!folder) {
-    folder = finderFiles.find(f => f.id === id)
+  const favorite = sidebarFavorites.find(f => f.id === id)
+  if (favorite) {
+    currentPath.value = [...favorite.path]
+    selectedFile.value = null
+    return
   }
 
+  // Fallback for folders not in favorites
+  const folder = finderFiles.find(f => f.id === id)
   if (folder) {
     currentPath.value = [folder]
     selectedFile.value = null
   }
+}
+
+const isSidebarActive = (id) => {
+  if (id === 'home') return currentPath.value.length === 0
+  
+  // Check if this favorite's ID is in the current path
+  const isInPath = currentPath.value.some(f => f.id === id)
+  if (!isInPath) return false
+
+  // If it is in path, check if any of its children that are ALSO favorites are in the path
+  // (e.g., if Projects is in path, don't highlight Desktop)
+  const childFavorites = sidebarFavorites.filter(fav => {
+    // A favorite is a 'child' if its path starts with our path but is longer
+    const favPath = sidebarFavorites.find(f => f.id === id).path
+    return fav.id !== id && 
+           fav.path.length > favPath.length && 
+           fav.path.every((p, i) => i >= favPath.length || p.id === favPath[i].id)
+  })
+
+  const isAnyChildFavoriteActive = childFavorites.some(child => 
+    currentPath.value.some(f => f.id === child.id)
+  )
+
+  return !isAnyChildFavoriteActive
 }
 </script>
 
@@ -115,7 +134,7 @@ const goToFolder = (id) => {
         <div class="sidebar-title">Favorites</div>
         <div 
           class="sidebar-item" 
-          :class="{ active: currentPath.length === 0 }" 
+          :class="{ active: isSidebarActive('home') }" 
           @click="goToRoot"
         >
           <span class="sidebar-icon">
@@ -123,35 +142,18 @@ const goToFolder = (id) => {
           </span>
           <span class="sidebar-label">Home</span>
         </div>
+        
         <div 
+          v-for="fav in sidebarFavorites"
+          :key="fav.id"
           class="sidebar-item" 
-          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'apps' }" 
-          @click="goToFolder('apps')"
+          :class="{ active: isSidebarActive(fav.id) }" 
+          @click="goToFolder(fav.id)"
         >
           <span class="sidebar-icon">
-            <img :src="sidebarAppsIcon" alt="Applications" class="sidebar-img-icon" />
+            <img :src="fav.icon" :alt="fav.name" class="sidebar-img-icon" />
           </span>
-          <span class="sidebar-label">Applications</span>
-        </div>
-        <div 
-          class="sidebar-item" 
-          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'desktop' }" 
-          @click="goToFolder('desktop')"
-        >
-          <span class="sidebar-icon">
-            <img :src="sidebarDesktopIcon" alt="Desktop" class="sidebar-img-icon" />
-          </span>
-          <span class="sidebar-label">Desktop</span>
-        </div>
-        <div 
-          class="sidebar-item" 
-          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'projects' }" 
-          @click="goToFolder('projects')"
-        >
-          <span class="sidebar-icon">
-            <img :src="sidebarProjectsIcon" alt="Projects" class="sidebar-img-icon" />
-          </span>
-          <span class="sidebar-label">Projects</span>
+          <span class="sidebar-label">{{ fav.name }}</span>
         </div>
       </div>
     </div>

@@ -10,6 +10,12 @@ import selfPortrait from '../assets/img/portrait.jpg'
 import desktopIcon from '../assets/icons/Folder_Desktop.png'
 import { apps } from './apps'
 
+// Sidebar Icons
+import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
+import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
+import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
+import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
+
 // project icons
 import racingLineMapperIcon from '../assets/icons/projects/racing-liner.png'
 import safeTrekIcon from '../assets/icons/projects/safetrek.png'
@@ -177,4 +183,25 @@ export const finderFiles = [
     // },
     // resumeFile,
     // projectsFolder
+]
+
+export const sidebarFavorites = [
+    {
+        id: 'apps',
+        name: 'Applications',
+        icon: sidebarAppsIcon,
+        path: [applicationsFolder]
+    },
+    {
+        id: 'desktop',
+        name: 'Desktop',
+        icon: sidebarDesktopIcon,
+        path: [desktopFolder]
+    },
+    {
+        id: 'projects',
+        name: 'My Projects',
+        icon: sidebarProjectsIcon,
+        path: [desktopFolder, projectsFolder]
+    }
 ]
