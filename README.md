@@ -1,6 +1,6 @@
 # macOS-style Portfolio
 
-A high-fidelity personal portfolio website that recreates the macOS Sequoia/Sonoma desktop interface using Vue 3. This project focuses on authentic interaction design, system architecture simulation, and responsiveness.
+A high-fidelity personal portfolio website that recreates the macOS Sequoia/Sonoma desktop interface using Vue 3. This project focuses on authentic interaction design, system architecture simulation, and cross-device responsiveness.
 
 Currently hosted at https://7wik-pk.github.io/portfolio/
 
@@ -19,59 +19,49 @@ Currently hosted at https://7wik-pk.github.io/portfolio/
 
 ### Dynamic Window Management 🪟
 The core of the desktop experience is a robust window management system handled in `App.vue`:
-- **Registry & State**: Windows are tracked in an `openWindows` array.
-- **Z-Index Stacking**: A separate `windowStack` array tracks the focus order. The currently focused window is always at the end of the array.
-- **Dynamic Layering**: The `z-index` is computed dynamically (`base + index`), ensuring the active window is always on top. Clicking any window brings it to the front by moving its ID to the end of the stack.
-- **Component Injection**: Windows dynamically render content using Vue's `<component :is="...">` based on the registry configuration.
+- **Registry & State**: Windows are tracked in an `openWindows` array and rendered dynamically via `<component :is="...">`.
+- **Z-Index Stacking**: A separate `windowStack` array tracks the focus order. The currently focused window is always at the end of the array, with a computed `z-index` starting from 2000.
+- **Project Structure**: Organized into `views/` (major application screens) and `components/` (reusable UI elements), ensuring a clear separation of concerns.
 
 ### System Registries 🗄️
-The application is data-driven, separating configuration from logic:
-- **`config/apps.js`**: Centralized registry for all applications (Finder, Launchpad, Spotify, etc.), defining their icons, responsive behavior, and launch actions (commands vs links).
-- **`config/finder.js`**: A mock file system structure simulating hierarchical folder navigation for the Finder.
+The application is data-driven, leveraging dry configuration patterns:
+- **`config/apps.js`**: Centralized registry for all applications, defining icons, responsive behavior, and launch actions.
+- **`config/finder.js`**: A mock file system including an automated **Sidebar Favorites** engine. Favorites define their own canonical paths (e.g., Projects nested in Desktop), which Finder uses to build breadcrumbs automatically.
 
 ## ✨ Key Features
 
-### 1. Desktop Experience
-- **Stickies Note**: A draggable, editable sticky note component.
-  - *Authentic Feel*: Uses `contenteditable`, yellow paper texture, and drop shadows.
-  - *Responsiveness*: Repositions on mobile; includes a secondary "Mobile Disclaimer" note on small screens.
-- **Context Menus**: Functional custom dropdowns for the Apple Logo and "File" menu.
-  - *State Awareness*: The "File" menu automatically greys out when no windows are open.
-  - *Actions*: "Close Window", "About Me", and "Source Code" links.
-- **Dynamic Wallpapers**: Randomly cycles through high-quality wallpapers on load.
+### 1. Desktop Experience 🖥️
+- **Functional Icons**: High-fidelity desktop icons for "My Projects" and "My Resume".
+  - *Interaction*: Supports single-click selection (blue label highlight) and double-click/double-tap launching.
+  - *Accessibility*: High-contrast multi-layer text shadows ensure legibility on any wallpaper.
+- **Stickies Note**: Draggable, editable sticky note components with authentic yellow paper textures and automatic persistence.
+- **Dynamic Wallpapers**: Includes a smooth **cross-fade transition system** when changing wallpapers via the Control Center.
 
-### 2. The Dock 🚀
-- **Physics**: Implements a "bounce" animation on app launch.
-- **Launch Simulation**: Adds a realistic 300ms delay before windows appear.
-- **Active Indicators**: Persistent white dots under running applications, managed via global state.
-- **Smart Launchpad**: Toggles the App Drawer; auto-closes if an app is launched.
+### 2. The Dock & Menu Bar 🚀
+- **Launch Simulation**: Implements a "bounce" physics animation and a realistic delay before windows appear.
+- **Typography Polish**: Uses SF Pro Display with standardized Medium (500) weights across the Menu Bar and dropdowns for a more premium system feel.
+- **Context-Aware Menus**: The Apple and File menus update states dynamically based on window focus.
 
 ### 3. Finder (File System) 📂
-- **Navigation**: Full breadcrumb navigation and "Back" button history stack.
-- **Mobile Optimization**: Implements a "Smart Tap" system for touch devices—tapping an already selected item opens it, solving double-click reliability issues on mobile.
-- **Visuals**: Uses high-res icons for sidebar items and file previews.
+- **Smart Navigation**: Full breadcrumb support and a sidebar that automatically highlights the most specific active favorite.
+- **Automated Favorites**: Sidebar items are rendered from a registry that maps IDs to canonical folder paths.
+- **Responsive Details**: A details side panel that displays metadata (size, kind, modified date) for selected files.
 
-### 4. Menu Bar 🕰️
-- **Context-Aware**: The bold application title (e.g., **Finder**, **Preview**) updates dynamically based on the currently focused window.
-- **Live Clock**: Accurate day, date, and time display.
+### 4. Control Center ⚡
+- **Wallpaper Switcher**: A refined submenu with rotating indicators, checkmarks for active selections, and hover tooltips for names.
+- **Glassmorphism**: Extensive use of `backdrop-filter` and `saturate` to achieve the signature macOS translucent effect.
 
-### 5. Toast Notifications 🍞
-- A custom global notification system for "Coming Soon" features.
-- handled via a centralized event bus (`showToast` helper).
-- Features glassmorphism styling, timeout management (resets on multiple clicks), and manual dismissal.
-
-## 📱 Responsiveness & Optimization
-- **Dark Mode**: Configured with `color-scheme: dark` metadata to prevent extensions like Dark Reader from interfering with the native design.
-- **Mobile Adaptations**:
-  - The Dock shrinks and hides non-essential apps.
-  - Sticky notes reposition and toggle content based on screen size.
-  - Finder switches interaction models (Double-click -> Tap-to-Open).
+## 📱 Responsiveness & Tablet Optimization
+- **Smart Tap Logic**: Robust double-tap detection for tablets (within 300ms) alongside native mouse support.
+- **Window Scaling**: On smaller screens and tablets (up to 1366px), windows automatically scale to **85% width** and **75% height** to maximize usable area.
+- **Touch Awareness**: Hover effects are conditionally disabled on touch devices using `@media (hover: hover)` to prevent "sticky" highlights.
+- **Mobile Handled**: The Dock shrinks, specific apps hide, and a "Mobile Disclaimer" sticky note provides guidance on smaller viewports.
 
 ## 🛠️ Tech Stack
 - **Framework**: Vue 3 (Composition API)
 - **Build Tool**: Vite
-- **Styling**: Vanilla CSS (Scoped) with extensive usage of `backdrop-filter` for glassmorphism.
-- **Fonts**: SF Pro Display (Project-hosted assets).
+- **Styling**: Vanilla CSS (Scoped)
+- **Asset Management**: Eager glob importing for wallpapers and dynamic icon resolution.
 
 ## Acknowledgements
 
