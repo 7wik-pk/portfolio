@@ -8,6 +8,8 @@ import Preview from './components/Preview.vue'
 import FinderView from './components/FinderView.vue'
 import Toast from './components/Toast.vue'
 import StickyNote from './components/StickyNote.vue'
+import DesktopIcon from './components/DesktopIcon.vue'
+import { desktopFolder, aboutMeFile } from './config/finder'
 import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
@@ -16,6 +18,7 @@ const currentWallpaper = ref('')
 // Mobile Detection
 const isMobile = ref(false)
 const disclaimerVisible = ref(true)
+const selectedDesktopIcon = ref(null)
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth <= 768
@@ -204,6 +207,18 @@ const handleAppLaunch = (app) => {
 }
 
 const handleFileLaunch = (file) => {
+  if (file.kind === 'Folder') {
+    launchWindow({
+      id: 'finder',
+      title: 'Finder',
+      component: 'finder',
+      width: '900px',
+      height: '600px',
+      props: { initialPath: [file] }
+    })
+    return
+  }
+
   if (!file.srcPath) {
     showToast()
     return
@@ -218,7 +233,7 @@ const handleFileLaunch = (file) => {
 
 const handleMenuAction = (action) => {
   if (action === 'about') {
-    showToast('About Me coming soon!')
+    handleFileLaunch(aboutMeFile)
   } else if (action === 'source') {
     window.open('https://github.com/7wik-pk/portfolio', '_blank')
   } else if (action === 'close-window') {
@@ -250,8 +265,20 @@ const handleMenuAction = (action) => {
       @change-wallpaper="handleWallpaperChange"
     />
     
-    <div class="desktop">
+    <div class="desktop" @click="selectedDesktopIcon = null">
       <AppDrawer v-if="drawerOpen" @launch-app="handleAppLaunch" @open-drawer="openDrawer" />
+      
+      <!-- Desktop Icons -->
+      <div class="desktop-icons">
+        <DesktopIcon
+          v-for="item in desktopFolder.children"
+          :key="item.id"
+          :item="item"
+          :is-selected="selectedDesktopIcon === item.id"
+          @select="id => selectedDesktopIcon = id"
+          @launch="handleFileLaunch"
+        />
+      </div>
       
       <!-- Dynamic Windows -->
       <Window 

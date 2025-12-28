@@ -1,12 +1,24 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { finderFiles, applicationsFolder, projectsFolder } from '../config/finder'
+import { ref, computed, watch } from 'vue'
+import { finderFiles, applicationsFolder, projectsFolder, desktopFolder } from '../config/finder'
 import sidebarHomeIcon from '../assets/icons/finder_sidebar/Home.ico'
 import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
 import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
+import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
 import searchIcon from '../assets/icons/finder_sidebar/Search.ico'
 
-const currentPath = ref([]) // Stack of folder objects
+const props = defineProps({
+  initialPath: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const currentPath = ref([...props.initialPath]) // Stack of folder objects
+
+watch(() => props.initialPath, (newVal) => {
+  currentPath.value = [...newVal]
+}, { deep: true })
 const selectedFile = ref(null)
 const lastTap = ref({ id: null, time: 0 })
 
@@ -80,6 +92,7 @@ const goToFolder = (id) => {
   let folder = null
   if (id === 'apps') folder = applicationsFolder
   if (id === 'projects') folder = projectsFolder
+  if (id === 'desktop') folder = desktopFolder
   // if (id === 'downloads') folder = downloadsFolder
   
   // Find in finderFiles if not one of the majors
@@ -119,6 +132,16 @@ const goToFolder = (id) => {
             <img :src="sidebarAppsIcon" alt="Applications" class="sidebar-img-icon" />
           </span>
           <span class="sidebar-label">Applications</span>
+        </div>
+        <div 
+          class="sidebar-item" 
+          :class="{ active: currentPath.length === 1 && currentPath[0].id === 'desktop' }" 
+          @click="goToFolder('desktop')"
+        >
+          <span class="sidebar-icon">
+            <img :src="sidebarDesktopIcon" alt="Desktop" class="sidebar-img-icon" />
+          </span>
+          <span class="sidebar-label">Desktop</span>
         </div>
         <div 
           class="sidebar-item" 
@@ -179,7 +202,6 @@ const goToFolder = (id) => {
             class="file-item"
             :class="{ selected: selectedFile?.id === file.id }"
             @click.stop="selectFile(file)"
-            @dblclick="openFile(file)"
           >
             <div class="file-icon">
               <img v-if="file.image" :src="file.image" :alt="file.name" class="finder-image-icon" />

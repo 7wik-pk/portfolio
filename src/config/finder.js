@@ -15,6 +15,31 @@ import safeTrekIcon from '../assets/icons/projects/safetrek.png'
 import rbTreeIcon from '../assets/icons/projects/rbtree.png'
 import portfolioIcon from '../assets/icons/projects/portfolio.png'
 
+// Common file objects for reuse (DRY)
+export const aboutMeFile = {
+    id: 'about-me-pdf',
+    name: 'About Me.pdf',
+    type: 'PDF Document',
+    image: pdfDocument,
+    size: '12 KB',
+    kind: 'PDF',
+    srcPath: null, // Triggers WIP toast in App.vue
+    lastModified: 'Dec 24, 2025 at 11:30 AM',
+    emoji: '📄'
+}
+
+export const resumeFile = {
+    id: 'resume-pdf',
+    name: 'My Resume.pdf',
+    type: 'PDF Document',
+    image: resumeIcon,
+    size: '1.2 MB',
+    kind: 'PDF',
+    srcPath: resumePdf,
+    lastModified: 'Dec 26, 2025 at 5:23 PM',
+    emoji: '📄'
+}
+
 export const applicationsFolder = {
     id: 'apps',
     name: 'Applications',
@@ -41,7 +66,7 @@ export const applicationsFolder = {
 
 export const projectsFolder = {
     id: 'projects',
-    name: 'Projects',
+    name: 'My Projects',
     type: 'Folder',
     size: '--',
     image: projectsIcon,
@@ -107,6 +132,22 @@ export const projectsFolder = {
     ]
 }
 
+export const desktopFolder = {
+    id: 'desktop',
+    name: 'Desktop',
+    type: 'Folder',
+    size: '--',
+    image: folderIcon,
+    kind: 'Folder',
+    lastModified: 'Dec 28, 2025 at 4:00 PM',
+    emoji: '🖥️',
+    children: [
+        resumeFile,
+        projectsFolder,
+        aboutMeFile
+    ]
+}
+
 // export const downloadsFolder = {
 //     id: 'downloads',
 //     name: 'Downloads',
@@ -120,17 +161,8 @@ export const projectsFolder = {
 // }
 
 export const finderFiles = [
-    {
-        id: '1',
-        name: 'About Me.pdf',
-        type: 'PDF Document',
-        image: pdfDocument,
-        size: '12 KB',
-        kind: 'PDF',
-        srcPath: null,
-        lastModified: 'Dec 24, 2025 at 11:30 AM',
-        emoji: '📄'
-    },
+    aboutMeFile,
+    desktopFolder,
     applicationsFolder,
     {
         id: '4',
@@ -143,17 +175,6 @@ export const finderFiles = [
         lastModified: 'Nov 15, 2025 at 2:15 PM',
         emoji: '🖼️'
     },
-    
-    {
-        id: '2',
-        name: 'Resume.pdf',
-        type: 'PDF Document',
-        image: resumeIcon,
-        size: '1.2 MB',
-        kind: 'PDF',
-        srcPath: resumePdf,
-        lastModified: 'Dec 26, 2025 at 5:23 PM',
-        emoji: '📄'
-    },
+    resumeFile,
     projectsFolder
 ]
