@@ -68,14 +68,23 @@ body {
   z-index: -1;
 }
 
-/* Fade-in animation for new wallpaper */
-.wallpaper-layer.fadeIn {
-  opacity: 0;
-  animation: wallpaperFadeIn 0.4s ease forwards;
+/* ===== Wallpaper Cross-Fade ===== */
+
+.wallpaper-fade-enter-active,
+.wallpaper-fade-leave-active {
+  transition: opacity 0.8s ease-in-out;
 }
 
-@keyframes wallpaperFadeIn {
-  to {
-    opacity: 1;
-  }
+.wallpaper-fade-enter-from,
+.wallpaper-fade-leave-to {
+  opacity: 0;
+}
+
+/* Ensure incoming wallpaper is above the outgoing one during transition */
+.wallpaper-fade-enter-active {
+  z-index: -1;
+}
+
+.wallpaper-fade-leave-active {
+  z-index: -2;
 }

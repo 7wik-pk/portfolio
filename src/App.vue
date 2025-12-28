@@ -12,8 +12,6 @@ import resumePdf from './assets/docs/sathwik_general_resume.pdf'
 
 const drawerOpen = ref(false)
 const currentWallpaper = ref('')
-const previousWallpaper = ref('')
-const isFading = ref(false)
 
 // Mobile Detection
 const isMobile = ref(false)
@@ -148,16 +146,7 @@ const wallpaperList = computed(() => {
 
 const handleWallpaperChange = (path) => {
   if (path === currentWallpaper.value) return
-
-  previousWallpaper.value = currentWallpaper.value
   currentWallpaper.value = path
-  isFading.value = true
-
-  // End fade after transition duration
-  setTimeout(() => {
-    previousWallpaper.value = ''
-    isFading.value = false
-  }, 400) // must match CSS duration
 }
 
 onMounted(() => {
@@ -243,24 +232,19 @@ const handleMenuAction = (action) => {
 
 <template>
   <div class="macos-container">
-    <!-- Old wallpaper -->
-    <div
-      v-if="previousWallpaper"
-      class="wallpaper-layer"
-      :style="{ backgroundImage: `url(${previousWallpaper})` }"
-    ></div>
-
-    <!-- New wallpaper -->
-    <div
-      class="wallpaper-layer"
-      :class="{ fadeIn: isFading }"
-      :style="{ backgroundImage: `url(${currentWallpaper})` }"
-    ></div>
+    <Transition name="wallpaper-fade">
+      <div 
+        :key="currentWallpaper" 
+        class="wallpaper-layer" 
+        :style="{ backgroundImage: `url(${currentWallpaper})` }"
+      ></div>
+    </Transition>
 
     <MenuBar 
       :active-app-name="activeAppName"
       :is-file-disabled="isFileDisabled"
       :wallpapers="wallpaperList"
+      :current-wallpaper="currentWallpaper"
       @menu-click="showToast()"
       @action="handleMenuAction"
       @change-wallpaper="handleWallpaperChange"

@@ -44,10 +44,12 @@
         >
           <!-- Change Wallpaper trigger -->
           <div
-            class="dropdown-item"
+            class="dropdown-item has-submenu"
+            :class="{ active: showWallpaperMenu }"
             @click.stop="showWallpaperMenu = !showWallpaperMenu"
           >
             Change Wallpaper
+            <span class="submenu-arrow" :class="{ rotated: showWallpaperMenu }">›</span>
           </div>
 
           <!-- EXPANDING section -->
@@ -59,12 +61,20 @@
               v-for="wp in wallpapers"
               :key="wp.path"
               class="dropdown-item wallpaper-option"
+              :class="{ selected: wp.path === currentWallpaper }"
+              :title="wp.name"
               @click.stop="handleWallpaperSelect(wp.path)"
             >
               <div
                 class="wallpaper-thumb"
                 :style="{ backgroundImage: `url(${wp.path})` }"
-              ></div>
+              >
+                <div v-if="wp.path === currentWallpaper" class="wallpaper-check">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </div>
+              </div>
               <span class="wallpaper-label">{{ wp.name }}</span>
             </div>
           </div>
@@ -126,6 +136,10 @@ const props = defineProps({
   wallpapers: {
     type: Array,
     default: () => []
+  },
+  currentWallpaper: {
+    type: String,
+    default: ''
   }
 })
 
@@ -301,6 +315,7 @@ onUnmounted(() => {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .dropdown-item:hover {
@@ -361,6 +376,9 @@ onUnmounted(() => {
   overflow-y: auto;
   max-height: 0;
   transition: max-height 0.25s ease;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0 -5px;
+  padding: 0 5px;
 }
 
 /* When open, expand responsively */
@@ -368,11 +386,20 @@ onUnmounted(() => {
   max-height: min(40vh, 320px);
 }
 
-/* Wallpaper rows */
 .wallpaper-option {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-left: 15px; /* Indent */
+  justify-content: flex-start;
+}
+
+.wallpaper-option.selected {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.wallpaper-option:hover {
+  background: #007aff;
 }
 
 /* Thumbnail */
@@ -384,6 +411,20 @@ onUnmounted(() => {
   border-radius: 3px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallpaper-option.selected .wallpaper-thumb {
+  border-color: #007aff;
+  filter: brightness(0.7);
+}
+
+.wallpaper-check {
+  color: #fff;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
 }
 
 .wallpaper-label {
@@ -391,6 +432,22 @@ onUnmounted(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.has-submenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.submenu-arrow {
+  font-size: 16px;
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.submenu-arrow.rotated {
+  transform: rotate(90deg);
 }
 
 /* RESPONSIVENESS */

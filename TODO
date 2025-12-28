@@ -1,6 +1,7 @@
 - use icons in icons/finder_sidebar - DONE
 - add a stickies-like note that welcomes users to my portfolio - add an image of me - DONE.
-- add a context menu for the apple logo on the top left - with "About me", "This portfolio's source code"
+- add a context menu for the apple logo on the top left - with "About me", "This portfolio's source code" - DONE
+- in control center allow changing wallpapers - DONE
 
 - on firefox & zen browser, wallpapers dont fade in and out on changing - the new wallpaper appears first and then there's an instantaneous return and fade-out transition of the old wallpaper, but on brave (chromium) it works as intended. fix this.
 - add desktop icons - projects folder, resume, about me
@@ -9,18 +10,17 @@
 - add "About me" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
-- in control center allow changing wallpapers
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
-- control center menu's z-index should be higher than the toast
 - control center > change wallpaper needs refinements - make the whole inner submenu darker or indented - to indicate it's a submenu under "Change Wallpaper", add arrows to indicate drop down status, darken current wallpaper in the drop down and add a checkmark; when hovering over a wallpaper thumbnail, show the wallpaper name as a tooltip
 - double touch-clicking inside finder doesn't work on tablets + finder window is too tall on tablets
-- to the menu bar add a Give Feedback option which allows users to suggest new features, report bugs, etc.
+- to the menu bar add a Give Feedback option which allows users to suggest new features, report bugs, etc. - figure out a way to automate going from here to making an issue on the repo's issues page (or an alternative way for me to receive feedback from this static gh-pages site)
 
 keep search-bar functionality in mind when implementing everything below:
 
-- recreate either preview or something else for viewing resume (DONE - but very basic, doesn't fully simulate Preview), education background, projects (start with dummy projects) and tech stack -- interlink tech stack and projects.
-- figure out a way to dynamically generate the data for "projects" component - pull info/data from my GitHub repos to automate this maybe. BONUS; figure out a way to dynamically fetch/generate appropriate mac-style icons for each project.
-- in smartphone mode the finder isn't working properly; double clicking won't open anything. fix this
+- recreate either preview or something else for viewing resume (DONE - but very basic, doesn't fully simulate Preview), education background, projects (DONE but hardcoded) and tech stack -- interlink tech stack and projects.
+- figure out a way to dynamically generate the data for "projects" component - pull info/data from my GitHub repos to automate this maybe
+    - also fetch last modified dates using latest commits.
+    - this could be a separate executable/script that i need to run locally to generate/update/delete static JSON files or similar - since gh-pages will be static. OR explore github actions for this.
+    - BONUS; figure out a way to dynamically fetch/generate appropriate mac-style icons for each project.
+- in smartphone mode the finder isn't working properly; double clicking won't open anything. fix this - DONE but still doesn't work on tablets and landscape mode
 
-advanced:
-- use github apis or smth to update last modified datetime of each project regularly
