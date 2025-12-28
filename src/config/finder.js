@@ -66,17 +66,14 @@ export const applicationsFolder = {
     lastModified: 'Dec 26, 2025 at 12:00 PM',
     emoji: '🚀',
     children: apps
-        .filter(app => app.id !== 'launchpad' && app.id !== 'finder' && app.id !== 'resume')
+        .filter(app => app.id !== 'launchpad' && app.id !== 'finder' && app.id !== 'resume' && app.id !== 'about-me')
         .map(app => ({
+            ...app,
             id: `app-${app.id}`,
-            name: app.name,
             type: 'Application',
-            image: app.image,
-            size: '--',
             kind: 'App',
-            action: app,
+            size: '--',
             lastModified: 'Dec 26, 2025 at 12:00 PM',
-            emoji: app.emoji
         }))
 }
 // Load all project icons eagerly so Vite bundles them correctly

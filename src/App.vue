@@ -252,9 +252,15 @@ const handleLaunch = (item) => {
 }
 const handleInfoAction = (action, config) => {
   if (action === 'email') {
-    window.open(`mailto:${config.email}`, '_blank')
+    handleLaunch({ actionType: 'link', actionPayload: `mailto:${config.email}` })
   } else if (action === 'resume') {
     handleLaunch(contentMap['resume'])
+  }
+}
+
+const handleStickyLink = (action) => {
+  if (action === 'about') {
+    handleLaunch(contentMap['about-me'])
   }
 }
 
@@ -339,6 +345,7 @@ const handleMenuAction = (action) => {
       :initial-y="60"
       :z-index="stickyNoteZIndex"
       @close="closeStickyNote"
+      @link-click="handleStickyLink"
     />
 
     <!-- Mobile Disclaimer Note -->

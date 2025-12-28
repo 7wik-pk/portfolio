@@ -13,15 +13,12 @@
     </div>
     
     <div class="sticky-content">
-      <div v-if="showPortrait" class="portrait-container">
-        <img :src="portraitImage" alt="Portrait" class="portrait-image" />
-      </div>
-      
       <div 
         class="sticky-text"
         contenteditable="true"
         spellcheck="false"
         @mousedown.stop
+        @click="handleContentClick"
         v-html="content"
       ></div>
     </div>
@@ -30,7 +27,6 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import portraitImage from '../assets/img/portrait.jpg'
 
 const props = defineProps({
   initialX: {
@@ -47,7 +43,7 @@ const props = defineProps({
   },
   initialContent: {
     type: String,
-    default: `<strong>Welcome to my portfolio! 👋</strong><br><br>I'm Sathwik, and I've built this interactive macOS-style portfolio (in Vue3 JS) to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`
+    default: `<strong>Welcome to my portfolio! 👋</strong><br><br>I'm <span class="sticky-link" data-action="about">Sathwik</span>, and I've built this interactive macOS-style portfolio to showcase my work.<br><br>Feel free to explore the Finder, check out my resume, and see what I've been working on.<br><br>Enjoy your visit!`
   },
   showPortrait: {
     type: Boolean,
@@ -55,7 +51,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'link-click'])
 
 const isVisible = ref(true)
 const position = ref({ x: props.initialX, y: props.initialY })
@@ -63,6 +59,14 @@ const isDragging = ref(false)
 const dragStart = ref({ x: 0, y: 0 })
 
 const content = ref(props.initialContent)
+
+const handleContentClick = (e) => {
+  const target = e.target
+  if (target.classList.contains('sticky-link')) {
+    e.preventDefault()
+    emit('link-click', target.dataset.action)
+  }
+}
 
 const close = () => {
   isVisible.value = false
@@ -152,23 +156,7 @@ onUnmounted(() => {
 }
 
 .sticky-content {
-  padding: 16px;
-  padding-top: 0px;
-}
-
-.portrait-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12px;
-}
-
-.portrait-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px 16px 16px 16px;
 }
 
 .sticky-text {
@@ -178,7 +166,18 @@ onUnmounted(() => {
   outline: none;
   cursor: text;
   user-select: text;
-  min-height: 100px;
+  min-height: 50px;
+}
+
+:deep(.sticky-link) {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+:deep(.sticky-link:hover) {
+  text-decoration: underline;
 }
 
 .sticky-text strong {

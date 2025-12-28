@@ -60,11 +60,6 @@ const deselect = () => {
 const openFile = (file) => {
   if (file.kind === 'Folder') {
     currentPath.value.push(file)
-    selectedFile.value = null
-  } else if (file.kind === 'Link') {
-    window.open(file.url, '_blank')
-  } else if (file.kind === 'App') {
-    emit('launch-app', file.action)
   } else {
     emit('launch-file', file)
   }
