@@ -46,17 +46,7 @@ export const apps = [
         actionPayload: 'resume',
         hideOnMobile: false
     },
-    {
-        id: 'techstack',
-        name: 'Tech Stack Familiarity',
-        image: vsCodeIcon,
-        emoji: '📺',
-        showInDock: true,
-        showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-techstack',
-        hideOnMobile: false
-    },
+    // TODO: move techstack here once ready
     {
         id: 'github',
         name: 'GitHub',
@@ -77,6 +67,17 @@ export const apps = [
         showInDrawer: true,
         actionType: 'link',
         actionPayload: 'https://www.linkedin.com/in/sathwik-k-77b58b140/',
+        hideOnMobile: false
+    },
+    {
+        id: 'techstack',
+        name: 'Tech Stack Familiarity',
+        image: vsCodeIcon,
+        emoji: '📺',
+        showInDock: true,
+        showInDrawer: true,
+        actionType: 'command',
+        actionPayload: 'open-techstack',
         hideOnMobile: false
     },
     {
