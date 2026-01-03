@@ -1,0 +1,236 @@
+[
+    {
+        "id": "high-school",
+        "label": "High School",
+        "image": "../assets/icons/edu/kvm.png",
+        "groups": [
+            {
+                "title": "Institution Details",
+                "items": [
+                    {
+                        "label": "School",
+                        "value": "Kendriya Vidyalaya Malleshwaram",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Location",
+                        "value": "Bangalore, India",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Academic Performance",
+                "items": [
+                    {
+                        "label": "Year",
+                        "value": "2017 - 2018",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Stream",
+                        "value": "Science (CBSE)",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Percentage Score",
+                        "value": "90.8%",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Exceptional Performance",
+                        "value": [
+                            "Physics (94/100)",
+                            "Computer Science (93/100)",
+                            "Chemistry (91/100)",
+                            "Mathematics (88/100)"
+                        ],
+                        "type": "tags"
+                    }
+                ],
+                "footer": "Achieved A1 grades in all core science and technical subjects."
+            }
+        ]
+    },
+    {
+        "id": "undergrad",
+        "label": "Undergraduate Degree",
+        "image": "../assets/icons/edu/pes.png",
+        "groups": [
+            {
+                "title": "Institution Details",
+                "items": [
+                    {
+                        "label": "University",
+                        "value": "PES University",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Location",
+                        "value": "Bangalore, Karnataka, India",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Degree Information",
+                "items": [
+                    {
+                        "label": "Year",
+                        "value": "2018 - 2022",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Degree",
+                        "value": "Bachelor of Technology",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Major",
+                        "value": "Electronics and Communication Engineering",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Major CGPA",
+                        "value": "8.16/10.0",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Minor",
+                        "value": "Computer Science and Engineering",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Minor CGPA",
+                        "value": "8.25/10.0",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "ECE Specialization (Major)",
+                "items": [
+                    {
+                        "label": "Exceptional Performance",
+                        "value": [
+                            "Introduction to Computing (Python)",
+                            "Problem Solving with C",
+                            "Linear Algebra",
+                            "Computer Communication Networks",
+                            "Linux for Electronics Engineers",
+                            "Digital Signal Processing"
+                        ],
+                        "type": "tags"
+                    },
+                    {
+                        "label": "Strongest Domains",
+                        "value": [
+                            "Embedded Systems",
+                            "Digital Image Processing",
+                            "Digital Communication",
+                            "Programming"
+                        ],
+                        "type": "tags"
+                    },
+                    {
+                        "label": "Intriguing Subjects",
+                        "value": [
+                            "Performance Engineering",
+                            "Generic Programming",
+                            "Linear Algebra",
+                            "Artificial Neural Networks",
+                            "Digital Image Processing",
+                            "Engineering Mathematics"
+                        ],
+                        "type": "tags"
+                    }
+                ]
+            },
+            {
+                "title": "CSE Minor",
+                "items": [
+                    {
+                        "label": "Foundational Mastery",
+                        "value": [
+                            "Data Structures",
+                            "Algorithms",
+                            "Database Management Systems",
+                            "Operating Systems"
+                        ],
+                        "type": "tags"
+                    }
+                ],
+                "footer": "Successfully balanced a rigorous and cognitively demanding Electronics major with a core Computer Science minor."
+            }
+        ]
+    },
+    {
+        "id": "masters",
+        "label": "Masters Degree",
+        "image": "../assets/icons/edu/monash.png",
+        "groups": [
+            {
+                "title": "Institution Details",
+                "items": [
+                    {
+                        "label": "University",
+                        "value": "Monash University",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Location",
+                        "value": "Melbourne, Victoria, Australia",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Degree Information",
+                "items": [
+                    {
+                        "label": "Year",
+                        "value": "2024 - 2026",
+                        "type": "text"
+                    },
+                    {
+                        "label": "Degree",
+                        "value": "Master of Information Technology",
+                        "type": "text"
+                    },
+                    {
+                        "label": "GPA",
+                        "value": "3.313 / 4.0",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Academic Achievement",
+                "items": [
+                    {
+                        "label": "High Distinction",
+                        "value": [
+                            "Advanced Databases",
+                            "Internet Apps Development",
+                            "Mobile & Distributed Systems",
+                            "Java Foundations"
+                        ],
+                        "type": "tags"
+                    },
+                    {
+                        "label": "Distinction",
+                        "value": [
+                            "Discrete Optimisation",
+                            "Cloud Computing",
+                            "Multi-Agent Systems",
+                            "Project Management",
+                            "Software Engineering"
+                        ],
+                        "type": "tags"
+                    }
+                ],
+                "footer": "Maintained a consistent High Distinction (HD) and Distinction (D) record for all core units, except for one team-based Industry Studio project (affected by team dynamics)."
+            }
+        ]
+    }
+]

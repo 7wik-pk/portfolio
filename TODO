@@ -15,12 +15,12 @@ DONE-
 - should "about me" open by default? like half a second after the page loads? - YES, added 800ms auto-launch
 - on phones, about me doesn't have a scroll bar visible at first sight - users might not know they can scroll. - FIXED with custom macOS scrollbar
 - make windows draggable on touchscreen devices - DONE (added touch event listeners)
+- add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - DONE (Recreated as "System Settings" view)
+- replace the buttons in about me with tech stack, education and my life in pictures when they're ready - DONE (Interlinked in InfoView)
 
-- add "tech stack" section - consider using InfoView or a specialized grid view - simulate an installation wizard like that of zoom - on the left side have sections like languages, frameworks, database technologies, cloud computing, containerization, subject matter domains (RL, CV, DIP, OS, discrete optimization, etc.), interests, etc. have an expandable/collapsible section for each skill where there are links to corresponding projects / work experience / educational sources where the skill was learned / honed.
-- add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - use AI to generate summaries of my strongest performances using my transcripts
-- use the installation wizard template for both education and hobbies too
-- add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - use img/
-- replace the buttons in about me with tech stack, education and my life in pictures when they're ready
+- add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - (Recreated as "Setup Assistant" view) - pending more actual work. currently not linked to anything
+- responsiveness - why do windows become very big - especially wide - on tablets (medium screens) ?
+- add "tech stack" section - Parked for now, planning to use VS Code interface.
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.

@@ -6,6 +6,8 @@ import applicationsIcon from '../assets/icons/apps.png'
 import desktopIcon from '../assets/icons/Folder_Desktop.png'
 import googleContactIcon from '../assets/icons/google_contact.png'
 import selfPortrait from '../assets/img/portrait.jpg'
+import eduIcon from '../assets/icons/edu.png'
+import photosIcon from '../assets/icons/photos-2025-11-14.webp'
 import { apps } from './apps'
 
 // Sidebar Icons
@@ -13,6 +15,7 @@ import sidebarAppsIcon from '../assets/icons/finder_sidebar/Applications.ico'
 import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
 import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
 import projectsData from '../data/projects.json'
+import educationData from '../data/education.json'
 
 // project icons
 // (Individual project icons are now handled dynamically via projects.json paths)
@@ -78,6 +81,7 @@ export const applicationsFolder = {
 }
 // Load all project icons eagerly so Vite bundles them correctly
 const projectIcons = import.meta.glob('../assets/icons/projects/*.png', { eager: true })
+const eduIcons = import.meta.glob('../assets/icons/edu/*.png', { eager: true })
 
 export const projectsFolder = {
     id: 'projects',
@@ -110,9 +114,58 @@ export const desktopFolder = {
     ]
 }
 
+export const education = {
+    id: 'education',
+    name: 'Education',
+    type: 'System Settings',
+    image: eduIcon,
+    size: '--',
+    kind: 'Settings',
+    lastModified: 'Jan 3, 2026',
+    emoji: '🎓',
+    settingsProps: {
+        title: 'Education',
+        initialSectionId: 'masters',
+        sections: educationData.map(sec => ({
+            ...sec,
+            icon: eduIcons[sec.image]?.default || sec.image
+        }))
+    }
+}
+
+// TODO move to json file in data/ when you actually begin working on this
+export const myLife = {
+    id: 'my-life',
+    name: 'My Life in Pictures',
+    type: 'Setup Assistant',
+    image: photosIcon,
+    size: '--',
+    kind: 'Setup',
+    lastModified: 'Jan 3, 2026',
+    emoji: '📸',
+    setupProps: {
+        steps: [
+            {
+                title: 'Welcome to My Journey',
+                subtitle: 'A quick tour of my life beyond the code.',
+                image: selfPortrait,
+                content: '<p>I believe that behind every line of code is a human story. Here is a bit about mine.</p>',
+                buttonText: 'Start'
+            },
+            {
+                title: 'Hobbies',
+                subtitle: 'What keeps me active.',
+                content: '<p>When I am not at my desk, you can find me playing video games, guitar, football, table tennis, jogging, listening to rock music or watching excellent quirky/avant-garde movies/shows.</p>'
+            }
+        ]
+    }
+}
+
 export const finderFiles = [
     aboutMe,
     desktopFolder,
+    education,
+    // myLife,
     applicationsFolder,
 ]
 
@@ -169,5 +222,7 @@ export const contentMap = {
     'projects': projectsFolder,
     'apps': applicationsFolder,
     'desktop': desktopFolder,
-    'source-code': sourceCodeLink
+    'source-code': sourceCodeLink,
+    'education': education,
+    'my-life': myLife
 }

@@ -87,8 +87,8 @@ export const apps = [
         emoji: '🎓',
         showInDock: true,
         showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-education',
+        actionType: 'content',
+        actionPayload: 'education',
         hideOnMobile: true
     },
     {

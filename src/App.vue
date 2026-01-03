@@ -10,6 +10,8 @@ import Toast from './components/Toast.vue'
 import StickyNote from './components/StickyNote.vue'
 import DesktopIcon from './components/DesktopIcon.vue'
 import InfoView from './views/InfoView.vue'
+import SetupAssistantView from './views/SetupAssistantView.vue'
+import SettingsView from './views/SettingsView.vue'
 import { contentMap, sidebarFavorites } from './config/finder'
 
 const drawerOpen = ref(false)
@@ -116,7 +118,9 @@ const closeWindow = (id) => {
 const windowComponents = {
   finder: FinderView,
   preview: Preview,
-  info: InfoView
+  info: InfoView,
+  setup: SetupAssistantView,
+  settings: SettingsView
 }
 
 const defaultTitle = "Sathwik's Portfolio"
@@ -231,6 +235,24 @@ const handleLaunch = (item) => {
       height: '600px',
       props: { initialPath }
     })
+  } else if (item.kind === 'Settings') {
+    launchWindow({
+      id: item.id,
+      title: item.name,
+      component: 'settings',
+      width: '800px',
+      height: '600px',
+      props: item.settingsProps
+    })
+  } else if (item.kind === 'Setup') {
+    launchWindow({
+      id: item.id,
+      title: item.name,
+      component: 'setup',
+      width: '700px',
+      height: '550px',
+      props: item.setupProps
+    })
   } else if (item.kind === 'Info') {
     const isSmall = window.innerWidth <= 1024 || window.innerHeight <= 600
     launchWindow({
@@ -264,6 +286,10 @@ const handleInfoAction = (action, config) => {
     handleLaunch(contentMap['resume'])
   } else if (action === 'download-resume') {
     window.open(contentMap['resume'].srcPath, '_blank')
+  } else if (action === 'education') {
+    handleLaunch(contentMap['education'])
+  } else if (action === 'my-life') {
+    handleLaunch(contentMap['my-life'])
   }
 }
 
