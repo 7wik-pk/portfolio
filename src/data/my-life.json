@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Welcome to My Journey",
+        "subtitle": "A quick tour of my life beyond the code.",
+        "image": "../assets/img/portrait.jpg",
+        "content": "<p>I believe that behind every line of code is a human story. Here is a bit about mine.</p>",
+        "buttonText": "Start"
+    },
+    {
+        "title": "Hobbies",
+        "subtitle": "What keeps me active.",
+        "content": "<p>When I am not at my desk, you can find me playing video games, guitar, football, table tennis, jogging, listening to rock music or watching excellent quirky/avant-garde movies/shows.</p>"
+    }
+]

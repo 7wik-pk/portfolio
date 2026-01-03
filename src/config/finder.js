@@ -7,7 +7,6 @@ import desktopIcon from '../assets/icons/Folder_Desktop.png'
 import googleContactIcon from '../assets/icons/google_contact.png'
 import selfPortrait from '../assets/img/portrait.jpg'
 import eduIcon from '../assets/icons/edu.png'
-import photosIcon from '../assets/icons/photos-2025-11-14.webp'
 import { apps } from './apps'
 
 // Sidebar Icons
@@ -133,39 +132,11 @@ export const education = {
     }
 }
 
-// TODO move to json file in data/ when you actually begin working on this
-export const myLife = {
-    id: 'my-life',
-    name: 'My Life in Pictures',
-    type: 'Setup Assistant',
-    image: photosIcon,
-    size: '--',
-    kind: 'Setup',
-    lastModified: 'Jan 3, 2026',
-    emoji: '📸',
-    setupProps: {
-        steps: [
-            {
-                title: 'Welcome to My Journey',
-                subtitle: 'A quick tour of my life beyond the code.',
-                image: selfPortrait,
-                content: '<p>I believe that behind every line of code is a human story. Here is a bit about mine.</p>',
-                buttonText: 'Start'
-            },
-            {
-                title: 'Hobbies',
-                subtitle: 'What keeps me active.',
-                content: '<p>When I am not at my desk, you can find me playing video games, guitar, football, table tennis, jogging, listening to rock music or watching excellent quirky/avant-garde movies/shows.</p>'
-            }
-        ]
-    }
-}
 
 export const finderFiles = [
     aboutMe,
     desktopFolder,
     education,
-    // myLife,
     applicationsFolder,
 ]
 
@@ -224,5 +195,5 @@ export const contentMap = {
     'desktop': desktopFolder,
     'source-code': sourceCodeLink,
     'education': education,
-    'my-life': myLife
+    // 'my-life': myLife
 }
