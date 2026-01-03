@@ -84,6 +84,8 @@ const projectIcons = import.meta.glob('../assets/icons/projects/*.png', { eager:
 const eduIcons = import.meta.glob('../assets/icons/edu/*.png', { eager: true })
 const hobbyImages = import.meta.glob('../assets/img/hobbies/*.jpg', { eager: true })
 
+const eduImages = import.meta.glob('../assets/img/edu/*.*', { eager: true })
+
 export const projectsFolder = {
     id: 'projects',
     name: 'My Projects',
@@ -129,7 +131,9 @@ export const education = {
         initialSectionId: 'masters',
         sections: educationData.map(sec => ({
             ...sec,
-            icon: eduIcons[sec.image]?.default || sec.image
+            icon: eduIcons[sec.image]?.default || sec.image,
+            headerImage: eduIcons[sec.image]?.default || sec.image,
+            idImage: sec.idImage ? (eduImages[sec.idImage]?.default || sec.idImage) : null
         }))
     }
 }

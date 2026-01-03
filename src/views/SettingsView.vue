@@ -64,7 +64,15 @@ const selectSection = (section) => {
 
     <!-- Main Content -->
     <div class="settings-main" v-if="activeSection">
-      <div class="main-header">
+      <div class="main-header" :class="{ 'has-images': activeSection.headerImage || activeSection.idImage }">
+        <div class="header-images" v-if="activeSection.headerImage || activeSection.idImage">
+            <div class="header-img-container" v-if="activeSection.headerImage">
+                <img :src="activeSection.headerImage" class="header-img logo-img" alt="Institution Logo" />
+            </div>
+            <div class="header-img-container id-container" v-if="activeSection.idImage">
+                <img :src="activeSection.idImage" class="header-img id-img" alt="ID Card" />
+            </div>
+        </div>
         <h1 class="section-heading">{{ activeSection.label }}</h1>
       </div>
 
@@ -186,8 +194,66 @@ const selectSection = (section) => {
   margin-bottom: 24px;
 }
 
+.main-header.has-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.header-img-container {
+    position: relative;
+    /* transition removed */
+}
+
+/* Hover removed */
+
+.header-img {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-img {
+    height: 120px;
+    width: auto;
+    max-width: 220px;
+}
+
+.id-img {
+    height: 135px;
+    width: auto;
+    transform: rotate(3deg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.id-container {
+    transform: rotate(-3deg);
+}
+
 .settings-group {
   margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .logo-img {
+    height: 80px;
+    max-width: 100%;
+  }
+  .id-img {
+    height: 100px;
+  }
 }
 
 .group-title {

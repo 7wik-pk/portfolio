@@ -3,6 +3,7 @@
         "id": "high-school",
         "label": "High School",
         "image": "../assets/icons/edu/kvm.png",
+        "idImage": "../assets/img/edu/kv_id.png",
         "groups": [
             {
                 "title": "Institution Details",
@@ -56,6 +57,7 @@
         "id": "undergrad",
         "label": "Undergraduate Degree",
         "image": "../assets/icons/edu/pes.png",
+        "idImage": "../assets/img/edu/pes_id.png",
         "groups": [
             {
                 "title": "Institution Details",
@@ -168,6 +170,7 @@
         "id": "masters",
         "label": "Masters Degree",
         "image": "../assets/icons/edu/monash.png",
+        "idImage": "../assets/img/edu/monash_id.jpg",
         "groups": [
             {
                 "title": "Institution Details",
