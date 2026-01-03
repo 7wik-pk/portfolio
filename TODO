@@ -19,7 +19,7 @@ DONE-
 - replace the buttons in about me with tech stack, education and my life in pictures when they're ready - DONE (Interlinked in InfoView)
 
 - add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - (Recreated as "Setup Assistant" view) - pending more actual work. currently not linked to anything
-- responsiveness - why do windows become very big - especially wide - on tablets (medium screens) ?
+- is it prudent to add images to education? (img/edu)
 - add "tech stack" section - Parked for now, planning to use VS Code interface.
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
