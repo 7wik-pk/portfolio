@@ -1,0 +1,45 @@
+[
+    {
+        "id": "intro",
+        "title": "My hobbies",
+        "subtitle": "Here is how I like to spend my free time.",
+        "description": "",
+        "image": "../assets/img/hobbies/hero.jpg",
+        "layout": "slide"
+    },
+    {
+        "id": "gaming",
+        "title": "Video Games",
+        "description": "I enjoy playing immersive story-driven games - I grew up on NFS and the Batman Arkham series. Racing games are a go-to for me to this day.",
+        "image": "../assets/img/hobbies/games.jpg",
+        "layout": "slide"
+    },
+    {
+        "id": "guitar",
+        "title": "Music & Guitar",
+        "description": "Playing guitar helps me unwind. I find it very satisfying when I get a song or a riff right after hours, sometimes days, of practice. Learning guitar taught me that delayed gratification is the best kind of gratification.",
+        "image": "../assets/img/hobbies/guitar.jpg",
+        "layout": "slide"
+    },
+    {
+        "id": "football",
+        "title": "Football",
+        "description": "As someone who played tennis as a tween, competitive cricket as a teen, and football and table tennis regularly in my 20s, my brain has been wired to thrive on sports. I enjoy both watching sports and playing on the weekends.",
+        "image": "../assets/img/hobbies/football.jpg",
+        "layout": "slide"
+    },
+    {
+        "id": "sim-racing",
+        "title": "Sim Racing",
+        "description": "Racing in the virtual world satisfies my need for speed and precision. As a petrolhead and motorsports enthusiast, sim racing is an addiction I sometimes need to force myself out of in order to get some sleep.",
+        "image": "../assets/img/hobbies/sim_racing.jpg",
+        "layout": "slide"
+    },
+    {
+        "id": "tv",
+        "title": "Fiction (Movies, Shows & Books)",
+        "description": "I love quirky, avant-garde cinema, shows and books that challenge conventional storytelling. Especially sci-fi and dystopian genres.",
+        "image": "../assets/img/hobbies/tv.jpg",
+        "layout": "slide"
+    }
+]

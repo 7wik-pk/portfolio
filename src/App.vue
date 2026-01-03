@@ -249,8 +249,8 @@ const handleLaunch = (item) => {
       id: item.id,
       title: item.name,
       component: 'setup',
-      width: '700px',
-      height: '550px',
+      width: '800px',
+      height: '600px',
       props: item.setupProps
     })
   } else if (item.kind === 'Info') {
@@ -368,6 +368,7 @@ const handleMenuAction = (action) => {
           @launch-app="handleLaunch"
           @button-click="action => handleInfoAction(action, win.props)"
           @show-toast="showToast"
+          @close="closeWindow(win.id)"
         />
       </Window>
     </div>

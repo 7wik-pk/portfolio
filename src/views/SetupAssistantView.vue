@@ -16,7 +16,7 @@ const nextStep = () => {
   if (currentStepIndex.value < props.steps.length - 1) {
     currentStepIndex.value++
   } else {
-    emit('complete')
+    emit('close')
   }
 }
 
@@ -31,14 +31,28 @@ const prevStep = () => {
   <div class="setup-assistant">
     <div class="setup-content">
       <div class="setup-header">
-        <div class="image-container" v-if="steps[currentStepIndex].image">
+        <div 
+          class="image-container" 
+          :class="{ 'is-slide': steps[currentStepIndex].layout === 'slide' }"
+          v-if="steps[currentStepIndex].image"
+        >
           <img :src="steps[currentStepIndex].image" :alt="steps[currentStepIndex].title" class="step-image" />
         </div>
         <h1 class="step-title">{{ steps[currentStepIndex].title }}</h1>
         <p class="step-subtitle" v-if="steps[currentStepIndex].subtitle">{{ steps[currentStepIndex].subtitle }}</p>
       </div>
 
-      <div class="step-body" v-html="steps[currentStepIndex].content"></div>
+      <div class="step-body" v-if="steps[currentStepIndex].description">
+        {{ steps[currentStepIndex].description }}
+      </div>
+      <div class="step-content-html" v-if="steps[currentStepIndex].content" v-html="steps[currentStepIndex].content"></div>
+
+      <!-- Slide Layout Support (Big Image) -->
+      <div v-if="steps[currentStepIndex].layout === 'slide'" class="slide-layout">
+         <!-- Image already shown in header via steps[currentStepIndex].image -->
+      </div>
+      
+      <!-- Grid Layout Support -->
     </div>
 
     <div class="setup-footer">
@@ -68,19 +82,20 @@ const prevStep = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 24px;
   text-align: center;
   overflow-y: auto;
 }
 
 .image-container {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .step-image {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
+  /* For slide layout, make images much bigger and cover */
 }
 
 .step-title {
@@ -103,6 +118,44 @@ const prevStep = () => {
   color: rgba(255, 255, 255, 0.9);
 }
 
+
+.grid-image-container {
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.grid-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Adjustments for Slide Layout */
+.slide-layout {
+  display: none; /* Content is handled by header logic, but we can add specific styles if needed */
+}
+
+/* If the current step is a "slide", we want the image to be larger */
+.image-container.is-slide .step-image {
+  width: 100%;
+  max-width: 500px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.step-body, .step-content-html {
+  max-width: 600px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 10px;
+}
+
 .setup-footer {
   height: 80px;
   padding: 0 40px;
@@ -116,37 +169,29 @@ const prevStep = () => {
   flex: 1;
 }
 
+
+
+/* Consistent macOS-like Button Styles */
 .setup-btn {
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  border: none;
   transition: all 0.2s ease;
 }
 
-.setup-btn.primary {
-  background: #007aff;
-  color: #fff;
-}
-
-.setup-btn.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
 @media (hover: hover) {
-  .setup-btn.primary:hover {
-    background: #0063cc;
-  }
-  .setup-btn.secondary:hover {
+  .setup-btn:hover {
     background: rgba(255, 255, 255, 0.15);
   }
 }
 
 .setup-btn:active {
-  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 600px) {

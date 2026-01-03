@@ -98,8 +98,8 @@ export const apps = [
         emoji: '🎵',
         showInDock: true,
         showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-hobbies',
+        actionType: 'content',
+        actionPayload: 'hobbies',
         hideOnMobile: true
     },
     // {

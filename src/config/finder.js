@@ -15,6 +15,7 @@ import sidebarProjectsIcon from '../assets/icons/finder_sidebar/3D.ico'
 import sidebarDesktopIcon from '../assets/icons/finder_sidebar/Desktop.ico'
 import projectsData from '../data/projects.json'
 import educationData from '../data/education.json'
+import hobbiesData from '../data/hobbies.json'
 
 // project icons
 // (Individual project icons are now handled dynamically via projects.json paths)
@@ -81,6 +82,7 @@ export const applicationsFolder = {
 // Load all project icons eagerly so Vite bundles them correctly
 const projectIcons = import.meta.glob('../assets/icons/projects/*.png', { eager: true })
 const eduIcons = import.meta.glob('../assets/icons/edu/*.png', { eager: true })
+const hobbyImages = import.meta.glob('../assets/img/hobbies/*.jpg', { eager: true })
 
 export const projectsFolder = {
     id: 'projects',
@@ -132,11 +134,34 @@ export const education = {
     }
 }
 
+export const hobbies = {
+    id: 'hobbies',
+    name: 'Hobbies',
+    type: 'Setup Assistant',
+    image: apps.find(a => a.id === 'hobbies').image,
+    size: '--',
+    kind: 'Setup',
+    lastModified: 'Jan 4, 2026',
+    emoji: '🎵',
+    setupProps: {
+        steps: hobbiesData.map(step => {
+            let imagePath = step.image;
+            // Resolve hero/slide image
+            if (imagePath && imagePath.includes('portrait')) {
+                return { ...step, image: selfPortrait }
+            } else if (imagePath) {
+                return { ...step, image: hobbyImages[imagePath]?.default || imagePath }
+            }
+            return step;
+        })
+    }
+}
 
 export const finderFiles = [
     aboutMe,
     desktopFolder,
     education,
+    hobbies,
     applicationsFolder,
 ]
 
@@ -195,5 +220,6 @@ export const contentMap = {
     'desktop': desktopFolder,
     'source-code': sourceCodeLink,
     'education': education,
+    'hobbies': hobbies,
     // 'my-life': myLife
 }
