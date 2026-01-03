@@ -224,4 +224,14 @@ onUnmounted(() => {
     height: 75% !important;
   }
 }
+
+/* Phones (Portrait) - Smart Sizing */
+@media (max-width: 600px) and (min-height: 600px) {
+  .window {
+    width: 90vw !important;
+    height: auto !important;
+    min-height: 50% !important;
+    max-height: 80% !important; /* Prevent covering the dock area */
+  }
+}
 </style>
