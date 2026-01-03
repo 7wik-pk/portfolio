@@ -142,7 +142,7 @@ onUnmounted(() => {
   animation: window-appear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
   max-height: 80%;
-  max-width: 85%;
+  max-width: 90vw;
 }
 
 @keyframes window-appear {

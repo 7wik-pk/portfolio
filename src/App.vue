@@ -254,13 +254,12 @@ const handleLaunch = (item) => {
       props: item.setupProps
     })
   } else if (item.kind === 'Info') {
-    const isSmall = window.innerWidth <= 1024 || window.innerHeight <= 600
     launchWindow({
       id: item.id,
       title: item.name,
       component: 'info',
-      width: isSmall ? '90vw' : '640px',
-      height: isSmall ? '540px' : '420px',
+      width: '640px',
+      height: '420px',
       resizable: false,
       props: item.infoProps
     })
