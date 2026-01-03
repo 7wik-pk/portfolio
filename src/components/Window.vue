@@ -231,7 +231,7 @@ onUnmounted(() => {
     width: 90vw !important;
     height: auto !important;
     min-height: 50% !important;
-    max-height: 80% !important; /* Prevent covering the dock area */
+    max-height: 85% !important; /* Prevent covering the dock area */
   }
 }
 </style>
