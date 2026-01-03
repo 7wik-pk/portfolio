@@ -460,7 +460,7 @@ onUnmounted(() => {
 /* RESPONSIVENESS */
 @media (max-width: 480px) {
   .wallpaper-expand.open {
-    max-height: 22vh; /* ~2–3 items */
+    max-height: 50vh;
   }
 }
 
