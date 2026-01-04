@@ -12,6 +12,7 @@ import DesktopIcon from './components/DesktopIcon.vue'
 import InfoView from './views/InfoView.vue'
 import SetupAssistantView from './views/SetupAssistantView.vue'
 import SettingsView from './views/SettingsView.vue'
+import VSCodeView from './views/VSCodeView.vue'
 import { contentMap, sidebarFavorites } from './config/finder'
 
 const drawerOpen = ref(false)
@@ -120,7 +121,8 @@ const windowComponents = {
   preview: Preview,
   info: InfoView,
   setup: SetupAssistantView,
-  settings: SettingsView
+  settings: SettingsView,
+  vscode: VSCodeView
 }
 
 const defaultTitle = "Sathwik's Portfolio"
@@ -204,6 +206,15 @@ const handleLaunch = (item) => {
         component: 'finder',
         width: '900px',
         height: '600px',
+        props: {}
+      })
+    } else if (item.actionPayload === 'open-techstack') {
+      launchWindow({
+        id: 'techstack',
+        title: 'Visual Studio Code',
+        component: 'vscode',
+        width: '90vw',
+        height: '80vh',
         props: {}
       })
     } else {

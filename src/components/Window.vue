@@ -141,8 +141,8 @@ onUnmounted(() => {
   overflow: hidden;
   animation: window-appear 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: auto;
-  max-height: 80%;
-  max-width: 90vw;
+  max-height: 90vh;
+  max-width: 95vw;
 }
 
 @keyframes window-appear {
@@ -220,8 +220,9 @@ onUnmounted(() => {
 
 @media (max-width: 1366px) {
   .window.is-resizable {
-    width: 85% !important;
-    height: 75% !important;
+    /* Respect props if they exist, otherwise use responsive defaults */
+    width: v-bind('width || "85%"');
+    height: v-bind('height || "75%"');
   }
 }
 

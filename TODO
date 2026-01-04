@@ -16,11 +16,16 @@ DONE-
 - on phones, about me doesn't have a scroll bar visible at first sight - users might not know they can scroll. - FIXED with custom macOS scrollbar
 - make windows draggable on touchscreen devices - DONE (added touch event listeners)
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - DONE (Recreated as "System Settings" view)
-- replace the buttons in about me with tech stack, education and my life in pictures when they're ready - DONE (Interlinked in InfoView)
 
+- replace the buttons in about me with whatever else is appropriate
+- is it prudent to add images to education? (img/edu) - DONE for now, take feedback from friends
+    remove id images only - sgt
+- add "tech stack" section - Parked for now, planning to use VS Code interface. - preliminary version added
+    sizing - this window alone can be big on all screens. also, responsiveness can be hard to achieve.
+    use career_bank.md to robustly populate this tech stack.
+
+- in about me, replace "email me" with "my projects" and make a separate icon for mailing me in launchpad - clicking this should open a new tab with a mailto link to my email address. 
 - add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - (Recreated as "Setup Assistant" view) - pending more actual work. currently not linked to anything
-- is it prudent to add images to education? (img/edu)
-- add "tech stack" section - Parked for now, planning to use VS Code interface.
 - add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
