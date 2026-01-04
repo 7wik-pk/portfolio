@@ -133,6 +133,10 @@ const handleDownload = () => {
 
 /* On mobile, keep it center and prominent */
 @media (max-width: 480px) {
+  .preview-container {
+    min-height: 450px;
+  }
+
   .preview-actions {
     bottom: 16px;
     width: 85%;

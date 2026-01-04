@@ -16,7 +16,9 @@ DONE-
 - on phones, about me doesn't have a scroll bar visible at first sight - users might not know they can scroll. - FIXED with custom macOS scrollbar
 - make windows draggable on touchscreen devices - DONE (added touch event listeners)
 - add "Education" which should show a summary of my BTech and masters (with accompanying pics in img/ too) - DONE (Recreated as "System Settings" view)
+- something broke resume responsiveness on phone screens - fix it - DONE looks ok now
 
+- tablet responsiveness - all 3 newest additions - vs code, education and hobbies - don't look right on my galaxy tab A9+
 - replace the buttons in about me with whatever else is appropriate
 - is it prudent to add images to education? (img/edu) - DONE for now, take feedback from friends
     remove id images only - sgt
