@@ -23,11 +23,12 @@
 ### Computer Science (Theoretical Knowledge)
 - **Data Structures**: Proficient in implementing and optimizing data structures.
 - **Algorithms**: Experience with algorithm design and optimization.
+- **Generic Programming**: Experience with generic programming and template metaprogramming (C++).
 - **Computer Networks**: Understanding of network protocols and security.
 - **Computer Architecture**: Experience with low-level programming and hardware interfacing.
 - **Operating Systems**: Understanding of operating system concepts and security.
 
-### Software Engineering (Practical Skills)
+### Practical Knowledge
 <div class="tech-shelf">
   <img src="../../assets/icons/tech_stack/postgis.png" class="shelf-img" title="PostGIS">
   <img src="../../assets/icons/tech_stack/postgresql-icon.png" class="shelf-img" title="PostgreSQL">
@@ -35,7 +36,10 @@
   <img src="../../assets/icons/tech_stack/aws-icon.png" class="shelf-img" title="AWS">
   <img src="../../assets/icons/tech_stack/docker-icon.png" class="shelf-img" title="Docker">
   <img src="../../assets/icons/tech_stack/kubernetes-icon.png" class="shelf-img" title="Kubernetes">
-  <img src="../../assets/icons/tech_stack/python-programming-language-icon.png" class="shelf-img" title="Python">
+  <img src="../../assets/icons/tech_stack/open-cv.png" class="shelf-img" title="OpenCV">
+  <img src="../../assets/icons/tech_stack/minizinc.png" class="shelf-img" title="Minizinc (Discrete Optimisation)">
+  <img src="../../assets/icons/tech_stack/python-programming-language-icon.png" class="shelf-img" title="Python (Reinforcement Learning)">
+  <img src="../../assets/icons/tech_stack/android-studio.png" class="shelf-img" title="Android Studio">
 </div>
 
 - **Geospatial Data Processing**: Experience with GIS and spatial analysis (using PostGIS).
@@ -44,9 +48,11 @@
 - **Cloud Computing**: Deploying and managing applications on cloud infrastructure using various cloud resources (primarily on OCI and AWS).
 - **Containerisation**: Experience with containerisation and orchestration (primarily using Docker and Kubernetes).
 - **Digital Image Processing**: Implementing algorithms, filters and operators for image processing and computer vision.
-- **Discrete Optimization**: Solving complex scheduling and routing problems.
+- **Discrete Optimisation**: Solving complex scheduling and routing problems (Minizinc).
 - **Multi-Agent Systems**: Designing and simulating autonomous agents.
-- **Mobile & Distributed Systems**: Building resilient and scalable mobile applications.
+- **Mobile App Development**: Building resilient and scalable mobile applications (Android).
+- **C++ Standard Library**: Experience and familiarity with the C++ Standard Library.
+- **Design Patterns**: Rudimentary experience working with design patterns and concurrency.
 
 ### Embedded & Hardware
 - **Embedded Systems**: Low-level programming and hardware interfacing.
@@ -55,6 +61,8 @@
 ### Artificial Intelligence
 <div class="tech-shelf">
   <img src="../../assets/icons/tech_stack/python-programming-language-icon.png" class="shelf-img" title="Python / AI">
+  <img src="../../assets/icons/tech_stack/pytorch.png" class="shelf-img" title="PyTorch">
+  <img src="../../assets/icons/tech_stack/machine-learning.png" class="shelf-img" title="Machine Learning">
 </div>
 
 - **Reinforcement Learning**: Experience with Q-Learning and tuning agent behavior.

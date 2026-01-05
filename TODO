@@ -23,7 +23,7 @@ DONE-
 - is it prudent to add images to education? (img/edu) - DONE for now, take feedback from friends
     remove id images only - sgt
 - add "tech stack" section - Parked for now, planning to use VS Code interface. - preliminary version added
-    sizing - this window alone can be big on all screens. also, responsiveness can be hard to achieve.
+    sizing - this window alone can be big on all screens. also, responsiveness can be hard to achieve. if it can't be done, don't open on smaller/narrow screens and instead show a message that it can't be viewed on small screens.
     use career_bank.md to robustly populate this tech stack.
 
 - in about me, replace "email me" with "my projects" and make a separate icon for mailing me in launchpad - clicking this should open a new tab with a mailto link to my email address. 

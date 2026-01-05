@@ -20,15 +20,20 @@
 
 # Interested in Learning
 
-### Technologies to Explore
+### Technologies I Wish to Explore
 <div class="tech-shelf">
   <img src="../../assets/icons/tech_stack/rust-icon.png" class="shelf-img" title="Rust">
+  <img src="../../assets/icons/tech_stack/wasm.png" class="shelf-img" title="WebAssembly">
+  <img src="../../assets/icons/tech_stack/blockchain.png" class="shelf-img" title="Blockchain">
   <img src="../../assets/icons/tech_stack/kubernetes-icon.png" class="shelf-img" title="Kubernetes">
+  <img src="../../assets/icons/tech_stack/terraform.png" class="shelf-img" title="Terraform (IaC)">
 </div>
 
 - **Rust**: For high-performance, memory-safe and thread-safe systems programming.
 - **Deep Q-Networks (DQN)**: Advancing from basic reinforcement learning to deep RL.
-- **Large Language Models (LLMs)**: Exploring agentic workflows and fine-tuning.
 - **WebAssembly (WASM)**: Bringing near-native performance to the browser.
+- **Blockchain (Web3)**: Understanding the fundamentals of blockchain technology to build the next generation of financial applications.
 - **Kubernetes**: Mastering container orchestration at scale.
+- **Infrastructure as Code (IaC)**: Automating the deployment and management of infrastructure (Terraform/Pulumi).
 - **Performance Engineering**: Deep dive into optimizing software for maximum hardware efficiency.
+- **Embedded Systems**: Low-level, low latency and low power programming for mobile systems on batteries.
