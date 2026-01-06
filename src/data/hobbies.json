@@ -10,7 +10,7 @@
     {
         "id": "sports",
         "title": "Sports",
-        "description": "As someone who played tennis as a tween, competitive cricket as a teen, and football and table tennis regularly in my 20s, my brain has been wired to thrive on sports. I enjoy both watching sports and playing on the weekends.",
+        "description": "As someone who played tennis as a tween, competitive cricket as a teen, football and table tennis regularly in my 20s, my brain has been wired to thrive on sports. I enjoy both watching sports and playing on the weekends.",
         "image": "../assets/img/hobbies/football.jpg",
         "layout": "slide"
     },
@@ -31,7 +31,7 @@
     {
         "id": "gaming",
         "title": "Video Games",
-        "description": "I enjoy playing immersive story-driven games - especially indie games with heart (Hollow Knight, Hades, etc.) I grew up on NFS and the Batman Arkham series. Racing games are a go-to for me to this day. Speaking of racing...",
+        "description": "I enjoy playing immersive story-driven games - especially indie games with heart (Hollow Knight, Hades, etc.) I grew up on the Batman Arkham series and NFS games - in fact, racing games are a go-to for me to this day. Speaking of racing...",
         "image": "../assets/img/hobbies/games.jpg",
         "layout": "slide"
     },
