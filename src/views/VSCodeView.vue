@@ -497,7 +497,6 @@ const activeSidebarTab = ref('explorer')
 
 .markdown-body :deep(h3) {
   margin-top: 1.5em;
-  color: #007acc;
 }
 
 .markdown-body :deep(strong) {
@@ -511,8 +510,4 @@ const activeSidebarTab = ref('explorer')
 .markdown-body :deep(li) {
   margin: 6px 0;
 }
-
-
-
-
 </style>

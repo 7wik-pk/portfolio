@@ -1,4 +1,5 @@
 <style>
+  h3 { color: #007acc; }
   .tech-shelf {
     display: flex;
     flex-wrap: wrap;
