@@ -52,6 +52,7 @@
 </div>
 
 - **PostGIS**: Geospatial data processing in PostgreSQL.
+- **SQLAlchemy**: Python SQL Toolkit and Object Relational Mapper for database interaction.
 - **Gin**: Feature-rich web framework for building RESTful APIs in Golang.
 - **Vue.js**: Used for building reactive and performant user interfaces.
 - **Vite**: Modern build tool for fast web development.
@@ -71,5 +72,6 @@
 - **PostgreSQL**: Advanced database management and optimization.
 <!-- - **MySQL**: Experience with database design and optimization. -->
 - **MongoDB**: Experience with NoSQL database management and optimization.
+- **Firebase/Firestore**: Experience with NoSQL real-time databases and cloud integration.
 - **Oracle DBMS**: Experience with database design and optimization.
 - **Redis**: Experience with database design and optimization.

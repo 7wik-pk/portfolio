@@ -202,7 +202,7 @@
                     },
                     {
                         "label": "GPA",
-                        "value": "3.313 / 4.0 [3.88 / 4.0 on the US scale]",
+                        "value": "3.313 / 4.0 (3.88 / 4.0 on the US scale)",
                         "type": "text"
                     }
                 ]

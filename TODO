@@ -25,11 +25,13 @@ DONE-
     u can keep both but layout could be improved - urvm
 - add "tech stack" section - Parked for now, planning to use VS Code interface. - preliminary version added
     sizing - this window alone can be big on all screens. also, responsiveness can be hard to achieve. if it can't be done, don't open on smaller/narrow screens and instead show a message that it can't be viewed on small screens.
-    use career_bank.md to robustly populate this tech stack.
+    use career_bank.md to robustly populate this tech stack. - DONE
 
-- in about me, replace "email me" with "my projects" and make a separate icon for mailing me in launchpad - clicking this should open a new tab with a mailto link to my email address. 
+- in about me, replace "email me" with "my projects" and make a separate icon for mailing me in launchpad - clicking this should open a new tab with a mailto link to my email address.
+- add descriptions to all files/links/etc. on Finder and display this desc on the details side panel - required for projects at least
+- also add "Skills used" only for projects in My Projects dir
+- in Finder (esp My Projects dir), allow filtering (projects) by "Skills used" and link this to my tech stack familiarity - allow viewing projects by skill/lang/framework from tech stack view
 - add "My Life in Pictures" which should go over my life, background, media tastes, hobbies, beliefs, etc. with accompanying pictures - (Recreated as "Setup Assistant" view) - pending more actual work. currently not linked to anything
-- add descriptions to all files/links/etc. on Finder and display this desc on the details side panel
 - add a 1-second mock login screen at the start (and maybe a welcome message?) with my name & face.
 - add acknowledgements and thank the creators of icons, mention where i found them, etc.
 - to the menu bar add a Give Feedback option which allows users to suggest new features, report bugs, etc. - figure out a way to automate going from here to making an issue on the repo's issues page (or an alternative way for me to receive feedback from this static gh-pages site)

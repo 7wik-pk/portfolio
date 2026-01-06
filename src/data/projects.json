@@ -46,5 +46,65 @@
         "actionPayload": "https://github.com/swarupgt/red-black-tree-generic",
         "lastModified": "Dec 26, 2025 at 5:23 PM",
         "emoji": "🔗"
+    },
+    {
+        "id": "p5",
+        "name": "StudyBuddy",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/studybuddy.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/studybuddy",
+        "lastModified": "Jan 4, 2025 at 12:00 PM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p6",
+        "name": "Obstacle Avoiding Surveillance Bot",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/surveil-bot.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/surveil-bot",
+        "lastModified": "Nov 15, 2020 at 10:00 AM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p7",
+        "name": "Road Lane Detection",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/road-lane-det.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/road-lane-detection-cv",
+        "lastModified": "Aug 20, 2022 at 2:00 PM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p9",
+        "name": "PyHangman - The Game",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/pyhangman.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/pyhangman",
+        "lastModified": "Jun 15, 2020 at 10:30 AM",
+        "emoji": "🔗"
+    },
+    {
+        "id": "p8",
+        "name": "Wayne Manor Bed & Breakfast (WIP)",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/wayne_bnb.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/wayne-manor-bnb",
+        "lastModified": "May 10, 2022 at 11:00 AM",
+        "emoji": "🔗"
     }
 ]

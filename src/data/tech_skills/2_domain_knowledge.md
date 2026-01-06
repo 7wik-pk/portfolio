@@ -45,8 +45,10 @@
 - **Geospatial Data Processing**: Experience with GIS and spatial analysis (using PostGIS).
 - **Database Management**: Proficient in database design and optimization.
 - **Backend Development**: Experience with building scalable and secure backend systems (primarily in Golang and Python).
+- **Legacy System Migration**: Experience in migrating infrastructure (e.g., Ruby on Rails to Golang) to improve performance and scalability.
 - **Cloud Computing**: Deploying and managing applications on cloud infrastructure using various cloud resources (primarily on OCI and AWS).
 - **Containerisation**: Experience with containerisation and orchestration (primarily using Docker and Kubernetes).
+- **Financial/Precision Logic**: Experience in implementing custom types to replace floating-point arithmetic for accurate financial calculations.
 - **Digital Image Processing**: Implementing algorithms, filters and operators for image processing and computer vision.
 - **Discrete Optimisation**: Solving complex scheduling and routing problems (Minizinc).
 - **Multi-Agent Systems**: Designing and simulating autonomous agents.
