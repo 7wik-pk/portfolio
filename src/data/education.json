@@ -24,7 +24,7 @@
                 "title": "Academic Performance",
                 "items": [
                     {
-                        "label": "Year",
+                        "label": "Year(s)",
                         "value": "2017 - 2018",
                         "type": "text"
                     },
@@ -78,7 +78,7 @@
                 "title": "Degree Information",
                 "items": [
                     {
-                        "label": "Year",
+                        "label": "Year(s)",
                         "value": "2018 - 2022",
                         "type": "text"
                     },
@@ -191,7 +191,7 @@
                 "title": "Degree Information",
                 "items": [
                     {
-                        "label": "Year",
+                        "label": "Year(s)",
                         "value": "2024 - 2026",
                         "type": "text"
                     },
