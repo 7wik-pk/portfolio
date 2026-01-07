@@ -405,7 +405,7 @@ const handleMenuAction = (action) => {
         :z-index="1500"
         :show-portrait="false"
         :is-stacked="isMobile"
-        initial-content="<strong>Note:</strong><br><br>This portfolio <strong>should be viewed on a tablet or PC screen</strong> for the best experience.<br>[It is also responsive to some degree.]"
+        initial-content="<strong>Note:</strong><br><br>This portfolio <strong>should be viewed on a PC screen</strong> for the best experience.<br>[It is also responsive to some degree.]"
         @close="closeDisclaimer"
       />
     </div>
