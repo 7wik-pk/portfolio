@@ -164,8 +164,8 @@ export const hobbies = {
 export const finderFiles = [
     aboutMe,
     desktopFolder,
-    education,
-    hobbies,
+    // education,
+    // hobbies,
     applicationsFolder,
 ]
 
