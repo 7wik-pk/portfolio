@@ -66,7 +66,7 @@ export const apps = [
         showInDock: true,
         showInDrawer: true,
         actionType: 'link',
-        actionPayload: 'https://www.linkedin.com/in/sathwik-k-77b58b140/',
+        actionPayload: 'https://www.linkedin.com/in/sathwik-pk/',
         hideOnMobile: false
     },
     {
