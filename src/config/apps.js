@@ -46,7 +46,17 @@ export const apps = [
         actionPayload: 'resume',
         hideOnMobile: false
     },
-    // TODO: move techstack here once ready
+    {
+        id: 'techstack',
+        name: 'Tech Stack Familiarity',
+        image: vsCodeIcon,
+        emoji: '📺',
+        showInDock: true,
+        showInDrawer: true,
+        actionType: 'command',
+        actionPayload: 'open-techstack',
+        hideOnMobile: true // TODO : make it visible on mobile instead of edu/hobbies or something else once this is responsive
+    },
     {
         id: 'github',
         name: 'GitHub',
@@ -70,17 +80,6 @@ export const apps = [
         hideOnMobile: false
     },
     {
-        id: 'techstack',
-        name: 'Tech Stack Familiarity',
-        image: vsCodeIcon,
-        emoji: '📺',
-        showInDock: true,
-        showInDrawer: true,
-        actionType: 'command',
-        actionPayload: 'open-techstack',
-        hideOnMobile: false
-    },
-    {
         id: 'education',
         name: 'Education',
         image: eduIcon,
@@ -100,7 +99,7 @@ export const apps = [
         showInDrawer: true,
         actionType: 'content',
         actionPayload: 'hobbies',
-        hideOnMobile: true
+        hideOnMobile: false
     },
     // {
     //     id: 'discord',
