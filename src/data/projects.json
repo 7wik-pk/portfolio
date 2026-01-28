@@ -12,6 +12,18 @@
         "emoji": "🔗"
     },
     {
+        "id": "p8",
+        "name": "Wayne Stays (WIP)",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/wayne_bnb.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/wayne-stays",
+        "lastModified": "Jan 28, 2026 at 11:00 PM",
+        "emoji": "🔗"
+    },
+    {
         "id": "p2",
         "name": "This Portfolio",
         "type": "GitHub Repository",
@@ -93,18 +105,6 @@
         "actionType": "link",
         "actionPayload": "https://github.com/7wik-pk/pyhangman",
         "lastModified": "Jun 15, 2020 at 10:30 AM",
-        "emoji": "🔗"
-    },
-    {
-        "id": "p8",
-        "name": "Wayne Manor Bed & Breakfast (WIP)",
-        "type": "GitHub Repository",
-        "image": "../assets/icons/projects/wayne_bnb.png",
-        "size": "--",
-        "kind": "Link",
-        "actionType": "link",
-        "actionPayload": "https://github.com/7wik-pk/wayne-manor-bnb",
-        "lastModified": "May 10, 2022 at 11:00 AM",
         "emoji": "🔗"
     }
 ]
