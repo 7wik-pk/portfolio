@@ -1,5 +1,17 @@
 [
     {
+        "id": "p10",
+        "name": "Matchday Muse AI (WIP)",
+        "type": "GitHub Repository",
+        "image": "../assets/icons/projects/matchday-muse.png",
+        "size": "--",
+        "kind": "Link",
+        "actionType": "link",
+        "actionPayload": "https://github.com/7wik-pk/Matchday-Muse",
+        "lastModified": "Oct 21, 2026 at 1:05 PM",
+        "emoji": "🔗"
+    },
+    {
         "id": "p1",
         "name": "Racing Line Mapper (WIP)",
         "type": "GitHub Repository",
